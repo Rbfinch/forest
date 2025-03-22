@@ -300,46 +300,47 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
     // Visit if-let and while-let expressions
     fn visit_expr_if(&mut self, if_expr: &'ast syn::ExprIf) {
         // Fix the source_text access and type issues
-        if let Some(if_let_str) = if_expr.if_token.span().source_text() {
+        if let (Some(if_let_str), Some(cond_str)) = (
+            if_expr.if_token.span().source_text(),
+            if_expr.cond.span().source_text(),
+        ) {
             if if_let_str.starts_with("if let ") {
-                if let Some(cond_str) = if_expr.cond.span().source_text() {
-                    let parts: Vec<&str> = cond_str.splitn(2, '=').collect();
-                    let (pat, expr) = if parts.len() == 2 {
-                        (parts[0].trim(), parts[1].trim())
-                    } else {
-                        (cond_str.as_str(), "")
-                    };
+                let parts: Vec<&str> = cond_str.splitn(2, '=').collect();
+                let (pat, expr) = if parts.len() == 2 {
+                    (parts[0].trim(), parts[1].trim())
+                } else {
+                    (cond_str.as_str(), "")
+                };
 
-                    // Fix span line retrieval
-                    let line_number = self
-                        .get_line_number(&if_expr.span(), &if_expr.to_token_stream().to_string());
+                // Fix span line retrieval
+                let line_number =
+                    self.get_line_number(&if_expr.span(), &if_expr.to_token_stream().to_string());
 
-                    // Get the context
-                    let context = if line_number <= self.lines.len() {
-                        self.lines[line_number - 1].to_string()
-                    } else {
-                        format!("Unknown context at line {}", line_number)
-                    };
+                // Get the context
+                let context = if line_number <= self.lines.len() {
+                    self.lines[line_number - 1].to_string()
+                } else {
+                    format!("Unknown context at line {}", line_number)
+                };
 
-                    // Check for mutable patterns in if-let
-                    if pat.contains("mut ") {
-                        // This is a simplified approach - ideally we'd parse the pattern properly
-                        for part in pat.split_whitespace() {
-                            if part.starts_with("mut") && part.len() > 3 {
-                                let name = part[3..]
-                                    .trim_matches(|c: char| !c.is_alphanumeric() && c != '_')
-                                    .to_string();
-                                if !name.is_empty() {
-                                    self.mutable_vars.push(VarInfo {
-                                        name,
-                                        mutable: true,
-                                        file_path: self.file_path.clone(),
-                                        line_number,
-                                        context: context.clone(),
-                                        var_kind: "if-let pattern".to_string(),
-                                        var_type: infer_type_from_pattern_match(pat, expr),
-                                    });
-                                }
+                // Check for mutable patterns in if-let
+                if pat.contains("mut ") {
+                    // This is a simplified approach - ideally we'd parse the pattern properly
+                    for part in pat.split_whitespace() {
+                        if part.starts_with("mut") && part.len() > 3 {
+                            let name = part[3..]
+                                .trim_matches(|c: char| !c.is_alphanumeric() && c != '_')
+                                .to_string();
+                            if !name.is_empty() {
+                                self.mutable_vars.push(VarInfo {
+                                    name,
+                                    mutable: true,
+                                    file_path: self.file_path.clone(),
+                                    line_number,
+                                    context: context.clone(),
+                                    var_kind: "if-let pattern".to_string(),
+                                    var_type: infer_type_from_pattern_match(pat, expr),
+                                });
                             }
                         }
                     }
@@ -352,7 +353,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
 }
 
 // Improved helper methods for the visitor
-impl<'ast> VariableVisitor<'ast> {
+impl VariableVisitor<'_> {
     // Add this new helper method to find line numbers
     fn get_line_number(&self, span: &proc_macro2::Span, token_str: &str) -> usize {
         // Try to find the token in the file content
@@ -421,16 +422,8 @@ impl<'ast> VariableVisitor<'ast> {
             Pat::Tuple(tuple) => {
                 // For tuple destructuring, try to extract element types
                 for (i, elem) in tuple.elems.iter().enumerate() {
-                    let elem_type = if let Some(tuple_ty) = ty {
-                        if let Type::Tuple(tuple_type) = *tuple_ty {
-                            if i < tuple_type.elems.len() {
-                                Some(&tuple_type.elems[i])
-                            } else {
-                                None
-                            }
-                        } else {
-                            None
-                        }
+                    let elem_type = if let Some(Type::Tuple(tuple_type)) = ty {
+                        tuple_type.elems.get(i)
                     } else {
                         None
                     };
@@ -1005,8 +998,8 @@ fn infer_type_from_expr(expr: &Expr) -> String {
 }
 
 // Function to infer type from a loop iterator expression
-fn infer_type_from_loop_expr(expr: &Box<Expr>) -> String {
-    match &**expr {
+fn infer_type_from_loop_expr(expr: &Expr) -> String {
+    match expr {
         Expr::Range(_) => "integer (range)".to_string(),
         Expr::MethodCall(method_call) => {
             let method_name = method_call.method.to_string();
@@ -1173,8 +1166,7 @@ fn extract_var_name_and_kind(line: &str, start_idx: usize) -> Option<(&str, &str
         let first_var = pattern
             .split(|c| "()[]{},".contains(c))
             .map(|s| s.trim())
-            .filter(|s| !s.is_empty() && !s.starts_with(".."))
-            .next()
+            .find(|s| !s.is_empty() && !s.starts_with(".."))
             .unwrap_or("unknown");
 
         // Check for type annotation
