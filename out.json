@@ -1,4 +1,102 @@
 {
+  "mutable_variables": [
+    {
+      "context": "use serde_json::Value;",
+      "file": "../spikeq/src/read_regex.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "error_messages",
+      "type": "function result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "expanded_patterns",
+      "type": "expression result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "output",
+      "type": "function result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "pattern_counts",
+      "type": "expression result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "explicitly typed pattern",
+      "line": 1,
+      "name": "regex_patterns",
+      "type": "Vec < Regex >"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "result",
+      "type": "expression result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "rng",
+      "type": "function result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "rng",
+      "type": "function result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "rng",
+      "type": "function result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "rng",
+      "type": "function result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "sequence",
+      "type": "function result"
+    },
+    {
+      "context": "mod arg;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 1,
+      "name": "temp",
+      "type": "expression result"
+    }
+  ],
   "immutable_variables": [
     {
       "context": "mod arg;",
@@ -289,102 +387,9 @@
       "type": "expression result"
     }
   ],
-  "mutable_variables": [
-    {
-      "context": "use serde_json::Value;",
-      "file": "../spikeq/src/read_regex.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "error_messages",
-      "type": "function result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "expanded_patterns",
-      "type": "expression result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "output",
-      "type": "function result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "pattern_counts",
-      "type": "expression result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "explicitly typed pattern",
-      "line": 1,
-      "name": "regex_patterns",
-      "type": "Vec < Regex >"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "result",
-      "type": "expression result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "rng",
-      "type": "function result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "rng",
-      "type": "function result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "rng",
-      "type": "function result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "rng",
-      "type": "function result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "sequence",
-      "type": "function result"
-    },
-    {
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 1,
-      "name": "temp",
-      "type": "expression result"
-    }
-  ]
+  "metadata": {
+    "datetime": "2025-03-23 10:46:46.072466 +11:00",
+    "project_name": "spikeq",
+    "version": "1.0.1"
+  }
 }

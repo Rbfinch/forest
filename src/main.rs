@@ -1,3 +1,4 @@
+use chrono::Local;
 use quote::ToTokens;
 use std::collections::HashMap;
 use std::error::Error;
@@ -7,6 +8,7 @@ use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
 use syn::visit::{self, Visit};
 use syn::{spanned::Spanned, Expr, Pat, Type};
+use toml::Value;
 
 mod args;
 
@@ -49,11 +51,37 @@ struct AnalysisResults {
     immutable_vars: Vec<VarInfo>, // List of immutable variables
 }
 
+struct AnalysisMetadata {
+    project_name: String,
+    version: String,
+    datetime: String,
+}
+
 fn main() -> Result<(), Box<dyn Error>> {
     // Parse command-line arguments using the clap-based module
     let args = args::parse_args();
 
+    // Get the current datetime
+    let datetime = Local::now().to_string();
+    println!("Analysis run at: {}", datetime);
+
+    // Read the version from Cargo.toml
+    let cargo_toml_path = Path::new(&args.project_dir).join("Cargo.toml");
+    let cargo_toml_content = fs::read_to_string(cargo_toml_path)?;
+    let cargo_toml: Value = toml::from_str(&cargo_toml_content)?;
+    let version = cargo_toml["package"]["version"]
+        .as_str()
+        .unwrap_or("unknown");
+    let project_name = cargo_toml["package"]["name"].as_str().unwrap_or("unknown");
+
     println!("Analyzing Rust project at: {}", args.project_dir);
+    println!("Project version: {}", version);
+
+    let metadata = AnalysisMetadata {
+        project_name: project_name.to_string(),
+        version: version.to_string(),
+        datetime,
+    };
 
     // Analyze the project directory
     let mut results = analyze_project(&args.project_dir)?;
@@ -71,12 +99,12 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Output results
     match args.output_file {
         Some(ref file) => {
-            output_results(&results, file, &args.format)?;
+            output_results(&results, &metadata, file, &args.format)?;
             println!("Results written to: {}", file);
         }
         None => {
             // Print to console
-            print_results(&results);
+            print_results(&results, &metadata);
         }
     }
 
@@ -1458,7 +1486,12 @@ fn infer_type_from_pattern(line: &str) -> String {
 
 // Function to print analysis results to the console
 
-fn print_results(results: &AnalysisResults) {
+fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata) {
+    println!("\n\x1b[1mProject Information:\x1b[0m");
+    println!("Project Name: {}", metadata.project_name);
+    println!("Version: {}", metadata.version);
+    println!("Analysis Run At: {}", metadata.datetime);
+
     println!("\n\x1b[1mMutable Variables:\x1b[0m");
     for var in &results.mutable_vars {
         println!("  {}", var);
@@ -1473,13 +1506,14 @@ fn print_results(results: &AnalysisResults) {
 // Function to output analysis results to a file
 fn output_results(
     results: &AnalysisResults,
+    metadata: &AnalysisMetadata,
     file: &str,
     format: &str,
 ) -> Result<(), Box<dyn Error>> {
     match format {
-        "json" => output_json(results, file)?,
-        "csv" => output_csv(results, file)?,
-        "text" => output_text(results, file)?,
+        "json" => output_json(results, metadata, file)?,
+        "csv" => output_csv(results, metadata, file)?,
+        "text" => output_text(results, metadata, file)?,
         _ => return Err("Invalid format".into()),
     }
 
@@ -1487,11 +1521,23 @@ fn output_results(
 }
 
 // Function to output results in JSON format
-fn output_json(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Error>> {
+fn output_json(
+    results: &AnalysisResults,
+    metadata: &AnalysisMetadata,
+    file: &str,
+) -> Result<(), Box<dyn Error>> {
     let mut file = File::create(file)?;
 
     // Convert to a serializable structure
     let mut output = HashMap::new();
+
+    // Add metadata
+    let metadata_map = serde_json::json!({
+        "version": metadata.version,
+        "project_name": metadata.project_name,
+        "datetime": metadata.datetime,
+    });
+    output.insert("metadata", metadata_map);
 
     // Use the already sorted vectors from the results
     let mut_vars: Vec<serde_json::Value> = results
@@ -1570,8 +1616,18 @@ fn output_json(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Erro
 }
 
 // Function to output results in CSV format
-fn output_csv(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Error>> {
+fn output_csv(
+    results: &AnalysisResults,
+    metadata: &AnalysisMetadata,
+    file: &str,
+) -> Result<(), Box<dyn Error>> {
     let mut file = File::create(file)?;
+
+    // Write metadata
+    writeln!(file, "Project Name,{}", metadata.project_name)?;
+    writeln!(file, "Version,{}", metadata.version)?;
+    writeln!(file, "Analysis Run At,{}", metadata.datetime)?;
+    writeln!(file)?;
 
     // Write header
     writeln!(file, "mutability,name,file,line,context,kind,type")?;
@@ -1608,8 +1664,19 @@ fn output_csv(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Error
 }
 
 // Function to output results in text format
-fn output_text(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Error>> {
+fn output_text(
+    results: &AnalysisResults,
+    metadata: &AnalysisMetadata,
+    file: &str,
+) -> Result<(), Box<dyn Error>> {
     let mut file = File::create(file)?;
+
+    writeln!(file, "Project Information")?;
+    writeln!(file, "-------------------")?;
+    writeln!(file, "Project Name: {}", metadata.project_name)?;
+    writeln!(file, "Version: {}", metadata.version)?;
+    writeln!(file, "Analysis Run At: {}", metadata.datetime)?;
+    writeln!(file)?;
 
     writeln!(file, "Mutable Variables ({})", results.mutable_vars.len())?;
     writeln!(file, "-------------------")?;
