@@ -1,11 +1,11 @@
 use std::collections::HashMap;
-use std::env;
 use std::error::Error;
 use std::fmt;
 use std::fs::{self, File};
 use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
-use std::process;
+
+mod args;
 
 // Structure to store information about variables
 struct VarInfo {
@@ -14,7 +14,7 @@ struct VarInfo {
     file_path: PathBuf, // Path to the file where the variable is declared
     line_number: usize, // Line number of the declaration
     context: String,    // Line of code containing the declaration
-    var_type: String,   // Type of the variable
+    var_kind: String,   // Kind (how declared) of the variable
 }
 
 // Implementing Display trait for VarInfo to format the output
@@ -22,13 +22,13 @@ impl fmt::Display for VarInfo {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
-            "{} ({}): {} at {}:{} - type: {}",
+            "{} ({}): {} at {}:{} - kind: {}",
             self.name,
             if self.mutable { "mutable" } else { "immutable" },
             self.context.trim(),
             self.file_path.display(),
             self.line_number,
-            self.var_type // Display the variable type
+            self.var_kind // Display the variable kind
         )
     }
 }
@@ -40,68 +40,28 @@ struct AnalysisResults {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    // Collect command-line arguments
-    let args: Vec<String> = env::args().collect();
+    // Parse command-line arguments using the clap-based module
+    let args = args::parse_args();
 
-    // Check if the required arguments are provided
-    if args.len() < 2 {
-        eprintln!(
-            "Usage: {} <project_directory> [--output <file>] [--format json|csv|text]",
-            args[0]
-        );
-        process::exit(1);
-    }
-
-    let project_dir = &args[1];
-    let mut output_file = None;
-    let mut format = "text";
-
-    // Parse optional arguments
-    let mut i = 2;
-    while i < args.len() {
-        match args[i].as_str() {
-            "--output" => {
-                if i + 1 < args.len() {
-                    output_file = Some(&args[i + 1]);
-                    i += 2;
-                } else {
-                    eprintln!("Error: --output requires a filename");
-                    process::exit(1);
-                }
-            }
-            "--format" => {
-                if i + 1 < args.len() {
-                    format = &args[i + 1];
-                    if !["json", "csv", "text"].contains(&format) {
-                        eprintln!("Error: format must be one of: json, csv, text");
-                        process::exit(1);
-                    }
-                    i += 2;
-                } else {
-                    eprintln!("Error: --format requires a value (json, csv, or text)");
-                    process::exit(1);
-                }
-            }
-            _ => {
-                eprintln!("Unknown argument: {}", args[i]);
-                process::exit(1);
-            }
-        }
-    }
-
-    println!("Analyzing Rust project at: {}", project_dir);
+    println!("Analyzing Rust project at: {}", args.project_dir);
 
     // Analyze the project directory
-    let results = analyze_project(project_dir)?;
+    let mut results = analyze_project(&args.project_dir)?;
+
+    // Sort results if requested
+    if args.sort {
+        results.mutable_vars.sort_by(|a, b| a.name.cmp(&b.name));
+        results.immutable_vars.sort_by(|a, b| a.name.cmp(&b.name));
+    }
 
     println!("\n\x1b[1mSummary:\x1b[0m");
     println!("Found {} mutable variables", results.mutable_vars.len());
     println!("Found {} immutable variables", results.immutable_vars.len());
 
     // Output results
-    match output_file {
-        Some(file) => {
-            output_results(&results, file, format)?;
+    match args.output_file {
+        Some(ref file) => {
+            output_results(&results, file, &args.format)?;
             println!("Results written to: {}", file);
         }
         None => {
@@ -198,14 +158,14 @@ fn analyze_file(
 
         // 1. Check for let mut declarations (standard case)
         if let Some(idx) = line.find("let mut ") {
-            if let Some((name, var_type)) = extract_var_name_and_type(line, idx + 8) {
+            if let Some((name, var_kind)) = extract_var_name_and_kind(line, idx + 8) {
                 mutable_vars.push(VarInfo {
                     name: name.to_string(),
                     mutable: true,
                     file_path: file_path.to_path_buf(),
                     line_number: i + 1,
                     context: line.to_string(),
-                    var_type: var_type.to_string(),
+                    var_kind: var_kind.to_string(),
                 });
             }
         }
@@ -213,14 +173,14 @@ fn analyze_file(
         else if let Some(idx) = line.find("let ") {
             // Make sure it's not actually "let mut"
             if !line[idx..].starts_with("let mut ") {
-                if let Some((name, var_type)) = extract_var_name_and_type(line, idx + 4) {
+                if let Some((name, var_kind)) = extract_var_name_and_kind(line, idx + 4) {
                     immutable_vars.push(VarInfo {
                         name: name.to_string(),
                         mutable: false,
                         file_path: file_path.to_path_buf(),
                         line_number: i + 1,
                         context: line.to_string(),
-                        var_type: var_type.to_string(),
+                        var_kind: var_kind.to_string(),
                     });
                 }
             }
@@ -235,7 +195,7 @@ fn analyze_file(
                     file_path: file_path.to_path_buf(),
                     line_number: i + 1,
                     context: line.to_string(),
-                    var_type: "inferred from loop".to_string(),
+                    var_kind: "inferred from loop".to_string(),
                 });
             }
         }
@@ -246,18 +206,18 @@ fn analyze_file(
         }
 
         // 5. Check for pattern matching with mut: "if let Some(mut x) =" or similar
-        if line.contains("if let ") || line.contains("while let ") || line.contains("match ") {
-            if line.contains("mut ") {
-                extract_mut_patterns(line, file_path, i + 1, mutable_vars);
-            }
+        if (line.contains("if let ") || line.contains("while let ") || line.contains("match "))
+            && line.contains("mut ")
+        {
+            extract_mut_patterns(line, file_path, i + 1, mutable_vars);
         }
     }
 
     Ok(())
 }
 
-// Function to extract variable name and type from a line of code - improved
-fn extract_var_name_and_type(line: &str, start_idx: usize) -> Option<(&str, &str)> {
+// Function to extract variable name and kind from a line of code - improved
+fn extract_var_name_and_kind(line: &str, start_idx: usize) -> Option<(&str, &str)> {
     let rest = &line[start_idx..];
 
     // Handle pattern matching with destructuring
@@ -291,22 +251,22 @@ fn extract_var_name_and_type(line: &str, start_idx: usize) -> Option<(&str, &str
         _ => return None,
     };
 
-    // Type extraction - handle both explicit and inferred types
-    let var_type = if let Some(type_start) = rest.find(':') {
-        let type_end = rest[type_start..]
+    // kind extraction - handle both explicit and inferred kinds
+    let var_kind = if let Some(kind_start) = rest.find(':') {
+        let kind_end = rest[kind_start..]
             .find(|c| ";=".contains(c))
-            .unwrap_or(rest.len() - type_start);
+            .unwrap_or(rest.len() - kind_start);
 
-        if type_start + 1 >= type_end + type_start {
+        if kind_start + 1 >= kind_end + kind_start {
             "inferred"
         } else {
-            rest[type_start + 1..type_start + type_end].trim()
+            rest[kind_start + 1..kind_start + kind_end].trim()
         }
     } else {
         "inferred"
     };
 
-    Some((name, var_type))
+    Some((name, var_kind))
 }
 
 // New function to extract mutable variable names from for loops
@@ -346,13 +306,13 @@ fn extract_mut_parameters(
             {
                 let param_name = &params_part[param_name_start..param_name_start + end_idx];
 
-                // Extract type if available
-                let param_type = if let Some(type_idx) = params_part[param_name_start..].find(':') {
-                    let type_start = param_name_start + type_idx + 1;
-                    let type_end = params_part[type_start..]
+                // Extract kind if available
+                let param_kind = if let Some(kind_idx) = params_part[param_name_start..].find(':') {
+                    let kind_start = param_name_start + kind_idx + 1;
+                    let kind_end = params_part[kind_start..]
                         .find(|c| ",)".contains(c))
-                        .unwrap_or(params_part.len() - type_start);
-                    params_part[type_start..type_start + type_end].trim()
+                        .unwrap_or(params_part.len() - kind_start);
+                    params_part[kind_start..kind_start + kind_end].trim()
                 } else {
                     "inferred parameter"
                 };
@@ -363,7 +323,7 @@ fn extract_mut_parameters(
                     file_path: file_path.to_path_buf(),
                     line_number,
                     context: line.to_string(),
-                    var_type: param_type.to_string(),
+                    var_kind: param_kind.to_string(),
                 });
             }
 
@@ -398,7 +358,7 @@ fn extract_mut_patterns(
                 file_path: file_path.to_path_buf(),
                 line_number,
                 context: line.to_string(),
-                var_type: "pattern matched".to_string(),
+                var_kind: "pattern matched".to_string(),
             });
         } else if !line[var_name_start..].is_empty() {
             // Handle case where the variable is at the end of the line
@@ -410,7 +370,7 @@ fn extract_mut_patterns(
                 file_path: file_path.to_path_buf(),
                 line_number,
                 context: line.to_string(),
-                var_type: "pattern matched".to_string(),
+                var_kind: "pattern matched".to_string(),
             });
         }
 
@@ -455,6 +415,7 @@ fn output_json(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Erro
     // Convert to a serializable structure
     let mut output = HashMap::new();
 
+    // Use the already sorted vectors from the results
     let mut_vars: Vec<serde_json::Value> = results
         .mutable_vars
         .iter()
@@ -477,8 +438,8 @@ fn output_json(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Erro
                 serde_json::Value::String(v.context.trim().to_string()),
             );
             map.insert(
-                "type".to_string(),
-                serde_json::Value::String(v.var_type.clone()), // Include the variable type
+                "kind".to_string(),
+                serde_json::Value::String(v.var_kind.clone()),
             );
             serde_json::Value::Object(map)
         })
@@ -506,8 +467,8 @@ fn output_json(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Erro
                 serde_json::Value::String(v.context.trim().to_string()),
             );
             map.insert(
-                "type".to_string(),
-                serde_json::Value::String(v.var_type.clone()), // Include the variable type
+                "kind".to_string(),
+                serde_json::Value::String(v.var_kind.clone()),
             );
             serde_json::Value::Object(map)
         })
@@ -527,18 +488,18 @@ fn output_csv(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Error
     let mut file = File::create(file)?;
 
     // Write header
-    writeln!(file, "mutability,name,file,line,context,type")?; // Include the type in the header
+    writeln!(file, "mutability,name,file,line,context,kind")?; // Include the kind in the header
 
     // Write mutable variables
     for var in &results.mutable_vars {
         writeln!(
             file,
-            "mutable,\"{}\",\"{}\",{},\"{}\",\"{}\"", // Include the type in the CSV
+            "mutable,\"{}\",\"{}\",{},\"{}\",\"{}\"", // Include the kind in the CSV
             var.name,
             var.file_path.display(),
             var.line_number,
             var.context.trim().replace("\"", "\"\""),
-            var.var_type // Include the variable type
+            var.var_kind // Include the variable kind
         )?;
     }
 
@@ -546,12 +507,12 @@ fn output_csv(results: &AnalysisResults, file: &str) -> Result<(), Box<dyn Error
     for var in &results.immutable_vars {
         writeln!(
             file,
-            "immutable,\"{}\",\"{}\",{},\"{}\",\"{}\"", // Include the type in the CSV
+            "immutable,\"{}\",\"{}\",{},\"{}\",\"{}\"", // Include the kind in the CSV
             var.name,
             var.file_path.display(),
             var.line_number,
             var.context.trim().replace("\"", "\"\""),
-            var.var_type // Include the variable type
+            var.var_kind // Include the variable kind
         )?;
     }
 

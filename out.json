@@ -1,0 +1,321 @@
+{
+  "mutable_variables": [
+    {
+      "context": "fn insert_patterns(sequence: &mut String, patterns: &[Regex]) {",
+      "file": "../spikeq/src/main.rs",
+      "kind": "&[Regex]",
+      "line": 57,
+      "name": "String"
+    },
+    {
+      "context": "let mut error_messages = Vec::new();",
+      "file": "../spikeq/src/read_regex.rs",
+      "kind": "destructured",
+      "line": 73,
+      "name": "error_messages"
+    },
+    {
+      "context": "let mut expanded_patterns = vec![pattern];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 75,
+      "name": "expanded_patterns"
+    },
+    {
+      "context": "let mut output = String::new();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 88,
+      "name": "output"
+    },
+    {
+      "context": "let mut pattern_counts = vec![0; *num_patterns];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 103,
+      "name": "pattern_counts"
+    },
+    {
+      "context": "let mut regex_patterns: Vec<Regex> = vec![];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 68,
+      "name": "regex_patterns:"
+    },
+    {
+      "context": "let mut result = vec![];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 184,
+      "name": "result"
+    },
+    {
+      "context": "let mut rng = rand::thread_rng();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 32,
+      "name": "rng"
+    },
+    {
+      "context": "let mut rng = rand::thread_rng();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 46,
+      "name": "rng"
+    },
+    {
+      "context": "let mut rng = rand::thread_rng();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 58,
+      "name": "rng"
+    },
+    {
+      "context": "let mut rng = rand::thread_rng();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 97,
+      "name": "rng"
+    },
+    {
+      "context": "let mut sequence = generate_sequence(min_length, max_length, &regex_patterns);",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 106,
+      "name": "sequence"
+    },
+    {
+      "context": "let mut temp = vec![s];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 187,
+      "name": "temp"
+    }
+  ],
+  "immutable_variables": [
+    {
+      "context": "let (min_length, max_length) = args.length;",
+      "file": "../spikeq/src/main.rs",
+      "kind": "complex pattern",
+      "line": 90,
+      "name": "(min_length,"
+    },
+    {
+      "context": "if let Some(regex_patterns_file) = &args.regex_patterns {",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 70,
+      "name": "Some(regex_patterns_file)"
+    },
+    {
+      "context": "let additional_patterns = read_base_strings_from_json(regex_patterns_file)",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 71,
+      "name": "additional_patterns"
+    },
+    {
+      "context": "let args = Args::parse();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 66,
+      "name": "args"
+    },
+    {
+      "context": "let base_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
+      "file": "../spikeq/src/read_regex.rs",
+      "kind": "destructured",
+      "line": 85,
+      "name": "base_strings:"
+    },
+    {
+      "context": "let chars = ['A', 'C', 'T', 'G'];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 31,
+      "name": "chars"
+    },
+    {
+      "context": "let chars: Vec<char> = r#\"!\\\"\\#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\"#.chars().collect();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 45,
+      "name": "chars:"
+    },
+    {
+      "context": "let file = std::fs::File::open(regex_patterns_file).expect(\"Unable to open file\");",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 137,
+      "name": "file"
+    },
+    {
+      "context": "let file = File::open(filename)?;",
+      "file": "../spikeq/src/read_regex.rs",
+      "kind": "destructured",
+      "line": 55,
+      "name": "file"
+    },
+    {
+      "context": "let iupac_regexes = get_iupac_regexes();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 73,
+      "name": "iupac_regexes"
+    },
+    {
+      "context": "let json: serde_json::Value =",
+      "file": "../spikeq/src/main.rs",
+      "kind": "serde_json::Value",
+      "line": 139,
+      "name": "json"
+    },
+    {
+      "context": "let json: Value = serde_json::from_reader(reader)?;",
+      "file": "../spikeq/src/read_regex.rs",
+      "kind": "destructured",
+      "line": 57,
+      "name": "json:"
+    },
+    {
+      "context": "let length = rng.gen_range(min_length..=max_length);",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 33,
+      "name": "length"
+    },
+    {
+      "context": "let line: String = (0..length)",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 48,
+      "name": "line:"
+    },
+    {
+      "context": "let max_length = parts[1]",
+      "file": "../spikeq/src/arg.rs",
+      "kind": "destructured",
+      "line": 97,
+      "name": "max_length"
+    },
+    {
+      "context": "let min_length = parts[0]",
+      "file": "../spikeq/src/arg.rs",
+      "kind": "destructured",
+      "line": 94,
+      "name": "min_length"
+    },
+    {
+      "context": "let output_json = serde_json::json!({",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 149,
+      "name": "output_json"
+    },
+    {
+      "context": "let parts: Vec<&str> = s.split(',').collect();",
+      "file": "../spikeq/src/arg.rs",
+      "kind": "destructured",
+      "line": 90,
+      "name": "parts:"
+    },
+    {
+      "context": "let pos = rng.gen_range(0..=sequence.len());",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 60,
+      "name": "pos"
+    },
+    {
+      "context": "let quality_line = generate_quality_line(sequence.len(), &regex_patterns);",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 115,
+      "name": "quality_line"
+    },
+    {
+      "context": "let quality_line = generate_quality_line(sequence.len(), &regex_patterns);",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 167,
+      "name": "quality_line"
+    },
+    {
+      "context": "let reader = std::io::BufReader::new(file);",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 138,
+      "name": "reader"
+    },
+    {
+      "context": "let reader = BufReader::new(file);",
+      "file": "../spikeq/src/read_regex.rs",
+      "kind": "destructured",
+      "line": 56,
+      "name": "reader"
+    },
+    {
+      "context": "let regex_set_name = if let Some(regex_patterns_file) = &args.regex_patterns {",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 136,
+      "name": "regex_set_name"
+    },
+    {
+      "context": "let schema: Value = serde_json::from_str(SCHEMA).map_err(|e| {",
+      "file": "../spikeq/src/read_regex.rs",
+      "kind": "destructured",
+      "line": 59,
+      "name": "schema:"
+    },
+    {
+      "context": "let selected_patterns: Vec<Regex> = regex_patterns",
+      "file": "../spikeq/src/main.rs",
+      "kind": "Vec<Regex>",
+      "line": 98,
+      "name": "selected_patterns"
+    },
+    {
+      "context": "let sequence = generate_sequence(min_length, max_length, &regex_patterns);",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 166,
+      "name": "sequence"
+    },
+    {
+      "context": "let sequence: String = (0..length)",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 35,
+      "name": "sequence:"
+    },
+    {
+      "context": "let summary: Vec<_> = selected_patterns",
+      "file": "../spikeq/src/main.rs",
+      "kind": "Vec<_>",
+      "line": 125,
+      "name": "summary"
+    },
+    {
+      "context": "let summary_json =",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred",
+      "line": 160,
+      "name": "summary_json"
+    },
+    {
+      "context": "let uuid = Uuid::new_v4().to_string();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "destructured",
+      "line": 87,
+      "name": "uuid"
+    },
+    {
+      "context": "let validator = jsonschema::validator_for(&schema).map_err(|e| {",
+      "file": "../spikeq/src/read_regex.rs",
+      "kind": "destructured",
+      "line": 66,
+      "name": "validator"
+    }
+  ]
+}
