@@ -21,6 +21,7 @@ struct VarInfo {
     context: String,    // Line of code containing the declaration
     var_kind: String,   // Kind (how declared) of the variable
     var_type: String,   // The fundamental Rust type of the variable
+    basic_type: String, // The basic Rust type (i64, String, etc.)
 }
 
 // Function to format the type
@@ -33,16 +34,166 @@ impl fmt::Display for VarInfo {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
-            "{} ({}): {} at {}:{} - kind: {}, type: {}",
+            "{} ({}): {} at {}:{} - kind: {}, type: {}, basic type: {}",
             self.name,
             if self.mutable { "mutable" } else { "immutable" },
             self.context.trim(),
             self.file_path.display(),
             self.line_number,
             self.var_kind,
-            self.var_type
+            self.var_type,
+            self.basic_type
         )
     }
+}
+
+// Function to extract the basic Rust type
+fn extract_basic_type(ty: &Type) -> String {
+    match ty {
+        Type::Path(path) => {
+            // Extract the last segment as the base type
+            if let Some(segment) = path
+                .path
+                .segments
+                .last()
+                .map(|segment| segment.ident.to_string())
+            {
+                // Check for primitive types
+                match segment.as_str() {
+                    "i8" | "i16" | "i32" | "i64" | "i128" | "isize" | "u8" | "u16" | "u32"
+                    | "u64" | "u128" | "usize" | "f32" | "f64" | "bool" | "char" => segment,
+
+                    "String" => "String".to_string(),
+                    "Option" => {
+                        if let Some(syn::PathArguments::AngleBracketed(args)) =
+                            path.path.segments.last().map(|segment| &segment.arguments)
+                        {
+                            if let Some(arg) = args.args.first() {
+                                if let syn::GenericArgument::Type(inner_ty) = arg {
+                                    format!("Option<{}>", extract_basic_type(inner_ty))
+                                } else {
+                                    "Option<T>".to_string()
+                                }
+                            } else {
+                                "Option<T>".to_string()
+                            }
+                        } else {
+                            "Option<T>".to_string()
+                        }
+                    }
+                    "Vec" => {
+                        if let syn::PathArguments::AngleBracketed(args) =
+                            &path.path.segments.last().unwrap().arguments
+                        {
+                            if let Some(arg) = args.args.first() {
+                                if let syn::GenericArgument::Type(inner_ty) = arg {
+                                    format!("Vec<{}>", extract_basic_type(inner_ty))
+                                } else {
+                                    "Vec<T>".to_string()
+                                }
+                            } else {
+                                "Vec<T>".to_string()
+                            }
+                        } else {
+                            "Vec<T>".to_string()
+                        }
+                    }
+                    // Default to the type name itself
+                    _ => segment,
+                }
+            } else {
+                "unknown".to_string()
+            }
+        }
+        Type::Reference(ref_type) => {
+            let mutability = if ref_type.mutability.is_some() {
+                "mut "
+            } else {
+                ""
+            };
+            format!("&{}{}", mutability, extract_basic_type(&ref_type.elem))
+        }
+        Type::Array(array_type) => {
+            format!("[{}; N]", extract_basic_type(&array_type.elem))
+        }
+        Type::Tuple(tuple_type) => {
+            if tuple_type.elems.is_empty() {
+                "()".to_string()
+            } else {
+                let types: Vec<String> = tuple_type.elems.iter().map(extract_basic_type).collect();
+                format!("({})", types.join(", "))
+            }
+        }
+        Type::Slice(slice_type) => {
+            format!("[{}]", extract_basic_type(&slice_type.elem))
+        }
+        // For other types, just use the stringified version
+        _ => quote::quote!(#ty).to_string(),
+    }
+}
+
+// Function to infer basic type from context
+fn infer_basic_type_from_context(context: &str) -> String {
+    // Extract basic type from "let x: Type = ..." pattern
+    if let Some(idx) = context.find(':') {
+        let after_colon = &context[idx + 1..];
+        let end_idx = after_colon
+            .find(|c| ";=".contains(c))
+            .unwrap_or(after_colon.len());
+
+        if end_idx > 0 {
+            let type_str = after_colon[..end_idx].trim();
+            // Handle simple types directly
+            match type_str {
+                "i8" | "i16" | "i32" | "i64" | "i128" | "isize" | "u8" | "u16" | "u32" | "u64"
+                | "u128" | "usize" | "f32" | "f64" | "bool" | "char" | "String" => {
+                    return type_str.to_string()
+                }
+                _ => {
+                    // For more complex types, try some basic patterns
+                    if type_str.starts_with("Vec<") {
+                        return type_str.to_string();
+                    }
+                    if type_str.starts_with("Option<") {
+                        return type_str.to_string();
+                    }
+                    if type_str.starts_with("&") {
+                        return type_str.to_string();
+                    }
+                    return type_str.to_string();
+                }
+            }
+        }
+    }
+
+    // Try to infer from assignment
+    if let Some(eq_idx) = context.find('=') {
+        let rhs = context[eq_idx + 1..].trim();
+        if rhs.starts_with('"') {
+            return "String".to_string();
+        }
+        if rhs == "true" || rhs == "false" {
+            return "bool".to_string();
+        }
+        if rhs.chars().next().map_or(false, |c| c.is_ascii_digit()) {
+            if rhs.contains('.') {
+                return "f64".to_string();
+            } else {
+                return "i32".to_string();
+            }
+        }
+        if rhs.starts_with('\'') && rhs.len() >= 3 {
+            return "char".to_string();
+        }
+        if rhs.starts_with("vec!") || rhs.contains("Vec::") {
+            return "Vec<T>".to_string();
+        }
+        if rhs.starts_with("Some(") {
+            return "Option<T>".to_string();
+        }
+    }
+
+    "unknown".to_string()
 }
 
 // Structure to store analysis results
@@ -221,6 +372,13 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                 "inferred".to_string()
             };
 
+            // Determine basic type
+            let basic_type = if let Some(init) = &local.init {
+                infer_basic_type_from_expr(&init.expr)
+            } else {
+                infer_basic_type_from_context(&context)
+            };
+
             let var_info = VarInfo {
                 name,
                 mutable,
@@ -229,6 +387,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                 context,
                 var_kind: "inferred from initialization".to_string(),
                 var_type,
+                basic_type,
             };
 
             if mutable {
@@ -279,6 +438,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                         context,
                         var_kind: format!("function parameter: {}", quote::quote!(#pat_type.ty)),
                         var_type,
+                        basic_type: extract_basic_type(&pat_type.ty),
                     });
                 }
             }
@@ -313,6 +473,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                     context,
                     var_kind: "for loop variable".to_string(),
                     var_type,
+                    basic_type: infer_basic_type_from_expr(&for_loop.expr),
                 });
             }
         } else {
@@ -362,6 +523,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                                     context: context.clone(),
                                     var_kind: "if-let pattern".to_string(),
                                     var_type: infer_type_from_pattern_match(pat, expr),
+                                    basic_type: infer_basic_type_from_context(&context),
                                 });
                             }
                         }
@@ -459,6 +621,13 @@ impl VariableVisitor<'_> {
                     infer_type_from_context(context)
                 };
 
+                // Determine basic type
+                let basic_type = if let Some(ty) = ty {
+                    extract_basic_type(ty)
+                } else {
+                    infer_basic_type_from_context(context)
+                };
+
                 let var_info = VarInfo {
                     name,
                     mutable,
@@ -471,6 +640,7 @@ impl VariableVisitor<'_> {
                         "pattern match".to_string()
                     },
                     var_type,
+                    basic_type,
                 };
 
                 if mutable {
@@ -529,6 +699,7 @@ impl VariableVisitor<'_> {
                             context: context.to_string(),
                             var_kind: format!("destructured from {}", struct_name),
                             var_type,
+                            basic_type: infer_basic_type_from_context(context),
                         };
 
                         if mutable {
@@ -569,6 +740,7 @@ impl VariableVisitor<'_> {
                             context: context.to_string(),
                             var_kind: format!("destructured from struct {}", struct_name),
                             var_type,
+                            basic_type: infer_basic_type_from_context(context),
                         };
 
                         if mutable {
@@ -612,6 +784,7 @@ impl VariableVisitor<'_> {
                         context: context.to_string(),
                         var_kind: "reference pattern".to_string(),
                         var_type,
+                        basic_type: infer_basic_type_from_context(context),
                     };
 
                     if mutable {
@@ -648,6 +821,7 @@ impl VariableVisitor<'_> {
                             context: context.to_string(),
                             var_kind: "slice pattern".to_string(),
                             var_type,
+                            basic_type: infer_basic_type_from_context(context),
                         };
 
                         if mutable {
@@ -951,6 +1125,31 @@ fn infer_destructuring_type<'a>(rhs: &'a str, pattern: &str) -> &'a str {
     "destructured value"
 }
 
+// Function to infer basic type from an expression
+fn infer_basic_type_from_expr(expr: &Expr) -> String {
+    match expr {
+        Expr::Lit(lit_expr) => match &lit_expr.lit {
+            syn::Lit::Str(_) => "String".to_string(),
+            syn::Lit::ByteStr(_) => "Vec<u8>".to_string(),
+            syn::Lit::Byte(_) => "u8".to_string(),
+            syn::Lit::Char(_) => "char".to_string(),
+            syn::Lit::Int(_) => "i32".to_string(),
+            syn::Lit::Float(_) => "f64".to_string(),
+            syn::Lit::Bool(_) => "bool".to_string(),
+            _ => "unknown".to_string(),
+        },
+        Expr::Array(_) => "Vec<T>".to_string(),
+        Expr::Call(_) => "function call result".to_string(),
+        Expr::MethodCall(_) => "method call result".to_string(),
+        Expr::Struct(_) => "struct instance".to_string(),
+        Expr::Reference(_) => "reference".to_string(),
+        Expr::Binary(_) => "binary expression result".to_string(),
+        Expr::Match(_) => "match result".to_string(),
+        Expr::If(_) => "conditional result".to_string(),
+        _ => "unknown".to_string(),
+    }
+}
+
 // Function to infer type from an expression
 fn infer_type_from_expr(expr: &Expr) -> String {
     match expr {
@@ -1160,6 +1359,7 @@ fn analyze_file_manual_implementation(
                     context: line.to_string(),
                     var_kind: var_kind.to_string(),
                     var_type: rust_type,
+                    basic_type: infer_basic_type_from_context(line),
                 });
             }
         }
@@ -1183,6 +1383,7 @@ fn analyze_file_manual_implementation(
                         context: line.to_string(),
                         var_kind: var_kind.to_string(),
                         var_type: rust_type,
+                        basic_type: infer_basic_type_from_context(line),
                     });
                 }
             }
@@ -1199,6 +1400,7 @@ fn analyze_file_manual_implementation(
                     context: line.to_string(),
                     var_kind: "inferred from loop".to_string(),
                     var_type: infer_type_from_loop(line),
+                    basic_type: infer_basic_type_from_context(line),
                 });
             }
         }
@@ -1438,6 +1640,7 @@ fn extract_mut_parameters(
                     context: line.to_string(),
                     var_kind: param_kind.to_string(),
                     var_type: rust_type,
+                    basic_type: infer_basic_type_from_context(line),
                 });
             }
 
@@ -1477,6 +1680,7 @@ fn extract_mut_patterns(
                 context: line.to_string(),
                 var_kind: "pattern matched".to_string(),
                 var_type: pattern_type,
+                basic_type: infer_basic_type_from_context(line),
             });
         } else if !line[var_name_start..].is_empty() {
             // Handle case where the variable is at the end of the line
@@ -1493,6 +1697,7 @@ fn extract_mut_patterns(
                 context: line.to_string(),
                 var_kind: "pattern matched".to_string(),
                 var_type: pattern_type,
+                basic_type: infer_basic_type_from_context(line),
             });
         }
 
@@ -1614,6 +1819,10 @@ fn output_json(
                 "type".to_string(),
                 serde_json::Value::String(v.var_type.clone()),
             );
+            map.insert(
+                "basic_type".to_string(),
+                serde_json::Value::String(v.basic_type.clone()),
+            );
             serde_json::Value::Object(map)
         })
         .collect();
@@ -1647,6 +1856,10 @@ fn output_json(
                 "type".to_string(),
                 serde_json::Value::String(v.var_type.clone()),
             );
+            map.insert(
+                "basic_type".to_string(),
+                serde_json::Value::String(v.basic_type.clone()),
+            );
             serde_json::Value::Object(map)
         })
         .collect();
@@ -1675,19 +1888,23 @@ fn output_csv(
     writeln!(file)?;
 
     // Write header
-    writeln!(file, "mutability,name,file,line,context,kind,type")?;
+    writeln!(
+        file,
+        "mutability,name,file,line,context,kind,type,basic_type"
+    )?;
 
     // Write mutable variables
     for var in &results.mutable_vars {
         writeln!(
             file,
-            "mutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\"",
+            "mutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\"",
             var.name,
             var.file_path.display(),
             var.line_number,
             var.context.trim().replace("\"", "\"\""),
             var.var_kind,
-            var.var_type
+            var.var_type,
+            var.basic_type
         )?;
     }
 
@@ -1695,13 +1912,14 @@ fn output_csv(
     for var in &results.immutable_vars {
         writeln!(
             file,
-            "immutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\"",
+            "immutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\"",
             var.name,
             var.file_path.display(),
             var.line_number,
             var.context.trim().replace("\"", "\"\""),
             var.var_kind,
-            var.var_type
+            var.var_type,
+            var.basic_type
         )?;
     }
 
