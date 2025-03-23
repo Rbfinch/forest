@@ -1,44 +1,58 @@
-use chrono::Local;
-use quote::ToTokens;
+//
+// Forest - A Rust Static Analysis Tool
+// This tool analyzes Rust projects to track variable mutability and container usage.
+// It provides insights about how variables are declared, used, and what their types are.
+//
+// The analysis works by parsing Rust source files using the syn crate, traversing the AST,
+// and extracting information about variables and their properties.
+
+// External crates
+use chrono::Local; // For datetime handling
+use quote::ToTokens; // For converting AST nodes to token streams
 use std::collections::HashMap;
 use std::error::Error;
 use std::fmt;
 use std::fs::{self, File};
 use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
-use syn::visit::{self, Visit};
-use syn::{spanned::Spanned, Expr, Pat, Type};
-use toml::Value;
+use syn::visit::{self, Visit}; // For AST traversal
+use syn::{spanned::Spanned, Expr, Pat, Type}; // For working with Rust syntax elements
+use toml::Value; // For parsing Cargo.toml files
 
-mod args;
+// Internal modules
+mod args; // Command-line argument parsing
 
 // Structure to store information about variables
+// This is the core data structure that holds details about each variable found
 struct VarInfo {
-    name: String,       // Variable name
-    mutable: bool,      // Whether the variable is mutable
+    name: String,       // Variable name (identifier)
+    mutable: bool,      // Whether the variable is mutable (true) or immutable (false)
     file_path: PathBuf, // Path to the file where the variable is declared
-    line_number: usize, // Line number of the declaration
-    context: String,    // Line of code containing the declaration
-    var_kind: String,   // Kind (how declared) of the variable
-    var_type: String,   // The fundamental Rust type of the variable
-    basic_type: String, // The basic Rust type (i64, String, etc.)
-    scope: String,      // Scope of the variable (e.g., function name, module name)
+    line_number: usize, // Line number of the declaration in the source file
+    context: String,    // Line of code containing the declaration (for reference)
+    var_kind: String, // Kind (how declared) of the variable (let binding, function parameter, etc.)
+    var_type: String, // The fundamental Rust type of the variable (with descriptive information)
+    basic_type: String, // The basic Rust type (i64, String, etc.) without type parameters
+    scope: String,    // Scope of the variable (e.g., function name, module name)
 }
 
 // Structure to store information about containers
+// Containers are structural elements like functions, structs, and enums
 struct ContainerInfo {
-    name: String,           // Container name
-    container_type: String, // Type of the container (e.g., struct, function)
+    name: String,           // Container name (identifier)
+    container_type: String, // Type of the container (e.g., struct, function, enum)
     file_path: PathBuf,     // Path to the file where the container is declared
-    line_number: usize,     // Line number of the declaration
+    line_number: usize,     // Line number of the declaration in the source file
 }
 
 // Function to format the type
+// Converts a syn::Type to a string representation using quote crate
 fn format_type(ty: &Type) -> String {
     quote::quote!(#ty).to_string()
 }
 
 // Implementing Display trait for VarInfo to format the output
+// This determines how VarInfo objects are printed in text output
 impl fmt::Display for VarInfo {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(

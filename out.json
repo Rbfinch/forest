@@ -1,4 +1,131 @@
 {
+  "metadata": {
+    "datetime": "2025-03-23 16:22:44.645851 +11:00",
+    "project_name": "spikeq",
+    "version": "1.0.1"
+  },
+  "mutable_variables": [
+    {
+      "basic_type": "function call result",
+      "context": "let mut error_messages = Vec::new();",
+      "file": "../spikeq/src/read_regex.rs",
+      "kind": "inferred from initialization",
+      "line": 73,
+      "name": "error_messages",
+      "scope": "read_base_strings_from_json",
+      "type": "function result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let mut expanded_patterns = vec![pattern];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 75,
+      "name": "expanded_patterns",
+      "scope": "main",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut output = String::new();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 88,
+      "name": "output",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let mut pattern_counts = vec![0; *num_patterns];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 103,
+      "name": "pattern_counts",
+      "scope": "main",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "Vec<Regex>",
+      "context": "let mut regex_patterns: Vec<Regex> = vec![];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "explicitly typed pattern",
+      "line": 68,
+      "name": "regex_patterns",
+      "scope": "main",
+      "type": "Vec < Regex >"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let mut regex_patterns: Vec<Regex> = vec![];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 68,
+      "name": "result",
+      "scope": "expand_strings",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut rng = rand::thread_rng();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 32,
+      "name": "rng",
+      "scope": "generate_sequence",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut rng = rand::thread_rng();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 32,
+      "name": "rng",
+      "scope": "generate_quality_line",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut rng = rand::thread_rng();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 32,
+      "name": "rng",
+      "scope": "insert_patterns",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut rng = rand::thread_rng();",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 32,
+      "name": "rng",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut sequence = generate_sequence(min_length, max_length, &regex_patterns);",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 106,
+      "name": "sequence",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let mut temp = vec![s];",
+      "file": "../spikeq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 187,
+      "name": "temp",
+      "scope": "expand_strings",
+      "type": "expression result"
+    }
+  ],
   "immutable_variables": [
     {
       "basic_type": "method call result",
@@ -361,133 +488,6 @@
       "type": "expression result"
     }
   ],
-  "mutable_variables": [
-    {
-      "basic_type": "function call result",
-      "context": "let mut error_messages = Vec::new();",
-      "file": "../spikeq/src/read_regex.rs",
-      "kind": "inferred from initialization",
-      "line": 73,
-      "name": "error_messages",
-      "scope": "read_base_strings_from_json",
-      "type": "function result"
-    },
-    {
-      "basic_type": "unknown",
-      "context": "let mut expanded_patterns = vec![pattern];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 75,
-      "name": "expanded_patterns",
-      "scope": "main",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut output = String::new();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 88,
-      "name": "output",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "unknown",
-      "context": "let mut pattern_counts = vec![0; *num_patterns];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 103,
-      "name": "pattern_counts",
-      "scope": "main",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "Vec<Regex>",
-      "context": "let mut regex_patterns: Vec<Regex> = vec![];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "explicitly typed pattern",
-      "line": 68,
-      "name": "regex_patterns",
-      "scope": "main",
-      "type": "Vec < Regex >"
-    },
-    {
-      "basic_type": "unknown",
-      "context": "let mut regex_patterns: Vec<Regex> = vec![];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 68,
-      "name": "result",
-      "scope": "expand_strings",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut rng = rand::thread_rng();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 32,
-      "name": "rng",
-      "scope": "generate_sequence",
-      "type": "function result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut rng = rand::thread_rng();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 32,
-      "name": "rng",
-      "scope": "generate_quality_line",
-      "type": "function result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut rng = rand::thread_rng();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 32,
-      "name": "rng",
-      "scope": "insert_patterns",
-      "type": "function result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut rng = rand::thread_rng();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 32,
-      "name": "rng",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut sequence = generate_sequence(min_length, max_length, &regex_patterns);",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 106,
-      "name": "sequence",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "unknown",
-      "context": "let mut temp = vec![s];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 187,
-      "name": "temp",
-      "scope": "expand_strings",
-      "type": "expression result"
-    }
-  ],
-  "metadata": {
-    "datetime": "2025-03-23 16:16:26.876474 +11:00",
-    "project_name": "spikeq",
-    "version": "1.0.1"
-  },
   "containers": [
     {
       "file": "../spikeq/src/arg.rs",
