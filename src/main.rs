@@ -61,45 +61,33 @@ fn extract_basic_type(ty: &Type) -> String {
                 // Check for primitive types
                 match segment.as_str() {
                     "i8" | "i16" | "i32" | "i64" | "i128" | "isize" | "u8" | "u16" | "u32"
-                    | "u64" | "u128" | "usize" | "f32" | "f64" | "bool" | "char" => segment,
+                    | "u64" | "u128" | "usize" | "f32" | "f64" | "bool" | "char" => {
+                        segment.to_string()
+                    }
 
                     "String" => "String".to_string(),
-                    "Option" => {
-                        if let Some(syn::PathArguments::AngleBracketed(args)) =
-                            path.path.segments.last().map(|segment| &segment.arguments)
-                        {
-                            if let Some(arg) = args.args.first() {
-                                if let syn::GenericArgument::Type(inner_ty) = arg {
-                                    format!("Option<{}>", extract_basic_type(inner_ty))
-                                } else {
-                                    "Option<T>".to_string()
-                                }
+                    "Option" => match path.path.segments.last().map(|segment| &segment.arguments) {
+                        Some(syn::PathArguments::AngleBracketed(args)) => {
+                            if let Some(syn::GenericArgument::Type(inner_ty)) = args.args.first() {
+                                format!("Option<{}>", extract_basic_type(inner_ty))
                             } else {
                                 "Option<T>".to_string()
                             }
-                        } else {
-                            "Option<T>".to_string()
                         }
-                    }
-                    "Vec" => {
-                        if let syn::PathArguments::AngleBracketed(args) =
-                            &path.path.segments.last().unwrap().arguments
-                        {
-                            if let Some(arg) = args.args.first() {
-                                if let syn::GenericArgument::Type(inner_ty) = arg {
-                                    format!("Vec<{}>", extract_basic_type(inner_ty))
-                                } else {
-                                    "Vec<T>".to_string()
-                                }
+                        _ => "Option<T>".to_string(),
+                    },
+                    "Vec" => match &path.path.segments.last().unwrap().arguments {
+                        syn::PathArguments::AngleBracketed(args) => {
+                            if let Some(syn::GenericArgument::Type(inner_ty)) = args.args.first() {
+                                format!("Vec<{}>", extract_basic_type(inner_ty))
                             } else {
                                 "Vec<T>".to_string()
                             }
-                        } else {
-                            "Vec<T>".to_string()
                         }
-                    }
+                        _ => "Vec<T>".to_string(),
+                    },
                     // Default to the type name itself
-                    _ => segment,
+                    _ => segment.to_string(),
                 }
             } else {
                 "unknown".to_string()
