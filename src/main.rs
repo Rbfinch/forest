@@ -273,6 +273,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("\n\x1b[1mSummary:\x1b[0m");
     println!("Found {} mutable variables", results.mutable_vars.len());
     println!("Found {} immutable variables", results.immutable_vars.len());
+    println!("Found {} container objects", results.containers.len());
 
     // Output results
     match args.output_file {
@@ -1907,17 +1908,23 @@ fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata) {
     println!("Version: {}", metadata.version);
     println!("Analysis Run At: {}", metadata.datetime);
 
-    println!("\n\x1b[1mMutable Variables:\x1b[0m");
+    println!(
+        "\n\x1b[1mMutable Variables ({}):\x1b[0m",
+        results.mutable_vars.len()
+    );
     for var in &results.mutable_vars {
         println!("  {}", var);
     }
 
-    println!("\n\x1b[1mImmutable Variables:\x1b[0m");
+    println!(
+        "\n\x1b[1mImmutable Variables ({}):\x1b[0m",
+        results.immutable_vars.len()
+    );
     for var in &results.immutable_vars {
         println!("  {}", var);
     }
 
-    println!("\n\x1b[1mContainers:\x1b[0m");
+    println!("\n\x1b[1mContainers ({}):\x1b[0m", results.containers.len());
     for container in &results.containers {
         println!("  {}", container);
     }
@@ -1951,11 +1958,14 @@ fn output_json(
     // Convert to a serializable structure
     let mut output = HashMap::new();
 
-    // Add metadata
+    // Add metadata with counts
     let metadata_map = serde_json::json!({
         "version": metadata.version,
         "project_name": metadata.project_name,
         "datetime": metadata.datetime,
+        "mutable_variable_count": results.mutable_vars.len(),
+        "immutable_variable_count": results.immutable_vars.len(),
+        "container_count": results.containers.len()
     });
     output.insert("metadata", metadata_map);
 
