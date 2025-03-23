@@ -190,13 +190,15 @@ struct VariableVisitor<'ast> {
     immutable_vars: &'ast mut Vec<VarInfo>,
 }
 
+// impl<'ast> VariableVisitor<'ast> {
+//     // Function removed as it was a duplicate
+// }
+
 impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
     // Visit local variable declarations (let statements)
     fn visit_local(&mut self, local: &'ast syn::Local) {
         // Get the line number for this node
-        let span = local.span();
-        // Use a different approach to get line number - spans in proc_macro2 don't have line()
-        let line_number = self.get_line_number(&span, &local.to_token_stream().to_string());
+        let line_number = self.get_line_number(&local.to_token_stream().to_string());
 
         // Get the context (full line of code)
         let context = if line_number <= self.lines.len() {
@@ -254,9 +256,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
     // Visit function parameters
     fn visit_fn_arg(&mut self, arg: &'ast syn::FnArg) {
         if let syn::FnArg::Typed(pat_type) = arg {
-            let span = arg.span();
-            // Fix span line retrieval
-            let line_number = self.get_line_number(&span, &arg.to_token_stream().to_string());
+            let line_number = self.get_line_number(&arg.to_token_stream().to_string());
 
             // Get the context
             let context = if line_number <= self.lines.len() {
@@ -289,9 +289,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
 
     // Visit for loops to catch "for mut x in ..." patterns
     fn visit_expr_for_loop(&mut self, for_loop: &'ast syn::ExprForLoop) {
-        let span = for_loop.span();
-        // Fix span line retrieval
-        let line_number = self.get_line_number(&span, &for_loop.to_token_stream().to_string());
+        let line_number = self.get_line_number(&for_loop.to_token_stream().to_string());
 
         // Get the context
         let context = if line_number <= self.lines.len() {
@@ -327,7 +325,6 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
 
     // Visit if-let and while-let expressions
     fn visit_expr_if(&mut self, if_expr: &'ast syn::ExprIf) {
-        // Fix the source_text access and type issues
         if let (Some(if_let_str), Some(cond_str)) = (
             if_expr.if_token.span().source_text(),
             if_expr.cond.span().source_text(),
@@ -340,9 +337,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                     (cond_str.as_str(), "")
                 };
 
-                // Fix span line retrieval
-                let line_number =
-                    self.get_line_number(&if_expr.span(), &if_expr.to_token_stream().to_string());
+                let line_number = self.get_line_number(&if_expr.to_token_stream().to_string());
 
                 // Get the context
                 let context = if line_number <= self.lines.len() {
@@ -353,7 +348,6 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
 
                 // Check for mutable patterns in if-let
                 if pat.contains("mut ") {
-                    // This is a simplified approach - ideally we'd parse the pattern properly
                     for part in pat.split_whitespace() {
                         if part.starts_with("mut") && part.len() > 3 {
                             let name = part[3..]
@@ -382,28 +376,66 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
 
 // Improved helper methods for the visitor
 impl VariableVisitor<'_> {
-    // Add this new helper method to find line numbers
-    fn get_line_number(&self, span: &proc_macro2::Span, token_str: &str) -> usize {
-        // Try to find the token in the file content
+    // Improved method to find line numbers using span information when available
+    fn get_line_number(&self, token_str: &str) -> usize {
+        // First try to get line number from the span
+        if let Some(line_col) = token_str
+            .lines()
+            .next()
+            .and_then(|line| line.trim().strip_prefix("// "))
+            .and_then(|span_info| span_info.split_once(':'))
+        {
+            if let Ok(line) = line_col.0.parse::<usize>() {
+                return line;
+            }
+        }
+
+        // If no span info or parsing failed, fall back to line search
         let content_str = token_str.trim();
         if !content_str.is_empty() {
+            // Try to find unique identifiers or patterns in the token string
             for (idx, line) in self.lines.iter().enumerate() {
-                if line.contains(content_str) {
+                // Look for specific patterns that are likely to be unique identifiers
+                if content_str.contains('=') {
+                    // For assignment expressions, match the variable name and equals sign
+                    let parts: Vec<&str> = content_str.split('=').collect();
+                    if !parts.is_empty() && line.contains(parts[0].trim()) && line.contains('=') {
+                        return idx + 1;
+                    }
+                } else if content_str.contains(':') && !content_str.contains('{') {
+                    // For type annotations, match the variable name and colon
+                    let parts: Vec<&str> = content_str.split(':').collect();
+                    if !parts.is_empty() && line.contains(parts[0].trim()) && line.contains(':') {
+                        return idx + 1;
+                    }
+                } else {
+                    // For simple variable names, ensure they match as whole words
+                    for word in content_str.split_whitespace() {
+                        if word.len() > 2 && line.contains(word) {
+                            // Additional check to avoid false matches
+                            let line_words: Vec<&str> = line.split_whitespace().collect();
+                            if line_words.contains(&word) {
+                                return idx + 1;
+                            }
+                        }
+                    }
+                }
+
+                // As a last resort, check if the line contains most of the token string
+                if content_str.len() > 10
+                    && line.contains(&content_str[0..content_str.len().min(10)])
+                {
                     return idx + 1;
                 }
             }
         }
 
-        // Fallback: approximate by using span information when available
-        if let Some(span_text) = span.source_text() {
-            for (idx, line) in self.lines.iter().enumerate() {
-                if line.contains(&span_text) {
-                    return idx + 1;
-                }
-            }
+        // If all else fails, use span information if available
+        if let Some(span_line) = local_span_to_line_number(token_str) {
+            return span_line;
         }
 
-        // Last resort - use a default value
+        // Default to 1 if we couldn't find a match
         1
     }
 
@@ -649,6 +681,19 @@ impl VariableVisitor<'_> {
             _ => {}
         }
     }
+}
+
+// Function to extract line number from a span debug representation
+fn local_span_to_line_number(token_str: &str) -> Option<usize> {
+    // Sometimes syn debug output includes span information like "#0 bytes(LINE:COL)"
+    if let Some(bytes_idx) = token_str.find("bytes(") {
+        if let Some(line_end) = token_str[bytes_idx..].find(':') {
+            if let Ok(line) = token_str[bytes_idx + 6..bytes_idx + line_end].parse::<usize>() {
+                return Some(line);
+            }
+        }
+    }
+    None
 }
 
 // New function to infer types from surrounding context
