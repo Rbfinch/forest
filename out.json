@@ -1,403 +1,1129 @@
 {
-  "metadata": {
-    "container_count": 12,
-    "datetime": "2025-03-23 17:04:48.756464 +11:00",
-    "immutable_variable_count": 36,
-    "mutable_variable_count": 12,
-    "project_name": "spikeq",
-    "version": "1.0.1"
-  },
-  "mutable_variables": [
-    {
-      "basic_type": "function call result",
-      "context": "let mut error_messages = Vec::new();",
-      "file": "../spikeq/src/read_regex.rs",
-      "kind": "inferred from initialization",
-      "line": 73,
-      "name": "error_messages",
-      "scope": "read_base_strings_from_json",
-      "type": "function result"
-    },
-    {
-      "basic_type": "unknown",
-      "context": "let mut expanded_patterns = vec![pattern];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 75,
-      "name": "expanded_patterns",
-      "scope": "main",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut output = String::new();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 88,
-      "name": "output",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "unknown",
-      "context": "let mut pattern_counts = vec![0; *num_patterns];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 103,
-      "name": "pattern_counts",
-      "scope": "main",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "Vec<Regex>",
-      "context": "let mut regex_patterns: Vec<Regex> = vec![];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "explicitly typed pattern",
-      "line": 68,
-      "name": "regex_patterns",
-      "scope": "main",
-      "type": "Vec < Regex >"
-    },
-    {
-      "basic_type": "unknown",
-      "context": "let mut regex_patterns: Vec<Regex> = vec![];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 68,
-      "name": "result",
-      "scope": "expand_strings",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut rng = rand::thread_rng();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 32,
-      "name": "rng",
-      "scope": "generate_sequence",
-      "type": "function result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut rng = rand::thread_rng();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 32,
-      "name": "rng",
-      "scope": "generate_quality_line",
-      "type": "function result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut rng = rand::thread_rng();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 32,
-      "name": "rng",
-      "scope": "insert_patterns",
-      "type": "function result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut rng = rand::thread_rng();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 32,
-      "name": "rng",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let mut sequence = generate_sequence(min_length, max_length, &regex_patterns);",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 106,
-      "name": "sequence",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "unknown",
-      "context": "let mut temp = vec![s];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 187,
-      "name": "temp",
-      "scope": "expand_strings",
-      "type": "expression result"
-    }
-  ],
-  "containers": [
-    {
-      "file": "../spikeq/src/arg.rs",
-      "line": 1,
-      "name": "Args",
-      "type": "struct"
-    },
-    {
-      "file": "../spikeq/src/arg.rs",
-      "line": 1,
-      "name": "Commands",
-      "type": "enum"
-    },
-    {
-      "file": "../spikeq/src/arg.rs",
-      "line": 89,
-      "name": "parse_length_range",
-      "type": "function"
-    },
-    {
-      "file": "../spikeq/src/main.rs",
-      "line": 16,
-      "name": "RegexPattern",
-      "type": "struct"
-    },
-    {
-      "file": "../spikeq/src/main.rs",
-      "line": 18,
-      "name": "RegexSet",
-      "type": "struct"
-    },
-    {
-      "file": "../spikeq/src/main.rs",
-      "line": 30,
-      "name": "generate_sequence",
-      "type": "function"
-    },
-    {
-      "file": "../spikeq/src/main.rs",
-      "line": 30,
-      "name": "generate_quality_line",
-      "type": "function"
-    },
-    {
-      "file": "../spikeq/src/main.rs",
-      "line": 57,
-      "name": "insert_patterns",
-      "type": "function"
-    },
-    {
-      "file": "../spikeq/src/main.rs",
-      "line": 1,
-      "name": "main",
-      "type": "function"
-    },
-    {
-      "file": "../spikeq/src/main.rs",
-      "line": 183,
-      "name": "expand_strings",
-      "type": "function"
-    },
-    {
-      "file": "../spikeq/src/iupac.rs",
-      "line": 3,
-      "name": "get_iupac_regexes",
-      "type": "function"
-    },
-    {
-      "file": "../spikeq/src/read_regex.rs",
-      "line": 51,
-      "name": "read_base_strings_from_json",
-      "type": "function"
-    }
-  ],
   "immutable_variables": [
     {
-      "basic_type": "method call result",
-      "context": "let additional_patterns = read_base_strings_from_json(regex_patterns_file)",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 71,
-      "name": "additional_patterns",
-      "scope": "main",
-      "type": "unwrapped value"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let args = Args::parse();",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 66,
-      "name": "args",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "Vec<String>",
-      "context": "let base_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
-      "file": "../spikeq/src/read_regex.rs",
-      "kind": "explicitly typed pattern",
-      "line": 85,
-      "name": "base_strings",
-      "scope": "read_base_strings_from_json",
-      "type": "Vec < String >"
-    },
-    {
-      "basic_type": "Vec<T>",
-      "context": "let chars = ['A', 'C', 'T', 'G'];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 31,
-      "name": "chars",
-      "scope": "generate_sequence",
-      "type": "array"
-    },
-    {
-      "basic_type": "Vec<char>",
-      "context": "let chars = ['A', 'C', 'T', 'G'];",
-      "file": "../spikeq/src/main.rs",
-      "kind": "explicitly typed pattern",
-      "line": 31,
-      "name": "chars",
-      "scope": "generate_quality_line",
-      "type": "Vec < char >"
-    },
-    {
-      "basic_type": "method call result",
-      "context": "let file = std::fs::File::open(regex_patterns_file).expect(\"Unable to open file\");",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
+      "basic_type": ":tetranucleotide_frequencies(ambiguous, Some(4))",
+      "context": "let (freq_amb, _count_amb) = quality::tetranucleotide_frequencies(ambiguous, Some(4));",
+      "file": "../grepq/src/tests.rs",
+      "kind": "pattern match",
       "line": 137,
-      "name": "file",
+      "name": "_count_amb",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": ":tetranucleotide_frequencies(ambiguous, Some(4))"
+    },
+    {
+      "basic_type": "Vec<u8>",
+      "context": "let all_ambiguous = b\"NNNNNNNN\";",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 142,
+      "name": "all_ambiguous",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": "byte string"
+    },
+    {
+      "basic_type": "Vec<u8>",
+      "context": "let ambiguous = b\"ATCGNATCGATCG\";",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 136,
+      "name": "ambiguous",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": "byte string"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let avg_quality = quality_encoding",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 232,
+      "name": "avg_quality",
       "scope": "main",
-      "type": "unwrapped value"
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let avg_quality = quality_encoding.as_ref()",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 99,
+      "name": "avg_quality",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": ":Serialize",
+      "context": "use serde::Serialize;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "reference pattern",
+      "line": 1,
+      "name": "base",
+      "scope": "gc_content",
+      "type": "reference to inferred from context"
     },
     {
       "basic_type": "unknown",
-      "context": "let file = File::open(filename)?;",
-      "file": "../spikeq/src/read_regex.rs",
+      "context": "let bucket = cli.bucket;",
+      "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
-      "line": 55,
-      "name": "file",
-      "scope": "read_base_strings_from_json",
+      "line": 114,
+      "name": "bucket",
+      "scope": "main",
       "type": "expression result"
     },
     {
-      "basic_type": "function call result",
-      "context": "let iupac_regexes = get_iupac_regexes();",
-      "file": "../spikeq/src/main.rs",
+      "basic_type": "method call result",
+      "context": "let check_seq_len = minimum_sequence_length.is_some();",
+      "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
-      "line": 73,
-      "name": "iupac_regexes",
+      "line": 37,
+      "name": "check_header",
+      "scope": "run_inverted",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let check_seq_len = minimum_sequence_length.is_some();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 117,
+      "name": "check_header",
+      "scope": "main",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let check_seq_len = minimum_sequence_length.is_some();",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 37,
+      "name": "check_qual",
+      "scope": "run_inverted",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let check_seq_len = minimum_sequence_length.is_some();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 117,
+      "name": "check_qual",
+      "scope": "main",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let check_seq_len = minimum_sequence_length.is_some();",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 37,
+      "name": "check_seq_len",
+      "scope": "run_inverted",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let check_seq_len = minimum_sequence_length.is_some();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 117,
+      "name": "check_seq_len",
+      "scope": "main",
+      "type": "method result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let cli = Cli::parse();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 30,
+      "name": "cli",
       "scope": "main",
       "type": "function result"
     },
     {
+      "basic_type": "conditional result",
+      "context": "let compression = if cli.fast_compression {",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 344,
+      "name": "compression",
+      "scope": "create_writer",
+      "type": "conditional result"
+    },
+    {
       "basic_type": "unknown",
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
+      "context": "let conn = Connection::open(&db_name)?;",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 98,
+      "name": "conn",
+      "scope": "create_sqlite_db",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let conn = Connection::open(&db_name)?;",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 98,
+      "name": "conn",
+      "scope": "create_sqlite_db_with_quality",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "conditional result",
+      "context": "let conn = if cli.patterns.ends_with(\".json\") {",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 39,
+      "name": "conn",
+      "scope": "main",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "conditional result",
+      "context": "let conn = if cli.patterns.ends_with(\".json\") {",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 36,
+      "name": "conn",
+      "scope": "run_summarise",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let converted_pattern = crate::initialise::convert_iupac_to_regex(&matched_pattern);",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 60,
+      "name": "converted_pattern",
+      "scope": "run_tune",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let converted_pattern = crate::initialise::convert_iupac_to_regex(&matched_pattern);",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 77,
+      "name": "converted_pattern",
+      "scope": "run_summarise",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let converted_pattern = crate::initialise::convert_iupac_to_regex(&matched_pattern);",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 60,
+      "name": "converted_regex_string",
+      "scope": "run_tune",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let converted_pattern = crate::initialise::convert_iupac_to_regex(&matched_pattern);",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 77,
+      "name": "converted_regex_string",
+      "scope": "run_summarise",
+      "type": "function result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let could_be_iupac = pattern.chars().all(|c| c.is_alphabetic());",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 109,
+      "name": "could_be_iupac",
+      "scope": "convert_iupac_to_regex",
+      "type": "method result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let count = cli.count;",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 18,
+      "name": "count",
+      "scope": "run_inverted",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let count = quality.len() as i32;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 17,
+      "name": "count",
+      "scope": "average_quality",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let count = cli.count;",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 113,
+      "name": "count",
+      "scope": "main",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "// This module contains unit tests for various components of the grepq tool,",
+      "file": "../grepq/src/tests.rs",
       "kind": "pattern match",
       "line": 1,
-      "name": "j",
-      "scope": "main",
+      "name": "count",
+      "scope": "test_empty_tetranucleotide_frequencies",
+      "type": "iteration variable"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let count = match_counts",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 111,
+      "name": "count",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "for mat in regex_set.matches(record.seq()).into_iter() {",
+      "file": "../grepq/src/tune.rs",
+      "kind": "pattern match",
+      "line": 58,
+      "name": "count",
+      "scope": "run_tune",
+      "type": "reference to collection element"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let count = match_counts.iter().find(|(pattern, _)| pattern == &converted_regex_string).map(|(_, count)| count).unwrap_or(&0);",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 152,
+      "name": "count",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "// This module handles the summarisation command for grepq.",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "count",
+      "scope": "run_summarise",
       "type": "inferred from context"
     },
     {
-      "basic_type": "Value",
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "explicitly typed pattern",
-      "line": 1,
-      "name": "json",
-      "scope": "main",
-      "type": "serde_json :: Value"
+      "basic_type": ":tetranucleotide_frequencies(ambiguous, Some(4))",
+      "context": "let (freq_amb, _count_amb) = quality::tetranucleotide_frequencies(ambiguous, Some(4));",
+      "file": "../grepq/src/tests.rs",
+      "kind": "pattern match",
+      "line": 137,
+      "name": "count_all_amb",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": ":tetranucleotide_frequencies(ambiguous, Some(4))"
     },
     {
-      "basic_type": "Value",
-      "context": "use serde_json::Value;",
-      "file": "../spikeq/src/read_regex.rs",
-      "kind": "explicitly typed pattern",
-      "line": 1,
-      "name": "json",
-      "scope": "read_base_strings_from_json",
-      "type": "Value"
+      "basic_type": "conditional result",
+      "context": "let db_conn = if cli.write_sql && cli.command.is_none() {",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 37,
+      "name": "db_conn",
+      "scope": "main",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "conditional result",
+      "context": "let db_conn = if cli.write_sql {",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 35,
+      "name": "db_conn",
+      "scope": "run_summarise",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let db_name = format!(\"fastq_{}.db\", timestamp);",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 97,
+      "name": "db_name",
+      "scope": "create_sqlite_db",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let db_name = format!(\"fastq_{}.db\", timestamp);",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 97,
+      "name": "db_name",
+      "scope": "create_sqlite_db_with_quality",
+      "type": "expression result"
     },
     {
       "basic_type": "method call result",
-      "context": "let length = rng.gen_range(min_length..=max_length);",
-      "file": "../spikeq/src/main.rs",
+      "context": "let entry = match_strings.entry(converted_pattern.clone()).or_default();",
+      "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
-      "line": 33,
-      "name": "length",
-      "scope": "generate_sequence",
+      "line": 62,
+      "name": "entry",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let entry = match_strings.entry(converted_pattern.clone()).or_default();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 81,
+      "name": "entry",
+      "scope": "run_summarise",
       "type": "method result"
     },
     {
       "basic_type": "String",
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "explicitly typed pattern",
-      "line": 1,
-      "name": "line",
-      "scope": "generate_quality_line",
-      "type": "String"
+      "context": "let expected = \"[ACGT][CT][AG][CG][AT][GT][AC][CGT][AGT][ACT][ACG]\";",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 207,
+      "name": "expected",
+      "scope": "test_complex_iupac_conversion",
+      "type": "string"
     },
     {
       "basic_type": "unknown",
-      "context": "let max_length = parts[1]",
-      "file": "../spikeq/src/arg.rs",
+      "context": "let file = File::open(patterns_path)",
+      "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
-      "line": 97,
-      "name": "max_length",
-      "scope": "parse_length_range",
+      "line": 243,
+      "name": "file",
+      "scope": "parse_patterns_file",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let file = File::open(patterns_path)",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 243,
+      "name": "file",
+      "scope": "create_reader",
+      "type": "function result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let file_name = if suffix.is_empty() {",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 178,
+      "name": "file",
+      "scope": "main",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let file = File::create(\"matches.json\")?;",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 195,
+      "name": "file",
+      "scope": "run_tune",
       "type": "expression result"
     },
     {
       "basic_type": "unknown",
-      "context": "let (min_length, max_length) = args.length;",
-      "file": "../spikeq/src/main.rs",
+      "context": "let file = File::create(\"matches.json\")?;",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 222,
+      "name": "file",
+      "scope": "run_summarise",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let file_content = read_to_string(patterns_file)",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 176,
+      "name": "file_content",
+      "scope": "write_regex_to_db",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "conditional result",
+      "context": "let file_name = if suffix.is_empty() {",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 178,
+      "name": "file_name",
+      "scope": "main",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "conditional result",
+      "context": "let file_param = if first {",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 191,
+      "name": "file_param",
+      "scope": "write_regex_to_db",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let formatted_name = name.replace(' ', \"-\").replace('\\'', \"\");",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 170,
+      "name": "formatted_name",
+      "scope": "main",
+      "type": "method result"
+    },
+    {
+      "basic_type": ":tetranucleotide_frequencies(ambiguous, Some(4))",
+      "context": "let (freq_amb, _count_amb) = quality::tetranucleotide_frequencies(ambiguous, Some(4));",
+      "file": "../grepq/src/tests.rs",
       "kind": "pattern match",
+      "line": 137,
+      "name": "freq_all_amb",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": ":tetranucleotide_frequencies(ambiguous, Some(4))"
+    },
+    {
+      "basic_type": ":tetranucleotide_frequencies(ambiguous, Some(4))",
+      "context": "let (freq_amb, _count_amb) = quality::tetranucleotide_frequencies(ambiguous, Some(4));",
+      "file": "../grepq/src/tests.rs",
+      "kind": "pattern match",
+      "line": 137,
+      "name": "freq_amb",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": ":tetranucleotide_frequencies(ambiguous, Some(4))"
+    },
+    {
+      "basic_type": ":tetranucleotide_frequencies(sequence, Some(4))",
+      "context": "let (frequencies, unique_count) = quality::tetranucleotide_frequencies(sequence, Some(4));",
+      "file": "../grepq/src/tests.rs",
+      "kind": "pattern match",
+      "line": 123,
+      "name": "frequencies",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": ":tetranucleotide_frequencies(sequence, Some(4))"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let gc = quality::gc_content(record.seq());",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 236,
+      "name": "gc",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let gc = quality::gc_content(record.seq());",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 103,
+      "name": "gc",
+      "scope": "run_summarise",
+      "type": "function result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let gc_int = gc.round() as i64;",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 237,
+      "name": "gc_int",
+      "scope": "main",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let gc_int = gc.round() as i64;",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 104,
+      "name": "gc_int",
+      "scope": "run_summarise",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let header_regex = header_regex.map(|re| {",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 27,
+      "name": "header_check",
+      "scope": "run_inverted",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let header_regex = header_regex.map(|re| {",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 27,
+      "name": "header_check",
+      "scope": "run_inverted",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let header_regex = header_regex.map(|re: String| Regex::new(&re).unwrap());",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 103,
+      "name": "header_check",
+      "scope": "main",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let header_regex = header_regex.map(|re: String| Regex::new(&re).unwrap());",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 103,
+      "name": "header_check",
+      "scope": "main",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let header_regex = header_regex.map(|re| Regex::new(&re).unwrap());",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 20,
+      "name": "header_check",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let header_regex = header_regex.map(|re| Regex::new(&re).unwrap());",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 25,
+      "name": "header_check",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "pattern match",
+      "line": 21,
+      "name": "header_regex",
+      "scope": "run_inverted",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let header_regex = header_regex.map(|re| {",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 27,
+      "name": "header_regex",
+      "scope": "run_inverted",
+      "type": "mapped iterator"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let header_regex = json[\"regexSet\"][\"headerRegex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 188,
+      "name": "header_regex",
+      "scope": "parse_patterns_file",
+      "type": "mapped iterator"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "header_regex",
+      "scope": "main",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let header_regex = header_regex.map(|re: String| Regex::new(&re).unwrap());",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 103,
+      "name": "header_regex",
+      "scope": "main",
+      "type": "mapped iterator"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/tune.rs",
+      "kind": "pattern match",
+      "line": 17,
+      "name": "header_regex",
+      "scope": "run_tune",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let header_regex = header_regex.map(|re| Regex::new(&re).unwrap());",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 20,
+      "name": "header_regex",
+      "scope": "run_tune",
+      "type": "mapped iterator"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "pattern match",
+      "line": 20,
+      "name": "header_regex",
+      "scope": "run_summarise",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let header_regex = header_regex.map(|re| Regex::new(&re).unwrap());",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 25,
+      "name": "header_regex",
+      "scope": "run_summarise",
+      "type": "mapped iterator"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "i",
+      "scope": "main",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "conditional result",
+      "context": "let insert_stmt = if quality_encoding.is_some() && !is_text_file {",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 241,
+      "name": "insert_stmt",
+      "scope": "main",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let is_text_file = cli.patterns.ends_with(\".txt\");",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
       "line": 90,
-      "name": "max_length",
+      "name": "is_text_file",
+      "scope": "main",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let is_unambiguous = window",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 100,
+      "name": "is_unambiguous",
+      "scope": "tetranucleotide_frequencies",
+      "type": "method result"
+    },
+    {
+      "basic_type": "Value",
+      "context": "use crate::arg::Cli;",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 1,
+      "name": "json",
+      "scope": "parse_patterns_file",
+      "type": "Value"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "// This module contains unit tests for various components of the grepq tool,",
+      "file": "../grepq/src/tests.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "json",
+      "scope": "test_empty_tetranucleotide_frequencies",
+      "type": "iteration variable"
+    },
+    {
+      "basic_type": "Value",
+      "context": "use crate::arg::Cli;",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 1,
+      "name": "json",
+      "scope": "run_tune",
+      "type": "serde_json :: Value"
+    },
+    {
+      "basic_type": "Value",
+      "context": "// This module handles the summarisation command for grepq.",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 1,
+      "name": "json",
+      "scope": "run_summarise",
+      "type": "serde_json :: Value"
+    },
+    {
+      "basic_type": "String",
+      "context": "let json_content = r#\"",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 214,
+      "name": "json_content",
+      "scope": "test_invalid_variant_json",
+      "type": "string"
+    },
+    {
+      "basic_type": "String",
+      "context": "let json_content = r#\"",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 214,
+      "name": "json_content",
+      "scope": "test_valid_json_pattern_parsing",
+      "type": "string"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let json_file =",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 155,
+      "name": "json_file",
+      "scope": "parse_patterns_file",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let json_output = json!({",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 189,
+      "name": "json_output",
+      "scope": "run_tune",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let json_output = json!({",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 216,
+      "name": "json_output",
+      "scope": "run_summarise",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let json_path = temp_file.path().with_extension(\"json\");",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 265,
+      "name": "json_path",
+      "scope": "test_valid_json_pattern_parsing",
+      "type": "method result"
+    },
+    {
+      "basic_type": "String",
+      "context": "let legal = \"ACGTYRWSKMBDHVN\";",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 106,
+      "name": "legal",
+      "scope": "convert_iupac_to_regex",
+      "type": "string"
+    },
+    {
+      "basic_type": "conditional result",
+      "context": "let level = if cli.fast_compression {",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 354,
+      "name": "level",
+      "scope": "create_writer",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "Result",
+      "context": "use crate::arg::Cli;",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 1,
+      "name": "lines",
+      "scope": "parse_patterns_file",
+      "type": "Result < Vec < _ > , _ >"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 76,
+      "name": "matched",
+      "scope": "run_summarise",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 59,
+      "name": "matched_pattern",
+      "scope": "run_tune",
+      "type": "string"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 76,
+      "name": "matched_pattern",
+      "scope": "run_summarise",
+      "type": "string"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 59,
+      "name": "matched_substring",
+      "scope": "run_tune",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "reference",
+      "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 59,
+      "name": "matched_substring",
+      "scope": "run_tune",
+      "type": "reference"
+    },
+    {
+      "basic_type": "reference",
+      "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 76,
+      "name": "matched_substring",
+      "scope": "run_summarise",
+      "type": "reference"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let matches_json = serde_json::to_string(&matches_info).unwrap_or_else(|_| \"[]\".to_string());",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 238,
+      "name": "matches_json",
+      "scope": "main",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 76,
+      "name": "matches_json",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "pattern match",
+      "line": 21,
+      "name": "minimum_quality",
+      "scope": "run_inverted",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let minimum_sequence_length = json[\"regexSet\"][\"minimumSequenceLength\"].as_u64();",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 191,
+      "name": "minimum_quality",
+      "scope": "parse_patterns_file",
+      "type": "mapped iterator"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "minimum_quality",
       "scope": "main",
       "type": "inferred from context"
     },
     {
       "basic_type": "unknown",
-      "context": "let min_length = parts[0]",
-      "file": "../spikeq/src/arg.rs",
-      "kind": "inferred from initialization",
-      "line": 94,
-      "name": "min_length",
-      "scope": "parse_length_range",
-      "type": "expression result"
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/tune.rs",
+      "kind": "pattern match",
+      "line": 17,
+      "name": "minimum_quality",
+      "scope": "run_tune",
+      "type": "inferred from context"
     },
     {
       "basic_type": "unknown",
-      "context": "let (min_length, max_length) = args.length;",
-      "file": "../spikeq/src/main.rs",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/summarise.rs",
       "kind": "pattern match",
-      "line": 90,
-      "name": "min_length",
+      "line": 20,
+      "name": "minimum_quality",
+      "scope": "run_summarise",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "pattern match",
+      "line": 21,
+      "name": "minimum_sequence_length",
+      "scope": "run_inverted",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let minimum_sequence_length = json[\"regexSet\"][\"minimumSequenceLength\"].as_u64();",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 191,
+      "name": "minimum_sequence_length",
+      "scope": "parse_patterns_file",
+      "type": "method result"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "minimum_sequence_length",
       "scope": "main",
       "type": "inferred from context"
     },
     {
       "basic_type": "unknown",
-      "context": "let output_json = serde_json::json!({",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 149,
-      "name": "output_json",
-      "scope": "main",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "Vec<&str>",
-      "context": "use clap::Parser;",
-      "file": "../spikeq/src/arg.rs",
-      "kind": "explicitly typed pattern",
-      "line": 1,
-      "name": "parts",
-      "scope": "parse_length_range",
-      "type": "Vec < & str >"
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/tune.rs",
+      "kind": "pattern match",
+      "line": 17,
+      "name": "minimum_sequence_length",
+      "scope": "run_tune",
+      "type": "inferred from context"
     },
     {
       "basic_type": "unknown",
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "pattern match",
+      "line": 20,
+      "name": "minimum_sequence_length",
+      "scope": "run_summarise",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let most_frequent_matches_json: Vec<_> = most_frequent_matches",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 148,
+      "name": "most_frequent_matches_json",
+      "scope": "run_tune",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let most_frequent_matches_json: Vec<_> = most_frequent_matches.into_iter().map(|(seq, count)| {",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 179,
+      "name": "most_frequent_matches_json",
+      "scope": "run_summarise",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "ntn",
+      "scope": "main",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "// This module handles the summarisation command for grepq.",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "ntn",
+      "scope": "run_summarise",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "match result",
+      "context": "let offset = match quality_encoding {",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 9,
+      "name": "offset",
+      "scope": "average_quality",
+      "type": "match result"
+    },
+    {
+      "basic_type": "String",
+      "context": "let pattern = \"ACGTYRWSKMBDHVN\";",
+      "file": "../grepq/benches/benchmarks.rs",
+      "kind": "inferred from initialization",
+      "line": 14,
+      "name": "pattern",
+      "scope": "criterion_benchmark",
+      "type": "string"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
       "kind": "pattern match",
       "line": 1,
       "name": "pattern",
@@ -405,164 +1131,1706 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
-      "context": "let pos = rng.gen_range(0..=sequence.len());",
-      "file": "../spikeq/src/main.rs",
+      "basic_type": "String",
+      "context": "let patterns = \"[AG]AAT[AT]G[AG]CGGGG\\n\\",
+      "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
-      "line": 60,
-      "name": "pos",
-      "scope": "insert_patterns",
-      "type": "method result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let quality_line = generate_quality_line(sequence.len(), &regex_patterns);",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 115,
-      "name": "quality_line",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "function call result",
-      "context": "let quality_line = generate_quality_line(sequence.len(), &regex_patterns);",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 115,
-      "name": "quality_line",
-      "scope": "main",
-      "type": "function result"
+      "line": 62,
+      "name": "pattern",
+      "scope": "test_complex_iupac_conversion",
+      "type": "string"
     },
     {
       "basic_type": "unknown",
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
+      "context": "for mat in regex_set.matches(record.seq()).into_iter() {",
+      "file": "../grepq/src/tune.rs",
+      "kind": "pattern match",
+      "line": 58,
+      "name": "pattern",
+      "scope": "run_tune",
+      "type": "reference to collection element"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "// This module handles the summarisation command for grepq.",
+      "file": "../grepq/src/summarise.rs",
       "kind": "pattern match",
       "line": 1,
-      "name": "re",
+      "name": "pattern",
+      "scope": "run_summarise",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "Value",
+      "context": "let pattern_data: serde_json::Value = serde_json::from_str(&std::fs::read_to_string(&cli.patterns).unwrap()).unwrap();",
+      "file": "../grepq/src/main.rs",
+      "kind": "explicitly typed pattern",
+      "line": 40,
+      "name": "pattern_data",
+      "scope": "main",
+      "type": "serde_json :: Value"
+    },
+    {
+      "basic_type": "Value",
+      "context": "let patterns_path = &cli.patterns;",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 17,
+      "name": "pattern_data",
+      "scope": "run_summarise",
+      "type": "serde_json :: Value"
+    },
+    {
+      "basic_type": "String",
+      "context": "let pattern = \"ACGTYRWSKMBDHVN\";",
+      "file": "../grepq/benches/benchmarks.rs",
+      "kind": "inferred from initialization",
+      "line": 14,
+      "name": "patterns",
+      "scope": "criterion_benchmark",
+      "type": "string"
+    },
+    {
+      "basic_type": "String",
+      "context": "let patterns = \"[AG]AAT[AT]G[AG]CGGGG\\n\\",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 62,
+      "name": "patterns",
+      "scope": "test_pattern_parsing",
+      "type": "string"
+    },
+    {
+      "basic_type": "String",
+      "context": "let patterns = \"[AG]AAT[AT]G[AG]CGGGG\\n\\",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 62,
+      "name": "patterns",
+      "scope": "test_plain_text_pattern_parsing",
+      "type": "string"
+    },
+    {
+      "basic_type": "reference",
+      "context": "let patterns_path = &cli.patterns;",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 14,
+      "name": "patterns_path",
+      "scope": "run_tune",
+      "type": "reference"
+    },
+    {
+      "basic_type": "reference",
+      "context": "let patterns_path = &cli.patterns;",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 17,
+      "name": "patterns_path",
+      "scope": "run_summarise",
+      "type": "reference"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let percentage = (count as f32 / total_count) * 100.0;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 127,
+      "name": "percentage",
+      "scope": "tetranucleotide_frequencies",
+      "type": "numeric"
+    },
+    {
+      "basic_type": ":Serialize",
+      "context": "use serde::Serialize;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "reference pattern",
+      "line": 1,
+      "name": "q",
+      "scope": "average_quality",
+      "type": "reference to inferred from context"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let qual_check = !check_qual",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 58,
+      "name": "qual_check",
+      "scope": "run_inverted",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let qual_check = !check_qual",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 58,
+      "name": "qual_check",
+      "scope": "run_inverted",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let qual_check = !check_qual",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 138,
+      "name": "qual_check",
+      "scope": "main",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let qual_check = !check_qual",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 138,
+      "name": "qual_check",
+      "scope": "main",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let qual_check = minimum_quality.map_or(true, |min_q| {",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 49,
+      "name": "qual_check",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let qual_check = minimum_quality.map_or(true, |min_q| {",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 66,
+      "name": "qual_check",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let quality = vec![b'I'; 1000];",
+      "file": "../grepq/benches/benchmarks.rs",
+      "kind": "inferred from initialization",
+      "line": 9,
+      "name": "quality",
+      "scope": "criterion_benchmark",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let quality = vec![b'I'; 1000];",
+      "file": "../grepq/benches/benchmarks.rs",
+      "kind": "inferred from initialization",
+      "line": 9,
+      "name": "quality",
+      "scope": "criterion_benchmark",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "pattern match",
+      "line": 21,
+      "name": "quality_encoding",
+      "scope": "run_inverted",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let quality_encoding = json[\"regexSet\"][\"qualityEncoding\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 195,
+      "name": "quality_encoding",
+      "scope": "parse_patterns_file",
+      "type": "mapped iterator"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "quality_encoding",
       "scope": "main",
       "type": "inferred from context"
     },
     {
-      "basic_type": "function call result",
-      "context": "let reader = std::io::BufReader::new(file);",
-      "file": "../spikeq/src/main.rs",
+      "basic_type": "method call result",
+      "context": "let quality_encoding = quality_encoding.as_deref();",
+      "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
-      "line": 138,
-      "name": "reader",
+      "line": 93,
+      "name": "quality_encoding",
       "scope": "main",
+      "type": "method result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/tune.rs",
+      "kind": "pattern match",
+      "line": 17,
+      "name": "quality_encoding",
+      "scope": "run_tune",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "pattern match",
+      "line": 20,
+      "name": "quality_encoding",
+      "scope": "run_summarise",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let reader = create_reader(cli);",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 33,
+      "name": "reader",
+      "scope": "run_inverted",
       "type": "function result"
     },
     {
       "basic_type": "function call result",
       "context": "let reader = BufReader::new(file);",
-      "file": "../spikeq/src/read_regex.rs",
+      "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
-      "line": 56,
+      "line": 245,
       "name": "reader",
-      "scope": "read_base_strings_from_json",
+      "scope": "parse_patterns_file",
       "type": "function result"
     },
     {
-      "basic_type": "conditional result",
-      "context": "let regex_set_name = if let Some(regex_patterns_file) = &args.regex_patterns {",
-      "file": "../spikeq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 136,
-      "name": "regex_set_name",
-      "scope": "main",
-      "type": "conditional result"
-    },
-    {
-      "basic_type": "unknown",
-      "context": "mod arg;",
-      "file": "../spikeq/src/main.rs",
-      "kind": "pattern match",
-      "line": 1,
-      "name": "replacements",
-      "scope": "main",
-      "type": "inferred from context"
-    },
-    {
-      "basic_type": "Value",
-      "context": "let schema: Value = serde_json::from_str(SCHEMA).map_err(|e| {",
-      "file": "../spikeq/src/read_regex.rs",
+      "basic_type": "Box",
+      "context": "let reader = BufReader::new(file);",
+      "file": "../grepq/src/initialise.rs",
       "kind": "explicitly typed pattern",
-      "line": 59,
-      "name": "schema",
-      "scope": "read_base_strings_from_json",
-      "type": "Value"
-    },
-    {
-      "basic_type": "Vec<Regex>",
-      "context": "let selected_patterns: Vec<Regex> = regex_patterns",
-      "file": "../spikeq/src/main.rs",
-      "kind": "explicitly typed pattern",
-      "line": 98,
-      "name": "selected_patterns",
-      "scope": "main",
-      "type": "Vec < Regex >"
-    },
-    {
-      "basic_type": "String",
-      "context": "let sequence: String = (0..length)",
-      "file": "../spikeq/src/main.rs",
-      "kind": "explicitly typed pattern",
-      "line": 35,
-      "name": "sequence",
-      "scope": "generate_sequence",
-      "type": "String"
+      "line": 245,
+      "name": "reader",
+      "scope": "create_reader",
+      "type": "Box < dyn BufRead + Send >"
     },
     {
       "basic_type": "function call result",
-      "context": "let sequence: String = (0..length)",
-      "file": "../spikeq/src/main.rs",
+      "context": "let reader = create_reader(&cli);",
+      "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
-      "line": 35,
-      "name": "sequence",
+      "line": 106,
+      "name": "reader",
       "scope": "main",
       "type": "function result"
     },
     {
-      "basic_type": "Vec<_>",
-      "context": "let summary: Vec<_> = selected_patterns",
-      "file": "../spikeq/src/main.rs",
-      "kind": "explicitly typed pattern",
-      "line": 125,
-      "name": "summary",
-      "scope": "main",
-      "type": "Vec < _ >"
+      "basic_type": "match result",
+      "context": "let record = match result {",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 30,
+      "name": "record",
+      "scope": "run_tune",
+      "type": "match result"
+    },
+    {
+      "basic_type": "match result",
+      "context": "let record = match result {",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 55,
+      "name": "record",
+      "scope": "run_summarise",
+      "type": "match result"
     },
     {
       "basic_type": "method call result",
-      "context": "let summary: Vec<_> = selected_patterns",
-      "file": "../spikeq/src/main.rs",
+      "context": "let regex_check = regex_set.is_match(record.seq());",
+      "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
-      "line": 125,
-      "name": "summary_json",
+      "line": 145,
+      "name": "regex",
       "scope": "main",
       "type": "unwrapped value"
     },
     {
       "basic_type": "method call result",
-      "context": "let uuid = Uuid::new_v4().to_string();",
-      "file": "../spikeq/src/main.rs",
+      "context": "let regex_check = regex_set.is_match(record.seq());",
+      "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
-      "line": 87,
-      "name": "uuid",
+      "line": 145,
+      "name": "regex",
       "scope": "main",
-      "type": "string"
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"]",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 93,
+      "name": "regex_array",
+      "scope": "run_tune",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"].as_str().unwrap_or(\"Unknown\");",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 137,
+      "name": "regex_array",
+      "scope": "run_summarise",
+      "type": "unwrapped value"
     },
     {
       "basic_type": "unknown",
-      "context": "let validator = jsonschema::validator_for(&schema).map_err(|e| {",
-      "file": "../spikeq/src/read_regex.rs",
+      "context": "let regex_check = !regex_set.is_match(record.seq());",
+      "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
-      "line": 66,
-      "name": "validator",
-      "scope": "read_base_strings_from_json",
+      "line": 65,
+      "name": "regex_check",
+      "scope": "run_inverted",
       "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let regex_check = !regex_set.is_match(record.seq());",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 65,
+      "name": "regex_check",
+      "scope": "run_inverted",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_check = regex_set.is_match(record.seq());",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 145,
+      "name": "regex_check",
+      "scope": "main",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_check = regex_set.is_match(record.seq());",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 145,
+      "name": "regex_check",
+      "scope": "main",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"]",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 93,
+      "name": "regex_name",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"].as_str().unwrap_or(\"Unknown\");",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 137,
+      "name": "regex_name",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 175,
+      "name": "regex_names",
+      "scope": "parse_patterns_file",
+      "type": "collection"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 175,
+      "name": "regex_names",
+      "scope": "parse_patterns_file",
+      "type": "cloned value"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "regex_names",
+      "scope": "main",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "pattern match",
+      "line": 21,
+      "name": "regex_set",
+      "scope": "run_inverted",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 175,
+      "name": "regex_set",
+      "scope": "parse_patterns_file",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 175,
+      "name": "regex_set",
+      "scope": "parse_patterns_file",
+      "type": "expression result"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "regex_set",
+      "scope": "main",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/tune.rs",
+      "kind": "pattern match",
+      "line": 17,
+      "name": "regex_set",
+      "scope": "run_tune",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let (regex_set, header_regex, minimum_sequence_length, minimum_quality, quality_encoding, _, _) =",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "pattern match",
+      "line": 20,
+      "name": "regex_set",
+      "scope": "run_summarise",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"]",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 93,
+      "name": "regex_set_name",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"].as_str().unwrap_or(\"Unknown\");",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 137,
+      "name": "regex_set_name",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"]",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 93,
+      "name": "regex_string",
+      "scope": "run_tune",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"].as_str().unwrap_or(\"Unknown\");",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 137,
+      "name": "regex_string",
+      "scope": "run_summarise",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "Vec<String>",
+      "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 175,
+      "name": "regex_strings",
+      "scope": "parse_patterns_file",
+      "type": "Vec < String >"
+    },
+    {
+      "basic_type": "Vec<String>",
+      "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 175,
+      "name": "regex_strings",
+      "scope": "parse_patterns_file",
+      "type": "Vec < String >"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 95,
+      "name": "result",
+      "scope": "test_pattern_parsing",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "Vec<Value>",
+      "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
+      "file": "../grepq/src/tests.rs",
+      "kind": "explicitly typed pattern",
+      "line": 95,
+      "name": "result",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": "Vec < Value >"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 95,
+      "name": "result",
+      "scope": "test_plain_text_pattern_parsing",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 95,
+      "name": "result",
+      "scope": "test_invalid_variant_json",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 95,
+      "name": "result",
+      "scope": "test_valid_json_pattern_parsing",
+      "type": "function result"
+    },
+    {
+      "basic_type": "Vec<Value>",
+      "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
+      "file": "../grepq/src/tests.rs",
+      "kind": "explicitly typed pattern",
+      "line": 95,
+      "name": "result_amb",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": "Vec < Value >"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let scale = 10.0_f32.powf(4.0 - value.abs().log10().floor());",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 75,
+      "name": "scale",
+      "scope": "round_to_4_sig_figs",
+      "type": "method result"
+    },
+    {
+      "basic_type": "Value",
+      "context": "let schema: Value = serde_json::from_str(SCHEMA)",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 159,
+      "name": "schema",
+      "scope": "parse_patterns_file",
+      "type": "Value"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let seq_len_check = !check_seq_len",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 56,
+      "name": "seq_len_check",
+      "scope": "run_inverted",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let seq_len_check = !check_seq_len",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 56,
+      "name": "seq_len_check",
+      "scope": "run_inverted",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let seq_len_check = !check_seq_len",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 136,
+      "name": "seq_len_check",
+      "scope": "main",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "binary expression result",
+      "context": "let seq_len_check = !check_seq_len",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 136,
+      "name": "seq_len_check",
+      "scope": "main",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let seq_len_check =",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 44,
+      "name": "seq_len_check",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let seq_len_check = minimum_sequence_length.map_or(true, |len| record.seq().len() >= len as usize);",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 64,
+      "name": "seq_len_check",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "Vec<u8>",
+      "context": "let sequence = b\"ATCGATCGATCG\";",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 122,
+      "name": "sequence",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": "byte string"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let stdout_lock = io::stdout().lock();",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 340,
+      "name": "stdout_lock",
+      "scope": "create_writer",
+      "type": "method result"
+    },
+    {
+      "basic_type": "conditional result",
+      "context": "let suffix = if with_fasta {",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 171,
+      "name": "suffix",
+      "scope": "main",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "f32",
+      "context": "// This module contains unit tests for various components of the grepq tool,",
+      "file": "../grepq/src/tests.rs",
+      "kind": "explicitly typed pattern",
+      "line": 1,
+      "name": "sum",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": "f32"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let temp_file = NamedTempFile::new().unwrap();",
+      "file": "../grepq/benches/benchmarks.rs",
+      "kind": "inferred from initialization",
+      "line": 19,
+      "name": "temp_file",
+      "scope": "criterion_benchmark",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let temp_file = NamedTempFile::new().unwrap();",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 61,
+      "name": "temp_file",
+      "scope": "test_pattern_parsing",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let temp_file = NamedTempFile::new().unwrap();",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 61,
+      "name": "temp_file",
+      "scope": "test_plain_text_pattern_parsing",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let temp_file = NamedTempFile::new().unwrap();",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 61,
+      "name": "temp_file",
+      "scope": "test_invalid_variant_json",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let temp_file = NamedTempFile::new().unwrap();",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 61,
+      "name": "temp_file",
+      "scope": "test_valid_json_pattern_parsing",
+      "type": "unwrapped value"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let timestamp = chrono::Local::now().format(\"%Y%m%d_%H%M%S\");",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 96,
+      "name": "timestamp",
+      "scope": "create_sqlite_db",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let timestamp = chrono::Local::now().format(\"%Y%m%d_%H%M%S\");",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 96,
+      "name": "timestamp",
+      "scope": "create_sqlite_db_with_quality",
+      "type": "method result"
+    },
+    {
+      "basic_type": ":MiMalloc",
+      "context": "use mimalloc::MiMalloc;",
+      "file": "../grepq/src/main.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "tnf",
+      "scope": "main",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "// This module handles the summarisation command for grepq.",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "pattern match",
+      "line": 1,
+      "name": "tnf",
+      "scope": "run_summarise",
+      "type": "inferred from context"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let top_n = cli",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 126,
+      "name": "top_n",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let top_n = cli.command.as_ref().and_then(|cmd| {",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 164,
+      "name": "top_n",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "f32",
+      "context": "let total_count: f32 = tetra_counts.values().sum::<usize>() as f32;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "explicitly typed pattern",
+      "line": 121,
+      "name": "total_count",
+      "scope": "tetranucleotide_frequencies",
+      "type": "f32"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let txt_path = temp_file.path().with_extension(\"txt\");",
+      "file": "../grepq/src/tests.rs",
+      "kind": "inferred from initialization",
+      "line": 177,
+      "name": "txt_path",
+      "scope": "test_plain_text_pattern_parsing",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let unique_count = tetra_counts.len();",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 113,
+      "name": "unique_count",
+      "scope": "tetranucleotide_frequencies",
+      "type": "method result"
+    },
+    {
+      "basic_type": ":tetranucleotide_frequencies(sequence, Some(4))",
+      "context": "let (frequencies, unique_count) = quality::tetranucleotide_frequencies(sequence, Some(4));",
+      "file": "../grepq/src/tests.rs",
+      "kind": "pattern match",
+      "line": 123,
+      "name": "unique_count",
+      "scope": "test_tetranucleotide_frequencies",
+      "type": ":tetranucleotide_frequencies(sequence, Some(4))"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let uppercase = pattern.to_uppercase();",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 120,
+      "name": "uppercase",
+      "scope": "convert_iupac_to_regex",
+      "type": "method result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let validator = jsonschema::validator_for(&schema)",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 162,
+      "name": "validator",
+      "scope": "parse_patterns_file",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let variants: Vec<_> = json[\"regexSet\"][\"regex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 200,
+      "name": "variant_name",
+      "scope": "parse_patterns_file",
+      "type": "string"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let variants_array = regex[\"variants\"]",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 144,
+      "name": "variant_name",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let variants_array = regex[\"variants\"].as_array().unwrap_or_else(|| Box::leak(Box::new(Vec::new())));",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 177,
+      "name": "variant_name",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let variants: Vec<_> = json[\"regexSet\"][\"regex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 200,
+      "name": "variant_string",
+      "scope": "parse_patterns_file",
+      "type": "string"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let variants: Vec<_> = json[\"regexSet\"][\"regex\"]",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 200,
+      "name": "variants",
+      "scope": "parse_patterns_file",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let variants_array = regex[\"variants\"]",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 144,
+      "name": "variants",
+      "scope": "run_tune",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let variants_array = regex[\"variants\"].as_array().unwrap_or_else(|| Box::leak(Box::new(Vec::new())));",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 177,
+      "name": "variants",
+      "scope": "run_summarise",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let variants_array = regex[\"variants\"]",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 144,
+      "name": "variants_array",
+      "scope": "run_tune",
+      "type": "method result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let variants_array = regex[\"variants\"].as_array().unwrap_or_else(|| Box::leak(Box::new(Vec::new())));",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 177,
+      "name": "variants_array",
+      "scope": "run_summarise",
+      "type": "method result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let with_full_record = cli.with_full_record;",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 16,
+      "name": "with_fasta",
+      "scope": "run_inverted",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let with_full_record = cli.with_full_record;",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 111,
+      "name": "with_fasta",
+      "scope": "main",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let with_full_record = cli.with_full_record;",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 16,
+      "name": "with_full_record",
+      "scope": "run_inverted",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let with_full_record = cli.with_full_record;",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 111,
+      "name": "with_full_record",
+      "scope": "main",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let with_id = cli.with_id;",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 15,
+      "name": "with_id",
+      "scope": "run_inverted",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let with_id = cli.with_id;",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 110,
+      "name": "with_id",
+      "scope": "main",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "method call result",
+      "context": "let writer = bucket_writers.get_mut(&regex_names[i]).unwrap();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 271,
+      "name": "writer",
+      "scope": "main",
+      "type": "unwrapped value"
     }
-  ]
+  ],
+  "containers": [
+    {
+      "file": "../grepq/benches/benchmarks.rs",
+      "line": 7,
+      "name": "criterion_benchmark",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/inverted.rs",
+      "line": 13,
+      "name": "run_inverted",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 105,
+      "name": "convert_iupac_to_regex",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 105,
+      "name": "validate_dna_sequence",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 152,
+      "name": "parse_patterns_file",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 105,
+      "name": "open_file",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 267,
+      "name": "create_reader",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 288,
+      "name": "ZstdWriter",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 267,
+      "name": "create_writer",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 6,
+      "name": "write_record_with_id",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 6,
+      "name": "write_full_record",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 6,
+      "name": "write_record_with_fasta",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 95,
+      "name": "create_sqlite_db",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 95,
+      "name": "create_sqlite_db_with_quality",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 15,
+      "name": "write_regex_to_db",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/arg.rs",
+      "line": 1,
+      "name": "Cli",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/arg.rs",
+      "line": 1,
+      "name": "Commands",
+      "type": "enum"
+    },
+    {
+      "file": "../grepq/src/arg.rs",
+      "line": 1,
+      "name": "Summarise",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/arg.rs",
+      "line": 1,
+      "name": "Tune",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 6,
+      "name": "average_quality",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 1,
+      "name": "gc_content",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 70,
+      "name": "round_to_4_sig_figs",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 6,
+      "name": "TetraFrequency",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 1,
+      "name": "tetranucleotide_frequencies",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/main.rs",
+      "line": 1,
+      "name": "main",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/main.rs",
+      "line": 92,
+      "name": "average_quality",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_quality_scores",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_iupac_conversion",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_illegal_iupac_conversion",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_pattern_parsing",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_gc_content",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_tetranucleotide_frequencies",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_empty_tetranucleotide_frequencies",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_iupac_case_insensitivity_conversion",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_plain_text_pattern_parsing",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_complex_iupac_conversion",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_invalid_variant_json",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_valid_json_pattern_parsing",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tune.rs",
+      "line": 13,
+      "name": "run_tune",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/summarise.rs",
+      "line": 16,
+      "name": "run_summarise",
+      "type": "function"
+    }
+  ],
+  "mutable_variables": [
+    {
+      "basic_type": "conditional result",
+      "context": "let mut bucket_writers = if bucket {",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 164,
+      "name": "bucket_writers",
+      "scope": "main",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let mut encoder = ZstdEncoder::new(writer, compression_level)?;",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 297,
+      "name": "encoder",
+      "scope": "",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut error_messages = Vec::new();",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 165,
+      "name": "error_messages",
+      "scope": "parse_patterns_file",
+      "type": "function result"
+    },
+    {
+      "basic_type": "bool",
+      "context": "let mut first = true;",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 188,
+      "name": "first",
+      "scope": "write_regex_to_db",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "Vec<TetraFrequency>",
+      "context": "let mut frequencies: Vec<TetraFrequency> = tetra_counts",
+      "file": "../grepq/src/quality.rs",
+      "kind": "explicitly typed pattern",
+      "line": 124,
+      "name": "frequencies",
+      "scope": "tetranucleotide_frequencies",
+      "type": "Vec < TetraFrequency >"
+    },
+    {
+      "basic_type": "i32",
+      "context": "let mut gc_count = 0;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 42,
+      "name": "gc_count",
+      "scope": "gc_content",
+      "type": "integer"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut head_buffer = Vec::new();",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 44,
+      "name": "head_buffer",
+      "scope": "run_inverted",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut head_buffer = Vec::new();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 124,
+      "name": "head_buffer",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "i32",
+      "context": "let mut match_count = 0;",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 48,
+      "name": "match_count",
+      "scope": "run_inverted",
+      "type": "integer"
+    },
+    {
+      "basic_type": "i32",
+      "context": "let mut match_count = 0;",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 128,
+      "name": "match_count",
+      "scope": "main",
+      "type": "integer"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 23,
+      "name": "match_counts",
+      "scope": "run_tune",
+      "type": "HashMap < String , usize >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 23,
+      "name": "match_counts",
+      "scope": "run_tune",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 31,
+      "name": "match_counts",
+      "scope": "run_summarise",
+      "type": "HashMap < String , usize >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 31,
+      "name": "match_counts",
+      "scope": "run_summarise",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 23,
+      "name": "match_strings",
+      "scope": "run_tune",
+      "type": "HashMap < String , HashMap < String , usize > >"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 31,
+      "name": "match_strings",
+      "scope": "run_summarise",
+      "type": "HashMap < String , HashMap < String , usize > >"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let mut match_count = 0;",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 128,
+      "name": "matches_info",
+      "scope": "main",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 31,
+      "name": "matches_info",
+      "scope": "run_summarise",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 23,
+      "name": "matches_vec",
+      "scope": "run_tune",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 31,
+      "name": "matches_vec",
+      "scope": "run_summarise",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut most_frequent_matches: Vec<_> = match_strings",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 117,
+      "name": "most_frequent_matches",
+      "scope": "run_tune",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut most_frequent_matches: Vec<_> = match_strings.get(&converted_regex_string)",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 155,
+      "name": "most_frequent_matches",
+      "scope": "run_summarise",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut qual_buffer = Vec::new();",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 43,
+      "name": "qual_buffer",
+      "scope": "run_inverted",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut qual_buffer = Vec::new();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 123,
+      "name": "qual_buffer",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 21,
+      "name": "reader",
+      "scope": "run_tune",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 28,
+      "name": "reader",
+      "scope": "run_summarise",
+      "type": "function result"
+    },
+    {
+      "basic_type": "i32",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 21,
+      "name": "records_processed",
+      "scope": "run_tune",
+      "type": "integer"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 21,
+      "name": "regex_matches",
+      "scope": "run_tune",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "unknown",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 28,
+      "name": "regex_matches",
+      "scope": "run_summarise",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut seq_buffer = Vec::new();",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 42,
+      "name": "seq_buffer",
+      "scope": "run_inverted",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut seq_buffer = Vec::new();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 122,
+      "name": "seq_buffer",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "i32",
+      "context": "let mut sum = 0;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 16,
+      "name": "sum",
+      "scope": "average_quality",
+      "type": "integer"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut tetra_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/quality.rs",
+      "kind": "explicitly typed pattern",
+      "line": 90,
+      "name": "tetra_counts",
+      "scope": "tetranucleotide_frequencies",
+      "type": "HashMap < String , usize >"
+    },
+    {
+      "basic_type": "i32",
+      "context": "let mut total_matches = 0;",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 25,
+      "name": "total_matches",
+      "scope": "run_tune",
+      "type": "integer"
+    },
+    {
+      "basic_type": "i32",
+      "context": "let mut valid_base_count = 0;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 43,
+      "name": "valid_base_count",
+      "scope": "gc_content",
+      "type": "integer"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut writer = create_writer(cli);",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 34,
+      "name": "writer",
+      "scope": "run_inverted",
+      "type": "function result"
+    },
+    {
+      "basic_type": "function call result",
+      "context": "let mut writer = create_writer(&cli);",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 107,
+      "name": "writer",
+      "scope": "main",
+      "type": "function result"
+    }
+  ],
+  "metadata": {
+    "container_count": 40,
+    "datetime": "2025-03-23 17:09:08.131013 +11:00",
+    "immutable_variable_count": 221,
+    "mutable_variable_count": 37,
+    "project_name": "grepq",
+    "version": "1.5.4"
+  }
 }
