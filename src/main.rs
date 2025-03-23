@@ -25,6 +25,14 @@ struct VarInfo {
     scope: String,      // Scope of the variable (e.g., function name, module name)
 }
 
+// Structure to store information about containers
+struct ContainerInfo {
+    name: String,           // Container name
+    container_type: String, // Type of the container (e.g., struct, function)
+    file_path: PathBuf,     // Path to the file where the container is declared
+    line_number: usize,     // Line number of the declaration
+}
+
 // Function to format the type
 fn format_type(ty: &Type) -> String {
     quote::quote!(#ty).to_string()
@@ -45,6 +53,20 @@ impl fmt::Display for VarInfo {
             self.var_type,
             self.basic_type,
             self.scope
+        )
+    }
+}
+
+// Implementing Display trait for ContainerInfo to format the output
+impl fmt::Display for ContainerInfo {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{} ({}): at {}:{}",
+            self.name,
+            self.container_type,
+            self.file_path.display(),
+            self.line_number
         )
     }
 }
@@ -188,8 +210,9 @@ fn infer_basic_type_from_context(context: &str) -> String {
 
 // Structure to store analysis results
 struct AnalysisResults {
-    mutable_vars: Vec<VarInfo>,   // List of mutable variables
-    immutable_vars: Vec<VarInfo>, // List of immutable variables
+    mutable_vars: Vec<VarInfo>,     // List of mutable variables
+    immutable_vars: Vec<VarInfo>,   // List of immutable variables
+    containers: Vec<ContainerInfo>, // List of containers (functions, structs, etc.)
 }
 
 struct AnalysisMetadata {
@@ -256,13 +279,20 @@ fn main() -> Result<(), Box<dyn Error>> {
 fn analyze_project(dir: &str) -> Result<AnalysisResults, Box<dyn Error>> {
     let mut mutable_vars = Vec::new();
     let mut immutable_vars = Vec::new();
+    let mut containers = Vec::new();
 
     // Recursively visit directories and analyze files
-    visit_dirs(Path::new(dir), &mut mutable_vars, &mut immutable_vars)?;
+    visit_dirs(
+        Path::new(dir),
+        &mut mutable_vars,
+        &mut immutable_vars,
+        &mut containers,
+    )?;
 
     Ok(AnalysisResults {
         mutable_vars,
         immutable_vars,
+        containers,
     })
 }
 
@@ -271,6 +301,7 @@ fn visit_dirs(
     dir: &Path,
     mutable_vars: &mut Vec<VarInfo>,
     immutable_vars: &mut Vec<VarInfo>,
+    containers: &mut Vec<ContainerInfo>,
 ) -> io::Result<()> {
     if dir.is_dir() {
         for entry in fs::read_dir(dir)? {
@@ -280,11 +311,11 @@ fn visit_dirs(
             if path.is_dir() {
                 // Skip target directory, which contains build artifacts
                 if path.file_name().unwrap_or_default() != "target" {
-                    visit_dirs(&path, mutable_vars, immutable_vars)?;
+                    visit_dirs(&path, mutable_vars, immutable_vars, containers)?;
                 }
             } else if let Some(extension) = path.extension() {
                 if extension == "rs" {
-                    analyze_file(&path, mutable_vars, immutable_vars)?;
+                    analyze_file(&path, mutable_vars, immutable_vars, containers)?;
                 }
             }
         }
@@ -294,23 +325,25 @@ fn visit_dirs(
 
 // Function to analyze a single file with syn parser
 fn analyze_file(
-    file_path: &Path,
+    file_path: &Path, // Rename _file_path to file_path
     mutable_vars: &mut Vec<VarInfo>,
     immutable_vars: &mut Vec<VarInfo>,
+    containers: &mut Vec<ContainerInfo>,
 ) -> io::Result<()> {
-    let mut file = File::open(file_path)?;
+    let mut file = File::open(file_path)?; // Use file_path here
     let mut content = String::new();
     file.read_to_string(&mut content)?;
 
     // Parse with syn to get the AST
     match syn::parse_file(&content) {
         Ok(file_ast) => {
-            // Traverse the AST to collect variable information
+            // Traverse the AST to collect variable and container information
             let mut visitor = VariableVisitor {
-                file_path: file_path.to_path_buf(),
+                file_path: file_path.to_path_buf(), // Use file_path here
                 lines: content.lines().collect(),
                 mutable_vars,
                 immutable_vars,
+                containers,
                 current_scope: String::new(),
             };
 
@@ -319,17 +352,24 @@ fn analyze_file(
         }
         Err(_) => {
             // Fallback to the manual approach if syn parsing fails
-            analyze_file_manual_implementation(file_path, mutable_vars, immutable_vars, &content)
+            analyze_file_manual_implementation(
+                file_path, // Use file_path here
+                mutable_vars,
+                immutable_vars,
+                containers,
+                &content,
+            )
         }
     }
 }
 
-// Struct for collecting variables during AST traversal
+// Struct for collecting variables and containers during AST traversal
 struct VariableVisitor<'ast> {
     file_path: PathBuf,
     lines: Vec<&'ast str>,
     mutable_vars: &'ast mut Vec<VarInfo>,
     immutable_vars: &'ast mut Vec<VarInfo>,
+    containers: &'ast mut Vec<ContainerInfo>,
     current_scope: String, // Track the current scope
 }
 
@@ -531,9 +571,53 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
     fn visit_item_fn(&mut self, item_fn: &'ast syn::ItemFn) {
         // Update the current scope to the function name
         self.current_scope = item_fn.sig.ident.to_string();
+
+        // Get the line number for this node
+        let line_number = self.get_line_number(&item_fn.to_token_stream().to_string());
+
+        // Add function to containers
+        self.containers.push(ContainerInfo {
+            name: item_fn.sig.ident.to_string(),
+            container_type: "function".to_string(),
+            file_path: self.file_path.clone(),
+            line_number,
+        });
+
         visit::visit_item_fn(self, item_fn);
         // Reset the scope after visiting the function
         self.current_scope = String::new();
+    }
+
+    // Visit struct items
+    fn visit_item_struct(&mut self, item_struct: &'ast syn::ItemStruct) {
+        // Get the line number for this node
+        let line_number = self.get_line_number(&item_struct.to_token_stream().to_string());
+
+        // Add struct to containers
+        self.containers.push(ContainerInfo {
+            name: item_struct.ident.to_string(),
+            container_type: "struct".to_string(),
+            file_path: self.file_path.clone(),
+            line_number,
+        });
+
+        visit::visit_item_struct(self, item_struct);
+    }
+
+    // Visit enum items
+    fn visit_item_enum(&mut self, item_enum: &'ast syn::ItemEnum) {
+        // Get the line number for this node
+        let line_number = self.get_line_number(&item_enum.to_token_stream().to_string());
+
+        // Add enum to containers
+        self.containers.push(ContainerInfo {
+            name: item_enum.ident.to_string(),
+            container_type: "enum".to_string(),
+            file_path: self.file_path.clone(),
+            line_number,
+        });
+
+        visit::visit_item_enum(self, item_enum);
     }
 }
 
@@ -1312,6 +1396,7 @@ fn analyze_file_manual_implementation(
     file_path: &Path,
     mutable_vars: &mut Vec<VarInfo>,
     immutable_vars: &mut Vec<VarInfo>,
+    containers: &mut Vec<ContainerInfo>,
     content: &str,
 ) -> io::Result<()> {
     let lines: Vec<&str> = content.lines().collect();
@@ -1416,14 +1501,50 @@ fn analyze_file_manual_implementation(
 
         // 4. Check for function parameters with mut
         if (line.contains("fn ") || line.contains("pub fn ")) && line.contains("mut ") {
-            extract_mut_parameters(line, file_path, i + 1, mutable_vars);
+            extract_mut_parameters(line, i + 1, mutable_vars, file_path);
         }
 
         // 5. Check for pattern matching with mut: "if let Some(mut x) =" or similar
         if (line.contains("if let ") || line.contains("while let ") || line.contains("match "))
             && line.contains("mut ")
         {
-            extract_mut_patterns(line, file_path, i + 1, mutable_vars);
+            extract_mut_patterns(line, i + 1, mutable_vars, file_path);
+        }
+
+        // Check for function declarations
+        if line.contains("fn ") {
+            if let Some((name, line_number)) = extract_container_info(line, "function", i + 1) {
+                containers.push(ContainerInfo {
+                    name: name.to_string(),
+                    container_type: "function".to_string(),
+                    file_path: file_path.to_path_buf(),
+                    line_number,
+                });
+            }
+        }
+
+        // Check for struct declarations
+        if line.contains("struct ") {
+            if let Some((name, line_number)) = extract_container_info(line, "struct", i + 1) {
+                containers.push(ContainerInfo {
+                    name: name.to_string(),
+                    container_type: "struct".to_string(),
+                    file_path: file_path.to_path_buf(),
+                    line_number,
+                });
+            }
+        }
+
+        // Check for enum declarations
+        if line.contains("enum ") {
+            if let Some((name, line_number)) = extract_container_info(line, "enum", i + 1) {
+                containers.push(ContainerInfo {
+                    name: name.to_string(),
+                    container_type: "enum".to_string(),
+                    file_path: file_path.to_path_buf(),
+                    line_number,
+                });
+            }
         }
     }
 
@@ -1607,9 +1728,9 @@ fn infer_type_from_loop(line: &str) -> String {
 // New function to extract mutable parameters from function signatures
 fn extract_mut_parameters(
     line: &str,
-    file_path: &Path,
     line_number: usize,
     mutable_vars: &mut Vec<VarInfo>,
+    file_path: &Path,
 ) {
     // Look for "mut " patterns after the opening parenthesis
     if let Some(params_start) = line.find('(') {
@@ -1663,9 +1784,9 @@ fn extract_mut_parameters(
 // New function to extract mutable variables from pattern matching
 fn extract_mut_patterns(
     line: &str,
-    file_path: &Path,
     line_number: usize,
     mutable_vars: &mut Vec<VarInfo>,
+    file_path: &Path,
 ) {
     // Look for patterns like "Some(mut x)" or "{mut y}"
     let mut search_idx = 0;
@@ -1746,6 +1867,24 @@ fn infer_type_from_pattern(line: &str) -> String {
     "pattern matched value".to_string()
 }
 
+// Function to extract container information from a line of code
+fn extract_container_info<'a>(
+    line: &'a str,
+    container_type: &'a str,
+    line_number: usize,
+) -> Option<(&'a str, usize)> {
+    let rest = &line[line.find(container_type)? + container_type.len()..];
+    let name_end = rest.find(|c: char| !c.is_alphanumeric() && c != '_');
+
+    let name = match name_end {
+        Some(end) if end > 0 => &rest[..end],
+        None if !rest.is_empty() => rest,
+        _ => return None,
+    };
+
+    Some((name, line_number))
+}
+
 // Function to print analysis results to the console
 
 fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata) {
@@ -1762,6 +1901,11 @@ fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata) {
     println!("\n\x1b[1mImmutable Variables:\x1b[0m");
     for var in &results.immutable_vars {
         println!("  {}", var);
+    }
+
+    println!("\n\x1b[1mContainers:\x1b[0m");
+    for container in &results.containers {
+        println!("  {}", container);
     }
 }
 
@@ -1884,8 +2028,34 @@ fn output_json(
         })
         .collect();
 
+    let containers: Vec<serde_json::Value> = results
+        .containers
+        .iter()
+        .map(|c| {
+            let mut map = serde_json::Map::new();
+            map.insert(
+                "name".to_string(),
+                serde_json::Value::String(c.name.clone()),
+            );
+            map.insert(
+                "type".to_string(),
+                serde_json::Value::String(c.container_type.clone()),
+            );
+            map.insert(
+                "file".to_string(),
+                serde_json::Value::String(c.file_path.display().to_string()),
+            );
+            map.insert(
+                "line".to_string(),
+                serde_json::Value::Number(serde_json::Number::from(c.line_number)),
+            );
+            serde_json::Value::Object(map)
+        })
+        .collect();
+
     output.insert("mutable_variables", serde_json::Value::Array(mut_vars));
     output.insert("immutable_variables", serde_json::Value::Array(immut_vars));
+    output.insert("containers", serde_json::Value::Array(containers));
 
     let json = serde_json::to_string_pretty(&output)?;
     file.write_all(json.as_bytes())?;
@@ -1945,6 +2115,19 @@ fn output_csv(
         )?;
     }
 
+    // Write containers
+    writeln!(file, "type,name,file,line")?;
+    for container in &results.containers {
+        writeln!(
+            file,
+            "\"{}\",\"{}\",\"{}\",{}",
+            container.container_type,
+            container.name,
+            container.file_path.display(),
+            container.line_number
+        )?;
+    }
+
     Ok(())
 }
 
@@ -1977,6 +2160,12 @@ fn output_text(
     writeln!(file, "---------------------")?;
     for var in &results.immutable_vars {
         writeln!(file, "{}", var)?;
+    }
+
+    writeln!(file, "\nContainers ({})", results.containers.len())?;
+    writeln!(file, "----------------")?;
+    for container in &results.containers {
+        writeln!(file, "{}", container)?;
     }
 
     Ok(())
