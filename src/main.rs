@@ -22,6 +22,7 @@ struct VarInfo {
     var_kind: String,   // Kind (how declared) of the variable
     var_type: String,   // The fundamental Rust type of the variable
     basic_type: String, // The basic Rust type (i64, String, etc.)
+    scope: String,      // Scope of the variable (e.g., function name, module name)
 }
 
 // Function to format the type
@@ -34,7 +35,7 @@ impl fmt::Display for VarInfo {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
-            "{} ({}): {} at {}:{} - kind: {}, type: {}, basic type: {}",
+            "{} ({}): {} at {}:{} - kind: {}, type: {}, basic type: {}, scope: {}",
             self.name,
             if self.mutable { "mutable" } else { "immutable" },
             self.context.trim(),
@@ -42,7 +43,8 @@ impl fmt::Display for VarInfo {
             self.line_number,
             self.var_kind,
             self.var_type,
-            self.basic_type
+            self.basic_type,
+            self.scope
         )
     }
 }
@@ -309,6 +311,7 @@ fn analyze_file(
                 lines: content.lines().collect(),
                 mutable_vars,
                 immutable_vars,
+                current_scope: String::new(),
             };
 
             visitor.visit_file(&file_ast);
@@ -327,6 +330,7 @@ struct VariableVisitor<'ast> {
     lines: Vec<&'ast str>,
     mutable_vars: &'ast mut Vec<VarInfo>,
     immutable_vars: &'ast mut Vec<VarInfo>,
+    current_scope: String, // Track the current scope
 }
 
 // Implement the Visit trait for VariableVisitor to traverse the AST
@@ -373,6 +377,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                 var_kind: "inferred from initialization".to_string(),
                 var_type,
                 basic_type,
+                scope: self.current_scope.clone(),
             };
 
             if mutable {
@@ -424,6 +429,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                         var_kind: format!("function parameter: {}", quote::quote!(#pat_type.ty)),
                         var_type,
                         basic_type: extract_basic_type(&pat_type.ty),
+                        scope: self.current_scope.clone(),
                     });
                 }
             }
@@ -459,6 +465,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                     var_kind: "for loop variable".to_string(),
                     var_type,
                     basic_type: infer_basic_type_from_expr(&for_loop.expr),
+                    scope: self.current_scope.clone(),
                 });
             }
         } else {
@@ -509,6 +516,7 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
                                     var_kind: "if-let pattern".to_string(),
                                     var_type: infer_type_from_pattern_match(pat, expr),
                                     basic_type: infer_basic_type_from_context(&context),
+                                    scope: self.current_scope.clone(),
                                 });
                             }
                         }
@@ -518,6 +526,14 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
         }
 
         visit::visit_expr_if(self, if_expr);
+    }
+
+    fn visit_item_fn(&mut self, item_fn: &'ast syn::ItemFn) {
+        // Update the current scope to the function name
+        self.current_scope = item_fn.sig.ident.to_string();
+        visit::visit_item_fn(self, item_fn);
+        // Reset the scope after visiting the function
+        self.current_scope = String::new();
     }
 }
 
@@ -626,6 +642,7 @@ impl VariableVisitor<'_> {
                     },
                     var_type,
                     basic_type,
+                    scope: self.current_scope.clone(),
                 };
 
                 if mutable {
@@ -685,6 +702,7 @@ impl VariableVisitor<'_> {
                             var_kind: format!("destructured from {}", struct_name),
                             var_type,
                             basic_type: infer_basic_type_from_context(context),
+                            scope: self.current_scope.clone(),
                         };
 
                         if mutable {
@@ -726,6 +744,7 @@ impl VariableVisitor<'_> {
                             var_kind: format!("destructured from struct {}", struct_name),
                             var_type,
                             basic_type: infer_basic_type_from_context(context),
+                            scope: self.current_scope.clone(),
                         };
 
                         if mutable {
@@ -770,6 +789,7 @@ impl VariableVisitor<'_> {
                         var_kind: "reference pattern".to_string(),
                         var_type,
                         basic_type: infer_basic_type_from_context(context),
+                        scope: self.current_scope.clone(),
                     };
 
                     if mutable {
@@ -807,6 +827,7 @@ impl VariableVisitor<'_> {
                             var_kind: "slice pattern".to_string(),
                             var_type,
                             basic_type: infer_basic_type_from_context(context),
+                            scope: self.current_scope.clone(),
                         };
 
                         if mutable {
@@ -1345,6 +1366,7 @@ fn analyze_file_manual_implementation(
                     var_kind: var_kind.to_string(),
                     var_type: rust_type,
                     basic_type: infer_basic_type_from_context(line),
+                    scope: String::new(),
                 });
             }
         }
@@ -1369,6 +1391,7 @@ fn analyze_file_manual_implementation(
                         var_kind: var_kind.to_string(),
                         var_type: rust_type,
                         basic_type: infer_basic_type_from_context(line),
+                        scope: String::new(),
                     });
                 }
             }
@@ -1386,6 +1409,7 @@ fn analyze_file_manual_implementation(
                     var_kind: "inferred from loop".to_string(),
                     var_type: infer_type_from_loop(line),
                     basic_type: infer_basic_type_from_context(line),
+                    scope: String::new(),
                 });
             }
         }
@@ -1626,6 +1650,7 @@ fn extract_mut_parameters(
                     var_kind: param_kind.to_string(),
                     var_type: rust_type,
                     basic_type: infer_basic_type_from_context(line),
+                    scope: String::new(),
                 });
             }
 
@@ -1666,6 +1691,7 @@ fn extract_mut_patterns(
                 var_kind: "pattern matched".to_string(),
                 var_type: pattern_type,
                 basic_type: infer_basic_type_from_context(line),
+                scope: String::new(),
             });
         } else if !line[var_name_start..].is_empty() {
             // Handle case where the variable is at the end of the line
@@ -1683,6 +1709,7 @@ fn extract_mut_patterns(
                 var_kind: "pattern matched".to_string(),
                 var_type: pattern_type,
                 basic_type: infer_basic_type_from_context(line),
+                scope: String::new(),
             });
         }
 
@@ -1808,6 +1835,10 @@ fn output_json(
                 "basic_type".to_string(),
                 serde_json::Value::String(v.basic_type.clone()),
             );
+            map.insert(
+                "scope".to_string(),
+                serde_json::Value::String(v.scope.clone()),
+            );
             serde_json::Value::Object(map)
         })
         .collect();
@@ -1845,6 +1876,10 @@ fn output_json(
                 "basic_type".to_string(),
                 serde_json::Value::String(v.basic_type.clone()),
             );
+            map.insert(
+                "scope".to_string(),
+                serde_json::Value::String(v.scope.clone()),
+            );
             serde_json::Value::Object(map)
         })
         .collect();
@@ -1875,21 +1910,22 @@ fn output_csv(
     // Write header
     writeln!(
         file,
-        "mutability,name,file,line,context,kind,type,basic_type"
+        "mutability,name,file,line,context,kind,type,basic_type,scope"
     )?;
 
     // Write mutable variables
     for var in &results.mutable_vars {
         writeln!(
             file,
-            "mutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\"",
+            "mutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"",
             var.name,
             var.file_path.display(),
             var.line_number,
             var.context.trim().replace("\"", "\"\""),
             var.var_kind,
             var.var_type,
-            var.basic_type
+            var.basic_type,
+            var.scope
         )?;
     }
 
@@ -1897,14 +1933,15 @@ fn output_csv(
     for var in &results.immutable_vars {
         writeln!(
             file,
-            "immutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\"",
+            "immutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"",
             var.name,
             var.file_path.display(),
             var.line_number,
             var.context.trim().replace("\"", "\"\""),
             var.var_kind,
             var.var_type,
-            var.basic_type
+            var.basic_type,
+            var.scope
         )?;
     }
 
