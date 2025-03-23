@@ -300,10 +300,10 @@ fn analyze_file(
     let mut content = String::new();
     file.read_to_string(&mut content)?;
 
-    // First, try to parse with syn
+    // Parse with syn to get the AST
     match syn::parse_file(&content) {
         Ok(file_ast) => {
-            // Parse using AST approach
+            // Traverse the AST to collect variable information
             let mut visitor = VariableVisitor {
                 file_path: file_path.to_path_buf(),
                 lines: content.lines().collect(),
@@ -329,10 +329,7 @@ struct VariableVisitor<'ast> {
     immutable_vars: &'ast mut Vec<VarInfo>,
 }
 
-// impl<'ast> VariableVisitor<'ast> {
-//     // Function removed as it was a duplicate
-// }
-
+// Implement the Visit trait for VariableVisitor to traverse the AST
 impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
     // Visit local variable declarations (let statements)
     fn visit_local(&mut self, local: &'ast syn::Local) {
