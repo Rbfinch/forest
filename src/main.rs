@@ -1,5 +1,5 @@
 //
-// Forest - A Rust Static Analysis Tool
+// Forest - Explore a Rust Project
 // This tool analyzes Rust projects to track variable mutability and container usage.
 // It provides insights about how variables are declared, used, and what their types are.
 //
