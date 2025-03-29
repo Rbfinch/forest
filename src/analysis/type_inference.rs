@@ -38,30 +38,76 @@ pub fn infer_basic_type_from_context(line: &str) -> String {
 pub fn extract_basic_type(ty: &Type) -> String {
     match ty {
         Type::Path(path) => {
-            // Extract the last segment as the base type
-            if let Some(segment) = path
-                .path
-                .segments
-                .last()
-                .map(|segment| segment.ident.to_string())
-            {
-                // Check for primitive types
-                match segment.as_str() {
-                    "i8" | "i16" | "i32" | "i64" | "i128" | "isize" | "u8" | "u16" | "u32"
-                    | "u64" | "u128" | "usize" | "f32" | "f64" | "bool" | "char" => {
-                        segment.to_string()
-                    }
-                    "String" => "String".to_string(),
+            if let Some(segment) = path.path.segments.last() {
+                let type_name = segment.ident.to_string();
+                match type_name.as_str() {
                     "Option" => {
-                        // Implementation for Option type
-                        "Option".to_string()
+                        if let syn::PathArguments::AngleBracketed(args) = &segment.arguments {
+                            if let Some(syn::GenericArgument::Type(inner_ty)) = args.args.first() {
+                                return format!("Option<{}>", extract_basic_type(inner_ty));
+                            }
+                        }
+                        "Option<T>".to_string()
                     }
-                    _ => segment.to_string(),
+                    "Result" => {
+                        if let syn::PathArguments::AngleBracketed(args) = &segment.arguments {
+                            let mut types = args.args.iter().filter_map(|arg| {
+                                if let syn::GenericArgument::Type(inner_ty) = arg {
+                                    Some(extract_basic_type(inner_ty))
+                                } else {
+                                    None
+                                }
+                            });
+                            let ok_type = types.next().unwrap_or("T".to_string());
+                            let err_type = types.next().unwrap_or("E".to_string());
+                            return format!("Result<{}, {}>", ok_type, err_type);
+                        }
+                        "Result<T, E>".to_string()
+                    }
+                    "Vec" => {
+                        if let syn::PathArguments::AngleBracketed(args) = &segment.arguments {
+                            if let Some(syn::GenericArgument::Type(inner_ty)) = args.args.first() {
+                                return format!("Vec<{}>", extract_basic_type(inner_ty));
+                            }
+                        }
+                        "Vec<T>".to_string()
+                    }
+                    "HashMap" => {
+                        if let syn::PathArguments::AngleBracketed(args) = &segment.arguments {
+                            let mut types = args.args.iter().filter_map(|arg| {
+                                if let syn::GenericArgument::Type(inner_ty) = arg {
+                                    Some(extract_basic_type(inner_ty))
+                                } else {
+                                    None
+                                }
+                            });
+                            let key_type = types.next().unwrap_or("K".to_string());
+                            let value_type = types.next().unwrap_or("V".to_string());
+                            return format!("HashMap<{}, {}>", key_type, value_type);
+                        }
+                        "HashMap<K, V>".to_string()
+                    }
+                    _ => type_name,
                 }
             } else {
-                "unknown".to_string()
+                "Unknown".to_string()
             }
         }
-        _ => "unknown".to_string(),
+        Type::Reference(ref_type) => {
+            let mutability = if ref_type.mutability.is_some() {
+                "mut "
+            } else {
+                ""
+            };
+            format!("&{}{}", mutability, extract_basic_type(&ref_type.elem))
+        }
+        Type::Array(array_type) => {
+            format!("[{}; N]", extract_basic_type(&array_type.elem))
+        }
+        Type::Tuple(tuple_type) => {
+            let types: Vec<String> = tuple_type.elems.iter().map(extract_basic_type).collect();
+            format!("({})", types.join(", "))
+        }
+        _ => "Unknown".to_string(),
     }
 }

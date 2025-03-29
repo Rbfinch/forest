@@ -31,7 +31,7 @@
       "type": "byte string"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let avg_quality = quality_encoding",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -41,7 +41,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let avg_quality = quality_encoding.as_ref()",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -61,7 +61,7 @@
       "type": "reference to inferred from context"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let bucket = cli.bucket;",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -71,7 +71,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let check_seq_len = minimum_sequence_length.is_some();",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -81,7 +81,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let check_seq_len = minimum_sequence_length.is_some();",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -91,7 +91,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let check_seq_len = minimum_sequence_length.is_some();",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -101,7 +101,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let check_seq_len = minimum_sequence_length.is_some();",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -111,7 +111,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let check_seq_len = minimum_sequence_length.is_some();",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -121,7 +121,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let check_seq_len = minimum_sequence_length.is_some();",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -131,7 +131,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let cli = Cli::parse();",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -141,7 +141,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let compression = if cli.fast_compression {",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -151,7 +151,7 @@
       "type": "conditional result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let conn = Connection::open(&db_name)?;",
       "file": "../grepq/src/output.rs",
       "kind": "inferred from initialization",
@@ -161,7 +161,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let conn = Connection::open(&db_name)?;",
       "file": "../grepq/src/output.rs",
       "kind": "inferred from initialization",
@@ -171,7 +171,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let conn = if cli.patterns.ends_with(\".json\") {",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -181,7 +181,7 @@
       "type": "conditional result"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let conn = if cli.patterns.ends_with(\".json\") {",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -191,7 +191,7 @@
       "type": "conditional result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let converted_pattern = crate::initialise::convert_iupac_to_regex(&matched_pattern);",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -201,7 +201,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let converted_pattern = crate::initialise::convert_iupac_to_regex(&matched_pattern);",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -211,7 +211,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let converted_pattern = crate::initialise::convert_iupac_to_regex(&matched_pattern);",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -221,7 +221,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let converted_pattern = crate::initialise::convert_iupac_to_regex(&matched_pattern);",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -231,7 +231,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let could_be_iupac = pattern.chars().all(|c| c.is_alphabetic());",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -241,7 +241,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let count = cli.count;",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -251,7 +251,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let count = quality.len() as i32;",
       "file": "../grepq/src/quality.rs",
       "kind": "inferred from initialization",
@@ -261,7 +261,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let count = cli.count;",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -281,7 +281,7 @@
       "type": "iteration variable"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let count = match_counts",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -301,7 +301,7 @@
       "type": "reference to collection element"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let count = match_counts.iter().find(|(pattern, _)| pattern == &converted_regex_string).map(|(_, count)| count).unwrap_or(&0);",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -331,7 +331,7 @@
       "type": ":tetranucleotide_frequencies(ambiguous, Some(4))"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let db_conn = if cli.write_sql && cli.command.is_none() {",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -341,7 +341,7 @@
       "type": "conditional result"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let db_conn = if cli.write_sql {",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -351,7 +351,7 @@
       "type": "conditional result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let db_name = format!(\"fastq_{}.db\", timestamp);",
       "file": "../grepq/src/output.rs",
       "kind": "inferred from initialization",
@@ -361,7 +361,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let db_name = format!(\"fastq_{}.db\", timestamp);",
       "file": "../grepq/src/output.rs",
       "kind": "inferred from initialization",
@@ -371,7 +371,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let entry = match_strings.entry(converted_pattern.clone()).or_default();",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -381,7 +381,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let entry = match_strings.entry(converted_pattern.clone()).or_default();",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -401,7 +401,7 @@
       "type": "string"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let file = File::open(patterns_path)",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -411,7 +411,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let file = File::open(patterns_path)",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -421,7 +421,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let file_name = if suffix.is_empty() {",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -431,7 +431,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let file = File::create(\"matches.json\")?;",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -441,7 +441,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let file = File::create(\"matches.json\")?;",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -451,7 +451,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let file_content = read_to_string(patterns_file)",
       "file": "../grepq/src/output.rs",
       "kind": "inferred from initialization",
@@ -461,7 +461,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let file_name = if suffix.is_empty() {",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -471,7 +471,7 @@
       "type": "conditional result"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let file_param = if first {",
       "file": "../grepq/src/output.rs",
       "kind": "inferred from initialization",
@@ -481,7 +481,7 @@
       "type": "conditional result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let formatted_name = name.replace(' ', \"-\").replace('\\'', \"\");",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -521,7 +521,7 @@
       "type": ":tetranucleotide_frequencies(sequence, Some(4))"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let gc = quality::gc_content(record.seq());",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -531,7 +531,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let gc = quality::gc_content(record.seq());",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -541,7 +541,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let gc_int = gc.round() as i64;",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -551,7 +551,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let gc_int = gc.round() as i64;",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -561,7 +561,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let header_regex = header_regex.map(|re| {",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -571,7 +571,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let header_regex = header_regex.map(|re| {",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -581,7 +581,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let header_regex = header_regex.map(|re: String| Regex::new(&re).unwrap());",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -591,7 +591,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let header_regex = header_regex.map(|re: String| Regex::new(&re).unwrap());",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -601,7 +601,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let header_regex = header_regex.map(|re| Regex::new(&re).unwrap());",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -611,7 +611,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let header_regex = header_regex.map(|re| Regex::new(&re).unwrap());",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -631,7 +631,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let header_regex = header_regex.map(|re| {",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -641,7 +641,7 @@
       "type": "mapped iterator"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let header_regex = json[\"regexSet\"][\"headerRegex\"]",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -661,7 +661,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let header_regex = header_regex.map(|re: String| Regex::new(&re).unwrap());",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -681,7 +681,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let header_regex = header_regex.map(|re| Regex::new(&re).unwrap());",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -701,7 +701,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let header_regex = header_regex.map(|re| Regex::new(&re).unwrap());",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -721,7 +721,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let insert_stmt = if quality_encoding.is_some() && !is_text_file {",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -731,7 +731,7 @@
       "type": "conditional result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let is_text_file = cli.patterns.ends_with(\".txt\");",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -741,7 +741,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let is_unambiguous = window",
       "file": "../grepq/src/quality.rs",
       "kind": "inferred from initialization",
@@ -811,7 +811,7 @@
       "type": "string"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let json_file =",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -821,7 +821,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let json_output = json!({",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -831,7 +831,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let json_output = json!({",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -841,7 +841,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let json_path = temp_file.path().with_extension(\"json\");",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -861,7 +861,7 @@
       "type": "string"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let level = if cli.fast_compression {",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -881,7 +881,7 @@
       "type": "Result < Vec < _ > , _ >"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -891,7 +891,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -901,7 +901,7 @@
       "type": "string"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -911,7 +911,7 @@
       "type": "string"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -921,7 +921,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "reference",
+      "basic_type": "Reference",
       "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -931,7 +931,7 @@
       "type": "reference"
     },
     {
-      "basic_type": "reference",
+      "basic_type": "Reference",
       "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -941,7 +941,7 @@
       "type": "reference"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let matches_json = serde_json::to_string(&matches_info).unwrap_or_else(|_| \"[]\".to_string());",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -951,7 +951,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let matched_pattern = regex_set.patterns()[mat].to_string();",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -971,7 +971,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let minimum_sequence_length = json[\"regexSet\"][\"minimumSequenceLength\"].as_u64();",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -1021,7 +1021,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let minimum_sequence_length = json[\"regexSet\"][\"minimumSequenceLength\"].as_u64();",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -1101,7 +1101,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "match result",
+      "basic_type": "Match result",
       "context": "let offset = match quality_encoding {",
       "file": "../grepq/src/quality.rs",
       "kind": "inferred from initialization",
@@ -1211,7 +1211,7 @@
       "type": "string"
     },
     {
-      "basic_type": "reference",
+      "basic_type": "Reference",
       "context": "let patterns_path = &cli.patterns;",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -1221,7 +1221,7 @@
       "type": "reference"
     },
     {
-      "basic_type": "reference",
+      "basic_type": "Reference",
       "context": "let patterns_path = &cli.patterns;",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -1231,7 +1231,7 @@
       "type": "reference"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let percentage = (count as f32 / total_count) * 100.0;",
       "file": "../grepq/src/quality.rs",
       "kind": "inferred from initialization",
@@ -1251,7 +1251,7 @@
       "type": "reference to inferred from context"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let qual_check = !check_qual",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -1261,7 +1261,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let qual_check = !check_qual",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -1271,7 +1271,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let qual_check = !check_qual",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1281,7 +1281,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let qual_check = !check_qual",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1291,7 +1291,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let qual_check = minimum_quality.map_or(true, |min_q| {",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -1301,7 +1301,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let qual_check = minimum_quality.map_or(true, |min_q| {",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -1311,7 +1311,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let quality = vec![b'I'; 1000];",
       "file": "../grepq/benches/benchmarks.rs",
       "kind": "inferred from initialization",
@@ -1321,7 +1321,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let quality = vec![b'I'; 1000];",
       "file": "../grepq/benches/benchmarks.rs",
       "kind": "inferred from initialization",
@@ -1341,7 +1341,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let quality_encoding = json[\"regexSet\"][\"qualityEncoding\"]",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -1361,7 +1361,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let quality_encoding = quality_encoding.as_deref();",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1391,7 +1391,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let reader = create_reader(cli);",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -1401,7 +1401,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let reader = BufReader::new(file);",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -1421,7 +1421,7 @@
       "type": "Box < dyn BufRead + Send >"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let reader = create_reader(&cli);",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1431,7 +1431,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "match result",
+      "basic_type": "Match result",
       "context": "let record = match result {",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -1441,7 +1441,7 @@
       "type": "match result"
     },
     {
-      "basic_type": "match result",
+      "basic_type": "Match result",
       "context": "let record = match result {",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -1451,7 +1451,7 @@
       "type": "match result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_check = regex_set.is_match(record.seq());",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1461,7 +1461,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_check = regex_set.is_match(record.seq());",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1471,7 +1471,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"]",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -1481,7 +1481,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"].as_str().unwrap_or(\"Unknown\");",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -1491,7 +1491,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let regex_check = !regex_set.is_match(record.seq());",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -1501,7 +1501,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let regex_check = !regex_set.is_match(record.seq());",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -1511,7 +1511,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_check = regex_set.is_match(record.seq());",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1521,7 +1521,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_check = regex_set.is_match(record.seq());",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1531,7 +1531,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"]",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -1541,7 +1541,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"].as_str().unwrap_or(\"Unknown\");",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -1551,7 +1551,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Collection",
       "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -1561,7 +1561,7 @@
       "type": "collection"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -1591,7 +1591,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -1601,7 +1601,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let regex_strings: Vec<String> = json[\"regexSet\"][\"regex\"]",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -1641,7 +1641,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"]",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -1651,7 +1651,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"].as_str().unwrap_or(\"Unknown\");",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -1661,7 +1661,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"]",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -1671,7 +1671,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let regex_set_name = json[\"regexSet\"][\"regexSetName\"].as_str().unwrap_or(\"Unknown\");",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -1701,7 +1701,7 @@
       "type": "Vec < String >"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -1721,7 +1721,7 @@
       "type": "Vec < Value >"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -1731,7 +1731,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -1741,7 +1741,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let result = initialise::parse_patterns_file(temp_file.path().to_str().unwrap())",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -1761,7 +1761,7 @@
       "type": "Vec < Value >"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let scale = 10.0_f32.powf(4.0 - value.abs().log10().floor());",
       "file": "../grepq/src/quality.rs",
       "kind": "inferred from initialization",
@@ -1781,7 +1781,7 @@
       "type": "Value"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let seq_len_check = !check_seq_len",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -1791,7 +1791,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let seq_len_check = !check_seq_len",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -1801,7 +1801,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let seq_len_check = !check_seq_len",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1811,7 +1811,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "binary expression result",
+      "basic_type": "Binary expression result",
       "context": "let seq_len_check = !check_seq_len",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1821,7 +1821,7 @@
       "type": "boolean"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let seq_len_check =",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -1831,7 +1831,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let seq_len_check = minimum_sequence_length.map_or(true, |len| record.seq().len() >= len as usize);",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -1851,7 +1851,7 @@
       "type": "byte string"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let stdout_lock = io::stdout().lock();",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -1861,7 +1861,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let suffix = if with_fasta {",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -1881,7 +1881,7 @@
       "type": "f32"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let temp_file = NamedTempFile::new().unwrap();",
       "file": "../grepq/benches/benchmarks.rs",
       "kind": "inferred from initialization",
@@ -1891,7 +1891,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let temp_file = NamedTempFile::new().unwrap();",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -1901,7 +1901,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let temp_file = NamedTempFile::new().unwrap();",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -1911,7 +1911,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let temp_file = NamedTempFile::new().unwrap();",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -1921,7 +1921,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let temp_file = NamedTempFile::new().unwrap();",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -1931,7 +1931,7 @@
       "type": "unwrapped value"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let timestamp = chrono::Local::now().format(\"%Y%m%d_%H%M%S\");",
       "file": "../grepq/src/output.rs",
       "kind": "inferred from initialization",
@@ -1941,7 +1941,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let timestamp = chrono::Local::now().format(\"%Y%m%d_%H%M%S\");",
       "file": "../grepq/src/output.rs",
       "kind": "inferred from initialization",
@@ -1971,7 +1971,7 @@
       "type": "inferred from context"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let top_n = cli",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -1981,7 +1981,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let top_n = cli.command.as_ref().and_then(|cmd| {",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -2001,7 +2001,7 @@
       "type": "f32"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let txt_path = temp_file.path().with_extension(\"txt\");",
       "file": "../grepq/src/tests.rs",
       "kind": "inferred from initialization",
@@ -2011,7 +2011,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let unique_count = tetra_counts.len();",
       "file": "../grepq/src/quality.rs",
       "kind": "inferred from initialization",
@@ -2031,7 +2031,7 @@
       "type": ":tetranucleotide_frequencies(sequence, Some(4))"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let uppercase = pattern.to_uppercase();",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -2041,7 +2041,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let validator = jsonschema::validator_for(&schema)",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -2051,7 +2051,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let variants: Vec<_> = json[\"regexSet\"][\"regex\"]",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -2061,7 +2061,7 @@
       "type": "string"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let variants_array = regex[\"variants\"]",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -2071,7 +2071,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let variants_array = regex[\"variants\"].as_array().unwrap_or_else(|| Box::leak(Box::new(Vec::new())));",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -2081,7 +2081,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let variants: Vec<_> = json[\"regexSet\"][\"regex\"]",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -2101,7 +2101,7 @@
       "type": "Vec < _ >"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let variants_array = regex[\"variants\"]",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -2111,7 +2111,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let variants_array = regex[\"variants\"].as_array().unwrap_or_else(|| Box::leak(Box::new(Vec::new())));",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -2121,7 +2121,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let variants_array = regex[\"variants\"]",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -2131,7 +2131,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let variants_array = regex[\"variants\"].as_array().unwrap_or_else(|| Box::leak(Box::new(Vec::new())));",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -2141,7 +2141,7 @@
       "type": "method result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let with_full_record = cli.with_full_record;",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -2151,7 +2151,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let with_full_record = cli.with_full_record;",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2161,7 +2161,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let with_full_record = cli.with_full_record;",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -2171,7 +2171,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let with_full_record = cli.with_full_record;",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2181,7 +2181,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let with_id = cli.with_id;",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -2191,7 +2191,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let with_id = cli.with_id;",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2201,7 +2201,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "method call result",
+      "basic_type": "Method call result",
       "context": "let writer = bucket_writers.get_mut(&regex_names[i]).unwrap();",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2211,9 +2211,17 @@
       "type": "unwrapped value"
     }
   ],
+  "metadata": {
+    "container_count": 40,
+    "datetime": "2025-03-30 10:06:15.356746 +11:00",
+    "immutable_variable_count": 221,
+    "mutable_variable_count": 37,
+    "project_name": "grepq",
+    "version": "1.5.4"
+  },
   "mutable_variables": [
     {
-      "basic_type": "conditional result",
+      "basic_type": "Conditional result",
       "context": "let mut bucket_writers = if bucket {",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2223,7 +2231,7 @@
       "type": "conditional result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let mut encoder = ZstdEncoder::new(writer, compression_level)?;",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -2233,7 +2241,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut error_messages = Vec::new();",
       "file": "../grepq/src/initialise.rs",
       "kind": "inferred from initialization",
@@ -2263,7 +2271,7 @@
       "type": "Vec < TetraFrequency >"
     },
     {
-      "basic_type": "i32",
+      "basic_type": "integer",
       "context": "let mut gc_count = 0;",
       "file": "../grepq/src/quality.rs",
       "kind": "inferred from initialization",
@@ -2273,7 +2281,7 @@
       "type": "integer"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut head_buffer = Vec::new();",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -2283,7 +2291,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut head_buffer = Vec::new();",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2293,7 +2301,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "i32",
+      "basic_type": "integer",
       "context": "let mut match_count = 0;",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -2303,7 +2311,7 @@
       "type": "integer"
     },
     {
-      "basic_type": "i32",
+      "basic_type": "integer",
       "context": "let mut match_count = 0;",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2373,7 +2381,7 @@
       "type": "HashMap < String , HashMap < String , usize > >"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let mut match_count = 0;",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2383,7 +2391,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -2433,7 +2441,7 @@
       "type": "Vec < _ >"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut qual_buffer = Vec::new();",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -2443,7 +2451,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut qual_buffer = Vec::new();",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2453,7 +2461,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut reader = create_reader(cli);",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -2463,7 +2471,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut reader = create_reader(cli);",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -2473,7 +2481,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "i32",
+      "basic_type": "integer",
       "context": "let mut reader = create_reader(cli);",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -2483,7 +2491,7 @@
       "type": "integer"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let mut reader = create_reader(cli);",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -2493,7 +2501,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "unknown",
+      "basic_type": "Unknown expression",
       "context": "let mut reader = create_reader(cli);",
       "file": "../grepq/src/summarise.rs",
       "kind": "inferred from initialization",
@@ -2503,7 +2511,7 @@
       "type": "expression result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut seq_buffer = Vec::new();",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -2513,7 +2521,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut seq_buffer = Vec::new();",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2523,7 +2531,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "i32",
+      "basic_type": "integer",
       "context": "let mut sum = 0;",
       "file": "../grepq/src/quality.rs",
       "kind": "inferred from initialization",
@@ -2543,7 +2551,7 @@
       "type": "HashMap < String , usize >"
     },
     {
-      "basic_type": "i32",
+      "basic_type": "integer",
       "context": "let mut total_matches = 0;",
       "file": "../grepq/src/tune.rs",
       "kind": "inferred from initialization",
@@ -2553,7 +2561,7 @@
       "type": "integer"
     },
     {
-      "basic_type": "i32",
+      "basic_type": "integer",
       "context": "let mut valid_base_count = 0;",
       "file": "../grepq/src/quality.rs",
       "kind": "inferred from initialization",
@@ -2563,7 +2571,7 @@
       "type": "integer"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut writer = create_writer(cli);",
       "file": "../grepq/src/inverted.rs",
       "kind": "inferred from initialization",
@@ -2573,7 +2581,7 @@
       "type": "function result"
     },
     {
-      "basic_type": "function call result",
+      "basic_type": "Function call result",
       "context": "let mut writer = create_writer(&cli);",
       "file": "../grepq/src/main.rs",
       "kind": "inferred from initialization",
@@ -2583,14 +2591,6 @@
       "type": "function result"
     }
   ],
-  "metadata": {
-    "container_count": 40,
-    "datetime": "2025-03-30 09:34:25.181722 +11:00",
-    "immutable_variable_count": 221,
-    "mutable_variable_count": 37,
-    "project_name": "grepq",
-    "version": "1.5.4"
-  },
   "containers": [
     {
       "file": "../grepq/benches/benchmarks.rs",

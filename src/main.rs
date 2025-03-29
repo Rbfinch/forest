@@ -962,6 +962,68 @@ impl VariableVisitor<'_> {
     }
 }
 
+// Function to infer basic type from an expression
+fn infer_basic_type_from_expr(expr: &Expr) -> String {
+    match expr {
+        Expr::Lit(lit_expr) => match &lit_expr.lit {
+            syn::Lit::Str(_) => "String".to_string(),
+            syn::Lit::ByteStr(_) => "Vec<u8>".to_string(),
+            syn::Lit::Byte(_) => "u8".to_string(),
+            syn::Lit::Char(_) => "char".to_string(),
+            syn::Lit::Int(int_lit) => {
+                if let Some(suffix) = int_lit.suffix().chars().next() {
+                    match suffix {
+                        'i' => "integer".to_string(),
+                        'u' => "unsigned integer".to_string(),
+                        _ => "integer".to_string(),
+                    }
+                } else {
+                    "integer".to_string()
+                }
+            }
+            syn::Lit::Float(_) => "f64".to_string(),
+            syn::Lit::Bool(_) => "bool".to_string(),
+            _ => "unknown".to_string(),
+        },
+        Expr::Array(_) => "Array".to_string(),
+        Expr::Call(call_expr) => {
+            if let Expr::Path(path_expr) = &*call_expr.func {
+                let path_string = quote::quote!(#path_expr).to_string();
+                if path_string.ends_with("::new") {
+                    format!("Instance of {}", path_string.trim_end_matches("::new"))
+                } else {
+                    "Function call result".to_string()
+                }
+            } else {
+                "Function call result".to_string()
+            }
+        }
+        Expr::MethodCall(method_call) => {
+            let method_name = method_call.method.to_string();
+            match method_name.as_str() {
+                "iter" => "Iterator".to_string(),
+                "iter_mut" => "Mutable Iterator".to_string(),
+                "into_iter" => "Owned Iterator".to_string(),
+                "collect" => "Collection".to_string(),
+                _ => "Method call result".to_string(),
+            }
+        }
+        Expr::Struct(_) => "Struct instance".to_string(),
+        Expr::Reference(ref_expr) => {
+            let mutability = if ref_expr.mutability.is_some() {
+                "Mutable reference"
+            } else {
+                "Reference"
+            };
+            mutability.to_string()
+        }
+        Expr::Binary(_) => "Binary expression result".to_string(),
+        Expr::Match(_) => "Match result".to_string(),
+        Expr::If(_) => "Conditional result".to_string(),
+        _ => "Unknown expression".to_string(),
+    }
+}
+
 // Function to extract line number from a span debug representation
 fn local_span_to_line_number(token_str: &str) -> Option<usize> {
     // Sometimes syn debug output includes span information like "#0 bytes(LINE:COL)"
@@ -1020,10 +1082,10 @@ fn infer_type_from_context(context: &str) -> String {
                 return "value inside Option".to_string();
             }
             if rhs.contains("Ok(") {
-                return "success value from Result".to_string();
+                return "success value".to_string();
             }
             if rhs.contains("Err(") {
-                return "error value from Result".to_string();
+                return "error value".to_string();
             }
 
             // More specific handling for common functions
@@ -1185,7 +1247,7 @@ fn extract_detailed_type(type_str: &str) -> String {
 // Improved function to extract variable name and kind from a line of code
 
 // New function to infer type from destructuring context
-fn infer_destructuring_type<'a>(rhs: &'a str, pattern: &str) -> &'a str {
+fn infer_destructuring_type<'a>(rhs: &'a str, pattern: &'a str) -> &'a str {
     // Try to infer the type based on the right-hand side of the assignment
     // and the structure of the pattern
 
@@ -1228,31 +1290,6 @@ fn infer_destructuring_type<'a>(rhs: &'a str, pattern: &str) -> &'a str {
     }
 
     "destructured value"
-}
-
-// Function to infer basic type from an expression
-fn infer_basic_type_from_expr(expr: &Expr) -> String {
-    match expr {
-        Expr::Lit(lit_expr) => match &lit_expr.lit {
-            syn::Lit::Str(_) => "String".to_string(),
-            syn::Lit::ByteStr(_) => "Vec<u8>".to_string(),
-            syn::Lit::Byte(_) => "u8".to_string(),
-            syn::Lit::Char(_) => "char".to_string(),
-            syn::Lit::Int(_) => "i32".to_string(),
-            syn::Lit::Float(_) => "f64".to_string(),
-            syn::Lit::Bool(_) => "bool".to_string(),
-            _ => "unknown".to_string(),
-        },
-        Expr::Array(_) => "Vec<T>".to_string(),
-        Expr::Call(_) => "function call result".to_string(),
-        Expr::MethodCall(_) => "method call result".to_string(),
-        Expr::Struct(_) => "struct instance".to_string(),
-        Expr::Reference(_) => "reference".to_string(),
-        Expr::Binary(_) => "binary expression result".to_string(),
-        Expr::Match(_) => "match result".to_string(),
-        Expr::If(_) => "conditional result".to_string(),
-        _ => "unknown".to_string(),
-    }
 }
 
 // Function to infer type from an expression
