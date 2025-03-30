@@ -36,6 +36,37 @@ struct VarInfo {
     scope: String,    // Scope of the variable (e.g., function name, module name)
 }
 
+// Add method to generate VSCode link for VarInfo with proper absolute path
+impl VarInfo {
+    fn vscode_link(&self) -> String {
+        // Convert to absolute path if it's not already
+        let absolute_path = if self.file_path.is_absolute() {
+            self.file_path.clone()
+        } else {
+            // Try to get the absolute path by using canonical path
+            match std::fs::canonicalize(&self.file_path) {
+                Ok(path) => path,
+                Err(_) => {
+                    // Fallback: try joining with the current directory
+                    if let Ok(current_dir) = std::env::current_dir() {
+                        current_dir.join(&self.file_path)
+                    } else {
+                        self.file_path.clone() // Last resort: use as-is
+                    }
+                }
+            }
+        };
+
+        // Format the link with proper URI encoding
+        // vscode://file/<absolute_path>:<line_number>
+        format!(
+            "vscode://file/{}:{}",
+            absolute_path.display().to_string().replace("\\", "/"),
+            self.line_number
+        )
+    }
+}
+
 // Structure to store information about data_structures
 // data_structures are structural elements like functions, structs, and enums
 struct DataStructureInfo {
@@ -43,6 +74,37 @@ struct DataStructureInfo {
     data_structure_type: String, // Type of the data_structure (e.g., struct, function, enum)
     file_path: PathBuf,          // Path to the file where the data_structure is declared
     line_number: usize,          // Line number of the declaration in the source file
+}
+
+// Update method to generate VSCode link for DataStructureInfo with proper absolute path
+impl DataStructureInfo {
+    fn vscode_link(&self) -> String {
+        // Convert to absolute path if it's not already
+        let absolute_path = if self.file_path.is_absolute() {
+            self.file_path.clone()
+        } else {
+            // Try to get the absolute path by using canonical path
+            match std::fs::canonicalize(&self.file_path) {
+                Ok(path) => path,
+                Err(_) => {
+                    // Fallback: try joining with the current directory
+                    if let Ok(current_dir) = std::env::current_dir() {
+                        current_dir.join(&self.file_path)
+                    } else {
+                        self.file_path.clone() // Last resort: use as-is
+                    }
+                }
+            }
+        };
+
+        // Format the link with proper URI encoding
+        // vscode://file/<absolute_path>:<line_number>
+        format!(
+            "vscode://file/{}:{}",
+            absolute_path.display().to_string().replace("\\", "/"),
+            self.line_number
+        )
+    }
 }
 
 // Function to format the type
@@ -71,6 +133,23 @@ impl fmt::Display for VarInfo {
     }
 }
 
+// New display with link
+fn format_var_with_link(var: &VarInfo) -> String {
+    format!(
+        "{} ({}): {} at [{}:{}]({}) - kind: {}, type: {}, basic type: {}, scope: {}",
+        var.name,
+        if var.mutable { "mutable" } else { "immutable" },
+        var.context.trim(),
+        var.file_path.display(),
+        var.line_number,
+        var.vscode_link(),
+        var.var_kind,
+        var.var_type,
+        var.basic_type,
+        var.scope
+    )
+}
+
 // Implementing Display trait for DataStructureInfo to format the output
 impl fmt::Display for DataStructureInfo {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -83,6 +162,18 @@ impl fmt::Display for DataStructureInfo {
             self.line_number
         )
     }
+}
+
+// New display with link
+fn format_structure_with_link(structure: &DataStructureInfo) -> String {
+    format!(
+        "{} ({}): at [{}:{}]({})",
+        structure.name,
+        structure.data_structure_type,
+        structure.file_path.display(),
+        structure.line_number,
+        structure.vscode_link()
+    )
 }
 
 // Function to extract the basic Rust type
@@ -349,12 +440,12 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Output results
     match args.output_file {
         Some(ref file) => {
-            output_results(&results, &metadata, file, &args.format)?;
+            output_results(&results, &metadata, file, &args.format, args.link)?;
             println!("Results written to: {}", file);
         }
         None => {
             // Print to console
-            print_results(&results, &metadata);
+            print_results(&results, &metadata, args.link);
         }
     }
 
@@ -1209,7 +1300,6 @@ fn infer_type_from_context(context: &str) -> String {
         return "error value from Result".to_string();
     }
 
-    // Default case
     "inferred from context".to_string()
 }
 
@@ -2010,8 +2100,7 @@ fn extract_data_structure_info<'a>(
 }
 
 // Function to print analysis results to the console
-
-fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata) {
+fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata, link: bool) {
     println!("\n\x1b[1mProject Information:\x1b[0m");
     println!("Project Name: {}", metadata.project_name);
     println!("Version: {}", metadata.version);
@@ -2022,7 +2111,11 @@ fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata) {
         results.mutable_vars.len()
     );
     for var in &results.mutable_vars {
-        println!("  {}", var);
+        if link {
+            println!("  {}", format_var_with_link(var));
+        } else {
+            println!("  {}", var);
+        }
     }
 
     println!(
@@ -2030,7 +2123,11 @@ fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata) {
         results.immutable_vars.len()
     );
     for var in &results.immutable_vars {
-        println!("  {}", var);
+        if link {
+            println!("  {}", format_var_with_link(var));
+        } else {
+            println!("  {}", var);
+        }
     }
 
     println!(
@@ -2038,7 +2135,11 @@ fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata) {
         results.data_structures.len()
     );
     for data_structure in &results.data_structures {
-        println!("  {}", data_structure);
+        if link {
+            println!("  {}", format_structure_with_link(data_structure));
+        } else {
+            println!("  {}", data_structure);
+        }
     }
 }
 
@@ -2048,11 +2149,12 @@ fn output_results(
     metadata: &AnalysisMetadata,
     file: &str,
     format: &str,
+    link: bool,
 ) -> Result<(), Box<dyn Error>> {
     match format {
-        "json" => output_json(results, metadata, file)?,
-        "csv" => output_csv(results, metadata, file)?,
-        "text" => output_text(results, metadata, file)?,
+        "json" => output_json(results, metadata, file, link)?,
+        "csv" => output_csv(results, metadata, file, link)?,
+        "text" => output_text(results, metadata, file, link)?,
         _ => return Err("Invalid format".into()),
     }
 
@@ -2064,6 +2166,7 @@ fn output_json(
     results: &AnalysisResults,
     metadata: &AnalysisMetadata,
     file: &str,
+    link: bool,
 ) -> Result<(), Box<dyn Error>> {
     let mut file = File::create(file)?;
 
@@ -2119,6 +2222,15 @@ fn output_json(
                 "scope".to_string(),
                 serde_json::Value::String(v.scope.clone()),
             );
+
+            // Add the VSCode link if requested
+            if link {
+                map.insert(
+                    "vscode_link".to_string(),
+                    serde_json::Value::String(v.vscode_link()),
+                );
+            }
+
             serde_json::Value::Object(map)
         })
         .collect();
@@ -2160,6 +2272,15 @@ fn output_json(
                 "scope".to_string(),
                 serde_json::Value::String(v.scope.clone()),
             );
+
+            // Add the VSCode link if requested
+            if link {
+                map.insert(
+                    "vscode_link".to_string(),
+                    serde_json::Value::String(v.vscode_link()),
+                );
+            }
+
             serde_json::Value::Object(map)
         })
         .collect();
@@ -2185,6 +2306,15 @@ fn output_json(
                 "line".to_string(),
                 serde_json::Value::Number(serde_json::Number::from(c.line_number)),
             );
+
+            // Add the VSCode link if requested
+            if link {
+                map.insert(
+                    "vscode_link".to_string(),
+                    serde_json::Value::String(c.vscode_link()),
+                );
+            }
+
             serde_json::Value::Object(map)
         })
         .collect();
@@ -2204,6 +2334,7 @@ fn output_csv(
     results: &AnalysisResults,
     metadata: &AnalysisMetadata,
     file: &str,
+    link: bool,
 ) -> Result<(), Box<dyn Error>> {
     let mut file = File::create(file)?;
 
@@ -2213,55 +2344,112 @@ fn output_csv(
     writeln!(file, "Analysis Run At,{}", metadata.datetime)?;
     writeln!(file)?;
 
-    // Write header
-    writeln!(
-        file,
-        "mutability,name,file,line,context,kind,type,basic_type,scope"
-    )?;
+    // Write header with optional vscode_link column
+    if link {
+        writeln!(
+            file,
+            "mutability,name,file,line,context,kind,type,basic_type,scope,vscode_link"
+        )?;
+    } else {
+        writeln!(
+            file,
+            "mutability,name,file,line,context,kind,type,basic_type,scope"
+        )?;
+    }
 
     // Write mutable variables
     for var in &results.mutable_vars {
-        writeln!(
-            file,
-            "mutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"",
-            var.name,
-            var.file_path.display(),
-            var.line_number,
-            var.context.trim().replace("\"", "\"\""),
-            var.var_kind,
-            var.var_type,
-            var.basic_type,
-            var.scope
-        )?;
+        if link {
+            writeln!(
+                file,
+                "mutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"",
+                var.name,
+                var.file_path.display(),
+                var.line_number,
+                var.context.trim().replace("\"", "\"\""),
+                var.var_kind,
+                var.var_type,
+                var.basic_type,
+                var.scope,
+                var.vscode_link()
+            )?;
+        } else {
+            writeln!(
+                file,
+                "mutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"",
+                var.name,
+                var.file_path.display(),
+                var.line_number,
+                var.context.trim().replace("\"", "\"\""),
+                var.var_kind,
+                var.var_type,
+                var.basic_type,
+                var.scope
+            )?;
+        }
     }
 
     // Write immutable variables
     for var in &results.immutable_vars {
-        writeln!(
-            file,
-            "immutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"",
-            var.name,
-            var.file_path.display(),
-            var.line_number,
-            var.context.trim().replace("\"", "\"\""),
-            var.var_kind,
-            var.var_type,
-            var.basic_type,
-            var.scope
-        )?;
+        if link {
+            writeln!(
+                file,
+                "immutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"",
+                var.name,
+                var.file_path.display(),
+                var.line_number,
+                var.context.trim().replace("\"", "\"\""),
+                var.var_kind,
+                var.var_type,
+                var.basic_type,
+                var.scope,
+                var.vscode_link()
+            )?;
+        } else {
+            writeln!(
+                file,
+                "immutable,\"{}\",\"{}\",{},\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"",
+                var.name,
+                var.file_path.display(),
+                var.line_number,
+                var.context.trim().replace("\"", "\"\""),
+                var.var_kind,
+                var.var_type,
+                var.basic_type,
+                var.scope
+            )?;
+        }
     }
 
-    // Write data_structures
-    writeln!(file, "type,name,file,line")?;
+    // Write data_structures with a header that includes vscode_link if needed
+    if link {
+        writeln!(file, "type,name,file,line,vscode_link")?;
+    } else {
+        writeln!(file, "type,name,file,line")?;
+    }
+
+    // Write data structures with or without vscode_link
     for data_structure in &results.data_structures {
-        writeln!(
-            file,
-            "\"{}\",\"{}\",\"{}\",{}",
-            data_structure.data_structure_type,
-            data_structure.name,
-            data_structure.file_path.display(),
-            data_structure.line_number
-        )?;
+        if link {
+            writeln!(
+                file,
+                "\"{}\",\"{}\",\"{}\",{},\"{}\"",
+                data_structure.data_structure_type,
+                data_structure.name,
+                data_structure.file_path.display(),
+                data_structure.line_number,
+                data_structure.vscode_link()
+            )?;
+        } else {
+            writeln!(
+                file,
+                "\"{}\",\"{}\",\"{}\",{}",
+                data_structure.data_structure_type,
+                data_structure.name,
+                data_structure.file_path.display(),
+                data_structure.line_number
+            )?;
+        }
     }
 
     Ok(())
@@ -2272,6 +2460,7 @@ fn output_text(
     results: &AnalysisResults,
     metadata: &AnalysisMetadata,
     file: &str,
+    link: bool,
 ) -> Result<(), Box<dyn Error>> {
     let mut file = File::create(file)?;
 
@@ -2285,7 +2474,11 @@ fn output_text(
     writeln!(file, "Mutable Variables ({})", results.mutable_vars.len())?;
     writeln!(file, "-------------------")?;
     for var in &results.mutable_vars {
-        writeln!(file, "{}", var)?;
+        if link {
+            writeln!(file, "{}", format_var_with_link(var))?;
+        } else {
+            writeln!(file, "{}", var)?;
+        }
     }
 
     writeln!(
@@ -2295,7 +2488,11 @@ fn output_text(
     )?;
     writeln!(file, "---------------------")?;
     for var in &results.immutable_vars {
-        writeln!(file, "{}", var)?;
+        if link {
+            writeln!(file, "{}", format_var_with_link(var))?;
+        } else {
+            writeln!(file, "{}", var)?;
+        }
     }
 
     writeln!(
@@ -2305,7 +2502,11 @@ fn output_text(
     )?;
     writeln!(file, "----------------")?;
     for data_structure in &results.data_structures {
-        writeln!(file, "{}", data_structure)?;
+        if link {
+            writeln!(file, "{}", format_structure_with_link(data_structure))?;
+        } else {
+            writeln!(file, "{}", data_structure)?;
+        }
     }
 
     Ok(())

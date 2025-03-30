@@ -29,6 +29,7 @@ Copyright (c) 2025 Nicholas D. Crosbie
 
 * `-s`, `--sort` — Sort variable names alphabetically
 * `--tree` — Generate a tree-like representation of the project's structure
+* `--link` — Include VSCode-compatible link to the source in the output
 * `--markdown-help` — Generate a markdown version of the help text
 
 

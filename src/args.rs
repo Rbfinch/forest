@@ -8,6 +8,7 @@ pub struct Args {
     pub sort: bool,
     pub tree: bool,
     pub markdown_help: bool,
+    pub link: bool, // New field for the link flag
 }
 
 // Add this new function that returns the Command definition
@@ -51,6 +52,12 @@ pub fn command() -> Command {
                 .action(ArgAction::SetTrue),
         )
         .arg(
+            Arg::new("link")
+                .long("link")
+                .help("Include VSCode-compatible link to the source in the output")
+                .action(ArgAction::SetTrue),
+        )
+        .arg(
             Arg::new("markdown_help")
                 .long("markdown-help")
                 .help("Generate a markdown version of the help text")
@@ -68,5 +75,6 @@ pub fn parse_args() -> Args {
         sort: matches.get_flag("sort"),
         tree: matches.get_flag("tree"),
         markdown_help: matches.get_flag("markdown_help"),
+        link: matches.get_flag("link"), // Parse the new flag
     }
 }

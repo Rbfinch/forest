@@ -1,6 +1,6 @@
 [package]
 name = "forest"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors = ["Nicholas D. Crosbie"]
 description = "Explore and summarise Rust projects"

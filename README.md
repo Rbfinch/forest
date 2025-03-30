@@ -21,9 +21,13 @@ open out.json | get mutable_variables | table --expand
 
 See [HELP](https://github.com/Rbfinch/forest/blob/main/HELP.md)
 
+Use the `--link` option to include VSCode-compatable file paths in the output, which can be used to open files directly in the editor from terminals which support it.
+
 ## Example output
 
 See [out.json](https://github.com/Rbfinch/forest/blob/main/out.json)
+
+Note that the `--link` option was not used in this example to avoid revealing private file paths.
 
 ## Update changes
 

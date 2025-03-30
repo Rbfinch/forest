@@ -3,6 +3,14 @@ TBD
 
 Unreleased changes. Release notes have not yet been written.
 
+0.1.3
+=====
+
+* 2025-03-30
+* Added vscode-compatible file paths to JSON output with `--link` option
+* Added `--link` option to README.md
+* Added `--link` option to HELP.md
+
 0.1.2
 =====
 

@@ -45,4 +45,33 @@ impl VarInfo {
             scope: String::new(),
         }
     }
+
+    // Updated method to generate a VSCode-compatible link to the source with proper absolute path
+    pub fn vscode_link(&self) -> String {
+        // Convert to absolute path if it's not already
+        let absolute_path = if self.file_path.is_absolute() {
+            self.file_path.clone()
+        } else {
+            // Try to get the absolute path by using canonical path
+            match std::fs::canonicalize(&self.file_path) {
+                Ok(path) => path,
+                Err(_) => {
+                    // Fallback: try joining with the current directory
+                    if let Ok(current_dir) = std::env::current_dir() {
+                        current_dir.join(&self.file_path)
+                    } else {
+                        self.file_path.clone() // Last resort: use as-is
+                    }
+                }
+            }
+        };
+
+        // Format the link with proper URI encoding
+        // vscode://file/<absolute_path>:<line_number>
+        format!(
+            "vscode://file/{}:{}",
+            absolute_path.display().to_string().replace("\\", "/"),
+            self.line_number
+        )
+    }
 }
