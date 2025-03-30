@@ -19,7 +19,11 @@ open out.json | get mutable_variables | table --expand
 
 ## Usage
 
-See see [HELP](https://github.com/Rbfinch/forest/blob/main/HELP.md)
+See [HELP](https://github.com/Rbfinch/forest/blob/main/HELP.md)
+
+## Example output
+
+See [out.json](https://github.com/Rbfinch/forest/blob/main/out.json)
 
 ## Update changes
 
