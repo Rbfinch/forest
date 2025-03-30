@@ -9,7 +9,7 @@ homepage = "https://github.com/Rbfinch/forest"
 documentation = "https://github.com/Rbfinch/forest"
 repository = "https://github.com/Rbfinch/forest"
 readme = "README.md"
-categories = ["CLI"]
+categories = ["command-line-utilities", "development-tools"]
 keywords = ["Rust", "analyse", "summarise", "codebase"]
 
 
