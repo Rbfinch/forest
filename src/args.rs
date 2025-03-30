@@ -1,3 +1,4 @@
+// Copyright (c) 2025 Nicholas D. Crosbie
 use clap::{Arg, ArgAction, Command};
 
 pub struct Args {
@@ -5,11 +6,17 @@ pub struct Args {
     pub output_file: Option<String>,
     pub format: String,
     pub sort: bool,
+    pub tree: bool,
+    pub markdown_help: bool,
 }
 
-pub fn parse_args() -> Args {
-    let matches = Command::new("forest")
-        .about("Analyzes Rust code for variable usage patterns")
+// Add this new function that returns the Command definition
+pub fn command() -> Command {
+    Command::new("forest")
+        .about("Generate a summaries of Rust projects")
+        .version(env!("CARGO_PKG_VERSION"))
+        .author(env!("CARGO_PKG_AUTHORS"))
+        .after_help("Copyright (c) 2025 Nicholas D. Crosbie")
         .arg(
             Arg::new("project_dir")
                 .help("The directory containing the Rust project to analyze")
@@ -37,12 +44,29 @@ pub fn parse_args() -> Args {
                 .help("Sort variable names alphabetically")
                 .action(ArgAction::SetTrue),
         )
-        .get_matches();
+        .arg(
+            Arg::new("tree")
+                .long("tree")
+                .help("Generate a tree-like representation of the project's structure")
+                .action(ArgAction::SetTrue),
+        )
+        .arg(
+            Arg::new("markdown_help")
+                .long("markdown-help")
+                .help("Generate a markdown version of the help text")
+                .action(ArgAction::SetTrue),
+        )
+}
+
+pub fn parse_args() -> Args {
+    let matches = command().get_matches();
 
     Args {
         project_dir: matches.get_one::<String>("project_dir").unwrap().clone(),
         output_file: matches.get_one::<String>("output").cloned(),
         format: matches.get_one::<String>("format").unwrap().clone(),
         sort: matches.get_flag("sort"),
+        tree: matches.get_flag("tree"),
+        markdown_help: matches.get_flag("markdown_help"),
     }
 }

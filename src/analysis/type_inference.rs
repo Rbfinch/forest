@@ -1,3 +1,4 @@
+// Copyright (c) 2025 Nicholas D. Crosbie
 use syn::Type;
 
 pub fn infer_type_from_context(type_str: &str) -> String {

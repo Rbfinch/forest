@@ -1,4 +1,13 @@
-use crate::models::{ContainerInfo, VarInfo};
+// Copyright (c) 2025 Nicholas D. Crosbie
+pub mod extractor;
+pub mod type_inference;
+pub mod visitor;
+
+pub use extractor::*;
+pub use type_inference::*;
+pub use visitor::*;
+
+use crate::models::{data_structureInfo, VarInfo};
 use chrono::Local;
 use std::io::Write;
 use std::path::Path;
@@ -8,7 +17,7 @@ pub trait OutputFormatter {
         &self,
         mutable_vars: &[VarInfo],
         immutable_vars: &[VarInfo],
-        containers: &[ContainerInfo],
+        data_structures: &[data_structureInfo],
         project_path: &Path,
     ) -> String;
 }
@@ -20,7 +29,7 @@ impl OutputFormatter for ConsoleFormatter {
         &self,
         mutable_vars: &[VarInfo],
         immutable_vars: &[VarInfo],
-        containers: &[ContainerInfo],
+        data_structures: &[data_structureInfo],
         project_path: &Path,
     ) -> String {
         let mut output = String::new();
@@ -67,10 +76,13 @@ impl OutputFormatter for ConsoleFormatter {
             ));
         }
 
-        // Containers
-        output.push_str(&format!("\nFound {} containers:\n", containers.len()));
-        for container in containers {
-            output.push_str(&format!("  {}\n", container));
+        // data_structures
+        output.push_str(&format!(
+            "\nFound {} data_structures:\n",
+            data_structures.len()
+        ));
+        for data_structure in data_structures {
+            output.push_str(&format!("  {}\n", data_structure));
         }
 
         output

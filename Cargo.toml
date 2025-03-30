@@ -2,8 +2,8 @@
 name = "forest"
 version = "0.1.0"
 edition = "2021"
-authors = ["Nicholas Crosbie"]
-description = "Explore a Rust project"
+authors = ["Nicholas D. Crosbie"]
+description = "A CLI tool to explore Rust projects"
 license = "MIT"
 
 [dependencies]
@@ -16,3 +16,4 @@ visit = "0.1.0"
 proc-macro2 = "1.0.94"
 chrono = "0.4.40"
 toml = "0.8.20"
+clap-markdown = "0.1.4"

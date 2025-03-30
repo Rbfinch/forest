@@ -1,10 +1,11 @@
-// Function to extract container information from a line of code
-pub fn extract_container_info<'a>(
+// Copyright (c) 2025 Nicholas D. Crosbie
+// Function to extract data_structure information from a line of code
+pub fn extract_data_structure_info<'a>(
     line: &'a str,
-    container_type: &'a str,
+    data_structure_type: &'a str,
     line_number: usize,
 ) -> Option<(&'a str, usize)> {
-    let rest = &line[line.find(container_type)? + container_type.len()..];
+    let rest = &line[line.find(data_structure_type)? + data_structure_type.len()..];
     let name_end = rest.find(|c: char| !c.is_alphanumeric() && c != '_');
 
     let name = match name_end {

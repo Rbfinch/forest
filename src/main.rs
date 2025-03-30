@@ -1,7 +1,7 @@
-//
+// Copyright (c) 2025 Nicholas D. Crosbie
 // Forest - Explore a Rust Project
-// This tool analyzes Rust projects to track variable mutability and container usage.
-// It provides insights about how variables are declared, used, and what their types are.
+// This tool analyzes Rust projects to summarise variable mutability and data structure usage.
+// It provides insights about where variables and data structures are declared, used, and what their types are.
 //
 // The analysis works by parsing Rust source files using the syn crate, traversing the AST,
 // and extracting information about variables and their properties.
@@ -36,13 +36,13 @@ struct VarInfo {
     scope: String,    // Scope of the variable (e.g., function name, module name)
 }
 
-// Structure to store information about containers
-// Containers are structural elements like functions, structs, and enums
-struct ContainerInfo {
-    name: String,           // Container name (identifier)
-    container_type: String, // Type of the container (e.g., struct, function, enum)
-    file_path: PathBuf,     // Path to the file where the container is declared
-    line_number: usize,     // Line number of the declaration in the source file
+// Structure to store information about data_structures
+// data_structures are structural elements like functions, structs, and enums
+struct DataStructureInfo {
+    name: String,                // data_structure name (identifier)
+    data_structure_type: String, // Type of the data_structure (e.g., struct, function, enum)
+    file_path: PathBuf,          // Path to the file where the data_structure is declared
+    line_number: usize,          // Line number of the declaration in the source file
 }
 
 // Function to format the type
@@ -71,14 +71,14 @@ impl fmt::Display for VarInfo {
     }
 }
 
-// Implementing Display trait for ContainerInfo to format the output
-impl fmt::Display for ContainerInfo {
+// Implementing Display trait for DataStructureInfo to format the output
+impl fmt::Display for DataStructureInfo {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
             "{} ({}): at {}:{}",
             self.name,
-            self.container_type,
+            self.data_structure_type,
             self.file_path.display(),
             self.line_number
         )
@@ -224,9 +224,9 @@ fn infer_basic_type_from_context(context: &str) -> String {
 
 // Structure to store analysis results
 struct AnalysisResults {
-    mutable_vars: Vec<VarInfo>,     // List of mutable variables
-    immutable_vars: Vec<VarInfo>,   // List of immutable variables
-    containers: Vec<ContainerInfo>, // List of containers (functions, structs, etc.)
+    mutable_vars: Vec<VarInfo>,              // List of mutable variables
+    immutable_vars: Vec<VarInfo>,            // List of immutable variables
+    data_structures: Vec<DataStructureInfo>, // List of data_structures (functions, structs, etc.)
 }
 
 struct AnalysisMetadata {
@@ -235,9 +235,77 @@ struct AnalysisMetadata {
     datetime: String,
 }
 
+fn generate_tree_representation(dir: &str) -> Result<(), Box<dyn Error>> {
+    println!(
+        "Generating tree-like representation for project at: {}",
+        dir
+    );
+
+    // Recursively visit directories and print the structure
+    fn visit_tree(dir: &Path, indent: usize) -> io::Result<()> {
+        if dir.is_dir() {
+            for entry in fs::read_dir(dir)? {
+                let entry = entry?;
+                let path = entry.path();
+
+                if path.is_dir() {
+                    println!(
+                        "{:indent$}📂 {}",
+                        "",
+                        path.file_name().unwrap().to_string_lossy(),
+                        indent = indent
+                    );
+                    if path.file_name().unwrap_or_default() != "target" {
+                        visit_tree(&path, indent + 2)?;
+                    }
+                } else if let Some(extension) = path.extension() {
+                    if extension == "rs" {
+                        println!(
+                            "{:indent$}📄 {}",
+                            "",
+                            path.file_name().unwrap().to_string_lossy(),
+                            indent = indent
+                        );
+                    }
+                }
+            }
+        }
+        Ok(())
+    }
+
+    visit_tree(Path::new(dir), 0)?;
+    Ok(())
+}
+
+use args::command; // Import the command function
+use clap::CommandFactory;
+
 fn main() -> Result<(), Box<dyn Error>> {
     // Parse command-line arguments using the clap-based module
     let args = args::parse_args();
+
+    if args.markdown_help {
+        // Create a Command factory function that satisfies CommandFactory trait
+        struct CmdFactory;
+        impl CommandFactory for CmdFactory {
+            fn command() -> clap::Command {
+                command() // Use our imported command function
+            }
+
+            fn command_for_update() -> clap::Command {
+                command() // Use the same command function or customize as needed
+            }
+        }
+
+        // Generate markdown help using the factory
+        clap_markdown::print_help_markdown::<CmdFactory>();
+        return Ok(());
+    }
+
+    if args.tree {
+        generate_tree_representation(&args.project_dir)?;
+        return Ok(());
+    }
 
     // Get the current datetime
     let datetime = Local::now().to_string();
@@ -273,7 +341,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("\n\x1b[1mSummary:\x1b[0m");
     println!("Found {} mutable variables", results.mutable_vars.len());
     println!("Found {} immutable variables", results.immutable_vars.len());
-    println!("Found {} container objects", results.containers.len());
+    println!(
+        "Found {} data structure objects",
+        results.data_structures.len()
+    );
 
     // Output results
     match args.output_file {
@@ -294,20 +365,20 @@ fn main() -> Result<(), Box<dyn Error>> {
 fn analyze_project(dir: &str) -> Result<AnalysisResults, Box<dyn Error>> {
     let mut mutable_vars = Vec::new();
     let mut immutable_vars = Vec::new();
-    let mut containers = Vec::new();
+    let mut data_structures = Vec::new();
 
     // Recursively visit directories and analyze files
     visit_dirs(
         Path::new(dir),
         &mut mutable_vars,
         &mut immutable_vars,
-        &mut containers,
+        &mut data_structures,
     )?;
 
     Ok(AnalysisResults {
         mutable_vars,
         immutable_vars,
-        containers,
+        data_structures,
     })
 }
 
@@ -316,7 +387,7 @@ fn visit_dirs(
     dir: &Path,
     mutable_vars: &mut Vec<VarInfo>,
     immutable_vars: &mut Vec<VarInfo>,
-    containers: &mut Vec<ContainerInfo>,
+    data_structures: &mut Vec<DataStructureInfo>,
 ) -> io::Result<()> {
     if dir.is_dir() {
         for entry in fs::read_dir(dir)? {
@@ -326,11 +397,11 @@ fn visit_dirs(
             if path.is_dir() {
                 // Skip target directory, which contains build artifacts
                 if path.file_name().unwrap_or_default() != "target" {
-                    visit_dirs(&path, mutable_vars, immutable_vars, containers)?;
+                    visit_dirs(&path, mutable_vars, immutable_vars, data_structures)?;
                 }
             } else if let Some(extension) = path.extension() {
                 if extension == "rs" {
-                    analyze_file(&path, mutable_vars, immutable_vars, containers)?;
+                    analyze_file(&path, mutable_vars, immutable_vars, data_structures)?;
                 }
             }
         }
@@ -343,7 +414,7 @@ fn analyze_file(
     file_path: &Path, // Rename _file_path to file_path
     mutable_vars: &mut Vec<VarInfo>,
     immutable_vars: &mut Vec<VarInfo>,
-    containers: &mut Vec<ContainerInfo>,
+    data_structures: &mut Vec<DataStructureInfo>,
 ) -> io::Result<()> {
     let mut file = File::open(file_path)?; // Use file_path here
     let mut content = String::new();
@@ -352,13 +423,13 @@ fn analyze_file(
     // Parse with syn to get the AST
     match syn::parse_file(&content) {
         Ok(file_ast) => {
-            // Traverse the AST to collect variable and container information
+            // Traverse the AST to collect variable and data_structure information
             let mut visitor = VariableVisitor {
                 file_path: file_path.to_path_buf(), // Use file_path here
                 lines: content.lines().collect(),
                 mutable_vars,
                 immutable_vars,
-                containers,
+                data_structures,
                 current_scope: String::new(),
             };
 
@@ -371,20 +442,20 @@ fn analyze_file(
                 file_path, // Use file_path here
                 mutable_vars,
                 immutable_vars,
-                containers,
+                data_structures,
                 &content,
             )
         }
     }
 }
 
-// Struct for collecting variables and containers during AST traversal
+// Struct for collecting variables and data_structures during AST traversal
 struct VariableVisitor<'ast> {
     file_path: PathBuf,
     lines: Vec<&'ast str>,
     mutable_vars: &'ast mut Vec<VarInfo>,
     immutable_vars: &'ast mut Vec<VarInfo>,
-    containers: &'ast mut Vec<ContainerInfo>,
+    data_structures: &'ast mut Vec<DataStructureInfo>,
     current_scope: String, // Track the current scope
 }
 
@@ -590,10 +661,10 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
         // Get the line number for this node
         let line_number = self.get_line_number(&item_fn.to_token_stream().to_string());
 
-        // Add function to containers
-        self.containers.push(ContainerInfo {
+        // Add function to data_structures
+        self.data_structures.push(DataStructureInfo {
             name: item_fn.sig.ident.to_string(),
-            container_type: "function".to_string(),
+            data_structure_type: "function".to_string(),
             file_path: self.file_path.clone(),
             line_number,
         });
@@ -608,10 +679,10 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
         // Get the line number for this node
         let line_number = self.get_line_number(&item_struct.to_token_stream().to_string());
 
-        // Add struct to containers
-        self.containers.push(ContainerInfo {
+        // Add struct to data_structures
+        self.data_structures.push(DataStructureInfo {
             name: item_struct.ident.to_string(),
-            container_type: "struct".to_string(),
+            data_structure_type: "struct".to_string(),
             file_path: self.file_path.clone(),
             line_number,
         });
@@ -624,10 +695,10 @@ impl<'ast> Visit<'ast> for VariableVisitor<'ast> {
         // Get the line number for this node
         let line_number = self.get_line_number(&item_enum.to_token_stream().to_string());
 
-        // Add enum to containers
-        self.containers.push(ContainerInfo {
+        // Add enum to data_structures
+        self.data_structures.push(DataStructureInfo {
             name: item_enum.ident.to_string(),
-            container_type: "enum".to_string(),
+            data_structure_type: "enum".to_string(),
             file_path: self.file_path.clone(),
             line_number,
         });
@@ -1448,7 +1519,7 @@ fn analyze_file_manual_implementation(
     file_path: &Path,
     mutable_vars: &mut Vec<VarInfo>,
     immutable_vars: &mut Vec<VarInfo>,
-    containers: &mut Vec<ContainerInfo>,
+    data_structures: &mut Vec<DataStructureInfo>,
     content: &str,
 ) -> io::Result<()> {
     let lines: Vec<&str> = content.lines().collect();
@@ -1565,10 +1636,11 @@ fn analyze_file_manual_implementation(
 
         // Check for function declarations
         if line.contains("fn ") {
-            if let Some((name, line_number)) = extract_container_info(line, "function", i + 1) {
-                containers.push(ContainerInfo {
+            if let Some((name, line_number)) = extract_data_structure_info(line, "function", i + 1)
+            {
+                data_structures.push(DataStructureInfo {
                     name: name.to_string(),
-                    container_type: "function".to_string(),
+                    data_structure_type: "function".to_string(),
                     file_path: file_path.to_path_buf(),
                     line_number,
                 });
@@ -1577,10 +1649,10 @@ fn analyze_file_manual_implementation(
 
         // Check for struct declarations
         if line.contains("struct ") {
-            if let Some((name, line_number)) = extract_container_info(line, "struct", i + 1) {
-                containers.push(ContainerInfo {
+            if let Some((name, line_number)) = extract_data_structure_info(line, "struct", i + 1) {
+                data_structures.push(DataStructureInfo {
                     name: name.to_string(),
-                    container_type: "struct".to_string(),
+                    data_structure_type: "struct".to_string(),
                     file_path: file_path.to_path_buf(),
                     line_number,
                 });
@@ -1589,10 +1661,10 @@ fn analyze_file_manual_implementation(
 
         // Check for enum declarations
         if line.contains("enum ") {
-            if let Some((name, line_number)) = extract_container_info(line, "enum", i + 1) {
-                containers.push(ContainerInfo {
+            if let Some((name, line_number)) = extract_data_structure_info(line, "enum", i + 1) {
+                data_structures.push(DataStructureInfo {
                     name: name.to_string(),
-                    container_type: "enum".to_string(),
+                    data_structure_type: "enum".to_string(),
                     file_path: file_path.to_path_buf(),
                     line_number,
                 });
@@ -1919,13 +1991,13 @@ fn infer_type_from_pattern(line: &str) -> String {
     "pattern matched value".to_string()
 }
 
-// Function to extract container information from a line of code
-fn extract_container_info<'a>(
+// Function to extract data_structure information from a line of code
+fn extract_data_structure_info<'a>(
     line: &'a str,
-    container_type: &'a str,
+    data_structure_type: &'a str,
     line_number: usize,
 ) -> Option<(&'a str, usize)> {
-    let rest = &line[line.find(container_type)? + container_type.len()..];
+    let rest = &line[line.find(data_structure_type)? + data_structure_type.len()..];
     let name_end = rest.find(|c: char| !c.is_alphanumeric() && c != '_');
 
     let name = match name_end {
@@ -1961,9 +2033,12 @@ fn print_results(results: &AnalysisResults, metadata: &AnalysisMetadata) {
         println!("  {}", var);
     }
 
-    println!("\n\x1b[1mContainers ({}):\x1b[0m", results.containers.len());
-    for container in &results.containers {
-        println!("  {}", container);
+    println!(
+        "\n\x1b[1mdata_structures ({}):\x1b[0m",
+        results.data_structures.len()
+    );
+    for data_structure in &results.data_structures {
+        println!("  {}", data_structure);
     }
 }
 
@@ -2002,7 +2077,7 @@ fn output_json(
         "datetime": metadata.datetime,
         "mutable_variable_count": results.mutable_vars.len(),
         "immutable_variable_count": results.immutable_vars.len(),
-        "container_count": results.containers.len()
+        "data_structure_count": results.data_structures.len()
     });
     output.insert("metadata", metadata_map);
 
@@ -2089,8 +2164,8 @@ fn output_json(
         })
         .collect();
 
-    let containers: Vec<serde_json::Value> = results
-        .containers
+    let data_structures: Vec<serde_json::Value> = results
+        .data_structures
         .iter()
         .map(|c| {
             let mut map = serde_json::Map::new();
@@ -2100,7 +2175,7 @@ fn output_json(
             );
             map.insert(
                 "type".to_string(),
-                serde_json::Value::String(c.container_type.clone()),
+                serde_json::Value::String(c.data_structure_type.clone()),
             );
             map.insert(
                 "file".to_string(),
@@ -2116,7 +2191,7 @@ fn output_json(
 
     output.insert("mutable_variables", serde_json::Value::Array(mut_vars));
     output.insert("immutable_variables", serde_json::Value::Array(immut_vars));
-    output.insert("containers", serde_json::Value::Array(containers));
+    output.insert("data_structures", serde_json::Value::Array(data_structures));
 
     let json = serde_json::to_string_pretty(&output)?;
     file.write_all(json.as_bytes())?;
@@ -2176,16 +2251,16 @@ fn output_csv(
         )?;
     }
 
-    // Write containers
+    // Write data_structures
     writeln!(file, "type,name,file,line")?;
-    for container in &results.containers {
+    for data_structure in &results.data_structures {
         writeln!(
             file,
             "\"{}\",\"{}\",\"{}\",{}",
-            container.container_type,
-            container.name,
-            container.file_path.display(),
-            container.line_number
+            data_structure.data_structure_type,
+            data_structure.name,
+            data_structure.file_path.display(),
+            data_structure.line_number
         )?;
     }
 
@@ -2223,10 +2298,14 @@ fn output_text(
         writeln!(file, "{}", var)?;
     }
 
-    writeln!(file, "\nContainers ({})", results.containers.len())?;
+    writeln!(
+        file,
+        "\ndata_structures ({})",
+        results.data_structures.len()
+    )?;
     writeln!(file, "----------------")?;
-    for container in &results.containers {
-        writeln!(file, "{}", container)?;
+    for data_structure in &results.data_structures {
+        writeln!(file, "{}", data_structure)?;
     }
 
     Ok(())

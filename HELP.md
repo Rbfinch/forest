@@ -1,18 +1,3 @@
-# forest - Explore a Rust Project
-
-Having trouble seeing the forest for the trees?
-
-This tool analyzes Rust projects to summarize variable mutability and data structure usage.
-
-It provides insights about where variables and data structures are declared, used, and what their types are.
-
->[!NOTE]
-**forest**'s JSON output is best viewed using a tool like **jq** or **nushell**, for example:
-
-```nushell
-open out.json | get mutable_variables | table --expand
-```
-
 # Command-Line Help for `forest`
 
 This document contains the help content for the `forest` command-line program.
@@ -45,3 +30,13 @@ Copyright (c) 2025 Nicholas D. Crosbie
 * `-s`, `--sort` — Sort variable names alphabetically
 * `--tree` — Generate a tree-like representation of the project's structure
 * `--markdown-help` — Generate a markdown version of the help text
+
+
+
+<hr/>
+
+<small><i>
+    This document was generated automatically by
+    <a href="https://crates.io/crates/clap-markdown"><code>clap-markdown</code></a>.
+</i></small>
+

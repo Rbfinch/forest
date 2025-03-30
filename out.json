@@ -1,4 +1,618 @@
 {
+  "mutable_variables": [
+    {
+      "basic_type": "Conditional result",
+      "context": "let mut bucket_writers = if bucket {",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 164,
+      "name": "bucket_writers",
+      "scope": "main",
+      "type": "conditional result"
+    },
+    {
+      "basic_type": "Unknown expression",
+      "context": "let mut encoder = ZstdEncoder::new(writer, compression_level)?;",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 297,
+      "name": "encoder",
+      "scope": "",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut error_messages = Vec::new();",
+      "file": "../grepq/src/initialise.rs",
+      "kind": "inferred from initialization",
+      "line": 165,
+      "name": "error_messages",
+      "scope": "parse_patterns_file",
+      "type": "function result"
+    },
+    {
+      "basic_type": "bool",
+      "context": "let mut first = true;",
+      "file": "../grepq/src/output.rs",
+      "kind": "inferred from initialization",
+      "line": 188,
+      "name": "first",
+      "scope": "write_regex_to_db",
+      "type": "boolean"
+    },
+    {
+      "basic_type": "Vec<TetraFrequency>",
+      "context": "let mut frequencies: Vec<TetraFrequency> = tetra_counts",
+      "file": "../grepq/src/quality.rs",
+      "kind": "explicitly typed pattern",
+      "line": 124,
+      "name": "frequencies",
+      "scope": "tetranucleotide_frequencies",
+      "type": "Vec < TetraFrequency >"
+    },
+    {
+      "basic_type": "integer",
+      "context": "let mut gc_count = 0;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 42,
+      "name": "gc_count",
+      "scope": "gc_content",
+      "type": "integer"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut head_buffer = Vec::new();",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 44,
+      "name": "head_buffer",
+      "scope": "run_inverted",
+      "type": "function result"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut head_buffer = Vec::new();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 124,
+      "name": "head_buffer",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "integer",
+      "context": "let mut match_count = 0;",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 48,
+      "name": "match_count",
+      "scope": "run_inverted",
+      "type": "integer"
+    },
+    {
+      "basic_type": "integer",
+      "context": "let mut match_count = 0;",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 128,
+      "name": "match_count",
+      "scope": "main",
+      "type": "integer"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 23,
+      "name": "match_counts",
+      "scope": "run_tune",
+      "type": "HashMap < String , usize >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 23,
+      "name": "match_counts",
+      "scope": "run_tune",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 31,
+      "name": "match_counts",
+      "scope": "run_summarise",
+      "type": "HashMap < String , usize >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 31,
+      "name": "match_counts",
+      "scope": "run_summarise",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 23,
+      "name": "match_strings",
+      "scope": "run_tune",
+      "type": "HashMap < String , HashMap < String , usize > >"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 31,
+      "name": "match_strings",
+      "scope": "run_summarise",
+      "type": "HashMap < String , HashMap < String , usize > >"
+    },
+    {
+      "basic_type": "Unknown expression",
+      "context": "let mut match_count = 0;",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 128,
+      "name": "matches_info",
+      "scope": "main",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "Unknown expression",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 31,
+      "name": "matches_info",
+      "scope": "run_summarise",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 23,
+      "name": "matches_vec",
+      "scope": "run_tune",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 31,
+      "name": "matches_vec",
+      "scope": "run_summarise",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut most_frequent_matches: Vec<_> = match_strings",
+      "file": "../grepq/src/tune.rs",
+      "kind": "explicitly typed pattern",
+      "line": 117,
+      "name": "most_frequent_matches",
+      "scope": "run_tune",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "Vec<_>",
+      "context": "let mut most_frequent_matches: Vec<_> = match_strings.get(&converted_regex_string)",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "explicitly typed pattern",
+      "line": 155,
+      "name": "most_frequent_matches",
+      "scope": "run_summarise",
+      "type": "Vec < _ >"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut qual_buffer = Vec::new();",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 43,
+      "name": "qual_buffer",
+      "scope": "run_inverted",
+      "type": "function result"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut qual_buffer = Vec::new();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 123,
+      "name": "qual_buffer",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 21,
+      "name": "reader",
+      "scope": "run_tune",
+      "type": "function result"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 28,
+      "name": "reader",
+      "scope": "run_summarise",
+      "type": "function result"
+    },
+    {
+      "basic_type": "integer",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 21,
+      "name": "records_processed",
+      "scope": "run_tune",
+      "type": "integer"
+    },
+    {
+      "basic_type": "Unknown expression",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 21,
+      "name": "regex_matches",
+      "scope": "run_tune",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "Unknown expression",
+      "context": "let mut reader = create_reader(cli);",
+      "file": "../grepq/src/summarise.rs",
+      "kind": "inferred from initialization",
+      "line": 28,
+      "name": "regex_matches",
+      "scope": "run_summarise",
+      "type": "expression result"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut seq_buffer = Vec::new();",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 42,
+      "name": "seq_buffer",
+      "scope": "run_inverted",
+      "type": "function result"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut seq_buffer = Vec::new();",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 122,
+      "name": "seq_buffer",
+      "scope": "main",
+      "type": "function result"
+    },
+    {
+      "basic_type": "integer",
+      "context": "let mut sum = 0;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 16,
+      "name": "sum",
+      "scope": "average_quality",
+      "type": "integer"
+    },
+    {
+      "basic_type": "HashMap",
+      "context": "let mut tetra_counts: HashMap<String, usize> = HashMap::new();",
+      "file": "../grepq/src/quality.rs",
+      "kind": "explicitly typed pattern",
+      "line": 90,
+      "name": "tetra_counts",
+      "scope": "tetranucleotide_frequencies",
+      "type": "HashMap < String , usize >"
+    },
+    {
+      "basic_type": "integer",
+      "context": "let mut total_matches = 0;",
+      "file": "../grepq/src/tune.rs",
+      "kind": "inferred from initialization",
+      "line": 25,
+      "name": "total_matches",
+      "scope": "run_tune",
+      "type": "integer"
+    },
+    {
+      "basic_type": "integer",
+      "context": "let mut valid_base_count = 0;",
+      "file": "../grepq/src/quality.rs",
+      "kind": "inferred from initialization",
+      "line": 43,
+      "name": "valid_base_count",
+      "scope": "gc_content",
+      "type": "integer"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut writer = create_writer(cli);",
+      "file": "../grepq/src/inverted.rs",
+      "kind": "inferred from initialization",
+      "line": 34,
+      "name": "writer",
+      "scope": "run_inverted",
+      "type": "function result"
+    },
+    {
+      "basic_type": "Function call result",
+      "context": "let mut writer = create_writer(&cli);",
+      "file": "../grepq/src/main.rs",
+      "kind": "inferred from initialization",
+      "line": 107,
+      "name": "writer",
+      "scope": "main",
+      "type": "function result"
+    }
+  ],
+  "data_structures": [
+    {
+      "file": "../grepq/benches/benchmarks.rs",
+      "line": 7,
+      "name": "criterion_benchmark",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/inverted.rs",
+      "line": 13,
+      "name": "run_inverted",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 105,
+      "name": "convert_iupac_to_regex",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 105,
+      "name": "validate_dna_sequence",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 152,
+      "name": "parse_patterns_file",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 105,
+      "name": "open_file",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 267,
+      "name": "create_reader",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 288,
+      "name": "ZstdWriter",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/initialise.rs",
+      "line": 267,
+      "name": "create_writer",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 6,
+      "name": "write_record_with_id",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 6,
+      "name": "write_full_record",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 6,
+      "name": "write_record_with_fasta",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 95,
+      "name": "create_sqlite_db",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 95,
+      "name": "create_sqlite_db_with_quality",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/output.rs",
+      "line": 15,
+      "name": "write_regex_to_db",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/arg.rs",
+      "line": 1,
+      "name": "Cli",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/arg.rs",
+      "line": 1,
+      "name": "Commands",
+      "type": "enum"
+    },
+    {
+      "file": "../grepq/src/arg.rs",
+      "line": 1,
+      "name": "Summarise",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/arg.rs",
+      "line": 1,
+      "name": "Tune",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 6,
+      "name": "average_quality",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 1,
+      "name": "gc_content",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 70,
+      "name": "round_to_4_sig_figs",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 6,
+      "name": "TetraFrequency",
+      "type": "struct"
+    },
+    {
+      "file": "../grepq/src/quality.rs",
+      "line": 1,
+      "name": "tetranucleotide_frequencies",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/main.rs",
+      "line": 1,
+      "name": "main",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/main.rs",
+      "line": 92,
+      "name": "average_quality",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_quality_scores",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_iupac_conversion",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_illegal_iupac_conversion",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_pattern_parsing",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_gc_content",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_tetranucleotide_frequencies",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_empty_tetranucleotide_frequencies",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_iupac_case_insensitivity_conversion",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_plain_text_pattern_parsing",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_complex_iupac_conversion",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_invalid_variant_json",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tests.rs",
+      "line": 1,
+      "name": "test_valid_json_pattern_parsing",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/tune.rs",
+      "line": 13,
+      "name": "run_tune",
+      "type": "function"
+    },
+    {
+      "file": "../grepq/src/summarise.rs",
+      "line": 16,
+      "name": "run_summarise",
+      "type": "function"
+    }
+  ],
   "immutable_variables": [
     {
       "basic_type": ":tetranucleotide_frequencies(ambiguous, Some(4))",
@@ -2212,625 +2826,11 @@
     }
   ],
   "metadata": {
-    "container_count": 40,
-    "datetime": "2025-03-30 10:06:15.356746 +11:00",
+    "data_structure_count": 40,
+    "datetime": "2025-03-30 11:23:13.361268 +11:00",
     "immutable_variable_count": 221,
     "mutable_variable_count": 37,
     "project_name": "grepq",
     "version": "1.5.4"
-  },
-  "mutable_variables": [
-    {
-      "basic_type": "Conditional result",
-      "context": "let mut bucket_writers = if bucket {",
-      "file": "../grepq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 164,
-      "name": "bucket_writers",
-      "scope": "main",
-      "type": "conditional result"
-    },
-    {
-      "basic_type": "Unknown expression",
-      "context": "let mut encoder = ZstdEncoder::new(writer, compression_level)?;",
-      "file": "../grepq/src/initialise.rs",
-      "kind": "inferred from initialization",
-      "line": 297,
-      "name": "encoder",
-      "scope": "",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut error_messages = Vec::new();",
-      "file": "../grepq/src/initialise.rs",
-      "kind": "inferred from initialization",
-      "line": 165,
-      "name": "error_messages",
-      "scope": "parse_patterns_file",
-      "type": "function result"
-    },
-    {
-      "basic_type": "bool",
-      "context": "let mut first = true;",
-      "file": "../grepq/src/output.rs",
-      "kind": "inferred from initialization",
-      "line": 188,
-      "name": "first",
-      "scope": "write_regex_to_db",
-      "type": "boolean"
-    },
-    {
-      "basic_type": "Vec<TetraFrequency>",
-      "context": "let mut frequencies: Vec<TetraFrequency> = tetra_counts",
-      "file": "../grepq/src/quality.rs",
-      "kind": "explicitly typed pattern",
-      "line": 124,
-      "name": "frequencies",
-      "scope": "tetranucleotide_frequencies",
-      "type": "Vec < TetraFrequency >"
-    },
-    {
-      "basic_type": "integer",
-      "context": "let mut gc_count = 0;",
-      "file": "../grepq/src/quality.rs",
-      "kind": "inferred from initialization",
-      "line": 42,
-      "name": "gc_count",
-      "scope": "gc_content",
-      "type": "integer"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut head_buffer = Vec::new();",
-      "file": "../grepq/src/inverted.rs",
-      "kind": "inferred from initialization",
-      "line": 44,
-      "name": "head_buffer",
-      "scope": "run_inverted",
-      "type": "function result"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut head_buffer = Vec::new();",
-      "file": "../grepq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 124,
-      "name": "head_buffer",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "integer",
-      "context": "let mut match_count = 0;",
-      "file": "../grepq/src/inverted.rs",
-      "kind": "inferred from initialization",
-      "line": 48,
-      "name": "match_count",
-      "scope": "run_inverted",
-      "type": "integer"
-    },
-    {
-      "basic_type": "integer",
-      "context": "let mut match_count = 0;",
-      "file": "../grepq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 128,
-      "name": "match_count",
-      "scope": "main",
-      "type": "integer"
-    },
-    {
-      "basic_type": "HashMap",
-      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/tune.rs",
-      "kind": "explicitly typed pattern",
-      "line": 23,
-      "name": "match_counts",
-      "scope": "run_tune",
-      "type": "HashMap < String , usize >"
-    },
-    {
-      "basic_type": "Vec<_>",
-      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/tune.rs",
-      "kind": "explicitly typed pattern",
-      "line": 23,
-      "name": "match_counts",
-      "scope": "run_tune",
-      "type": "Vec < _ >"
-    },
-    {
-      "basic_type": "HashMap",
-      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/summarise.rs",
-      "kind": "explicitly typed pattern",
-      "line": 31,
-      "name": "match_counts",
-      "scope": "run_summarise",
-      "type": "HashMap < String , usize >"
-    },
-    {
-      "basic_type": "Vec<_>",
-      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/summarise.rs",
-      "kind": "explicitly typed pattern",
-      "line": 31,
-      "name": "match_counts",
-      "scope": "run_summarise",
-      "type": "Vec < _ >"
-    },
-    {
-      "basic_type": "HashMap",
-      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/tune.rs",
-      "kind": "explicitly typed pattern",
-      "line": 23,
-      "name": "match_strings",
-      "scope": "run_tune",
-      "type": "HashMap < String , HashMap < String , usize > >"
-    },
-    {
-      "basic_type": "HashMap",
-      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/summarise.rs",
-      "kind": "explicitly typed pattern",
-      "line": 31,
-      "name": "match_strings",
-      "scope": "run_summarise",
-      "type": "HashMap < String , HashMap < String , usize > >"
-    },
-    {
-      "basic_type": "Unknown expression",
-      "context": "let mut match_count = 0;",
-      "file": "../grepq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 128,
-      "name": "matches_info",
-      "scope": "main",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "Unknown expression",
-      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/summarise.rs",
-      "kind": "inferred from initialization",
-      "line": 31,
-      "name": "matches_info",
-      "scope": "run_summarise",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "Vec<_>",
-      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/tune.rs",
-      "kind": "explicitly typed pattern",
-      "line": 23,
-      "name": "matches_vec",
-      "scope": "run_tune",
-      "type": "Vec < _ >"
-    },
-    {
-      "basic_type": "Vec<_>",
-      "context": "let mut match_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/summarise.rs",
-      "kind": "explicitly typed pattern",
-      "line": 31,
-      "name": "matches_vec",
-      "scope": "run_summarise",
-      "type": "Vec < _ >"
-    },
-    {
-      "basic_type": "Vec<_>",
-      "context": "let mut most_frequent_matches: Vec<_> = match_strings",
-      "file": "../grepq/src/tune.rs",
-      "kind": "explicitly typed pattern",
-      "line": 117,
-      "name": "most_frequent_matches",
-      "scope": "run_tune",
-      "type": "Vec < _ >"
-    },
-    {
-      "basic_type": "Vec<_>",
-      "context": "let mut most_frequent_matches: Vec<_> = match_strings.get(&converted_regex_string)",
-      "file": "../grepq/src/summarise.rs",
-      "kind": "explicitly typed pattern",
-      "line": 155,
-      "name": "most_frequent_matches",
-      "scope": "run_summarise",
-      "type": "Vec < _ >"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut qual_buffer = Vec::new();",
-      "file": "../grepq/src/inverted.rs",
-      "kind": "inferred from initialization",
-      "line": 43,
-      "name": "qual_buffer",
-      "scope": "run_inverted",
-      "type": "function result"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut qual_buffer = Vec::new();",
-      "file": "../grepq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 123,
-      "name": "qual_buffer",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut reader = create_reader(cli);",
-      "file": "../grepq/src/tune.rs",
-      "kind": "inferred from initialization",
-      "line": 21,
-      "name": "reader",
-      "scope": "run_tune",
-      "type": "function result"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut reader = create_reader(cli);",
-      "file": "../grepq/src/summarise.rs",
-      "kind": "inferred from initialization",
-      "line": 28,
-      "name": "reader",
-      "scope": "run_summarise",
-      "type": "function result"
-    },
-    {
-      "basic_type": "integer",
-      "context": "let mut reader = create_reader(cli);",
-      "file": "../grepq/src/tune.rs",
-      "kind": "inferred from initialization",
-      "line": 21,
-      "name": "records_processed",
-      "scope": "run_tune",
-      "type": "integer"
-    },
-    {
-      "basic_type": "Unknown expression",
-      "context": "let mut reader = create_reader(cli);",
-      "file": "../grepq/src/tune.rs",
-      "kind": "inferred from initialization",
-      "line": 21,
-      "name": "regex_matches",
-      "scope": "run_tune",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "Unknown expression",
-      "context": "let mut reader = create_reader(cli);",
-      "file": "../grepq/src/summarise.rs",
-      "kind": "inferred from initialization",
-      "line": 28,
-      "name": "regex_matches",
-      "scope": "run_summarise",
-      "type": "expression result"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut seq_buffer = Vec::new();",
-      "file": "../grepq/src/inverted.rs",
-      "kind": "inferred from initialization",
-      "line": 42,
-      "name": "seq_buffer",
-      "scope": "run_inverted",
-      "type": "function result"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut seq_buffer = Vec::new();",
-      "file": "../grepq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 122,
-      "name": "seq_buffer",
-      "scope": "main",
-      "type": "function result"
-    },
-    {
-      "basic_type": "integer",
-      "context": "let mut sum = 0;",
-      "file": "../grepq/src/quality.rs",
-      "kind": "inferred from initialization",
-      "line": 16,
-      "name": "sum",
-      "scope": "average_quality",
-      "type": "integer"
-    },
-    {
-      "basic_type": "HashMap",
-      "context": "let mut tetra_counts: HashMap<String, usize> = HashMap::new();",
-      "file": "../grepq/src/quality.rs",
-      "kind": "explicitly typed pattern",
-      "line": 90,
-      "name": "tetra_counts",
-      "scope": "tetranucleotide_frequencies",
-      "type": "HashMap < String , usize >"
-    },
-    {
-      "basic_type": "integer",
-      "context": "let mut total_matches = 0;",
-      "file": "../grepq/src/tune.rs",
-      "kind": "inferred from initialization",
-      "line": 25,
-      "name": "total_matches",
-      "scope": "run_tune",
-      "type": "integer"
-    },
-    {
-      "basic_type": "integer",
-      "context": "let mut valid_base_count = 0;",
-      "file": "../grepq/src/quality.rs",
-      "kind": "inferred from initialization",
-      "line": 43,
-      "name": "valid_base_count",
-      "scope": "gc_content",
-      "type": "integer"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut writer = create_writer(cli);",
-      "file": "../grepq/src/inverted.rs",
-      "kind": "inferred from initialization",
-      "line": 34,
-      "name": "writer",
-      "scope": "run_inverted",
-      "type": "function result"
-    },
-    {
-      "basic_type": "Function call result",
-      "context": "let mut writer = create_writer(&cli);",
-      "file": "../grepq/src/main.rs",
-      "kind": "inferred from initialization",
-      "line": 107,
-      "name": "writer",
-      "scope": "main",
-      "type": "function result"
-    }
-  ],
-  "containers": [
-    {
-      "file": "../grepq/benches/benchmarks.rs",
-      "line": 7,
-      "name": "criterion_benchmark",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/inverted.rs",
-      "line": 13,
-      "name": "run_inverted",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/initialise.rs",
-      "line": 105,
-      "name": "convert_iupac_to_regex",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/initialise.rs",
-      "line": 105,
-      "name": "validate_dna_sequence",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/initialise.rs",
-      "line": 152,
-      "name": "parse_patterns_file",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/initialise.rs",
-      "line": 105,
-      "name": "open_file",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/initialise.rs",
-      "line": 267,
-      "name": "create_reader",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/initialise.rs",
-      "line": 288,
-      "name": "ZstdWriter",
-      "type": "struct"
-    },
-    {
-      "file": "../grepq/src/initialise.rs",
-      "line": 267,
-      "name": "create_writer",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/output.rs",
-      "line": 6,
-      "name": "write_record_with_id",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/output.rs",
-      "line": 6,
-      "name": "write_full_record",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/output.rs",
-      "line": 6,
-      "name": "write_record_with_fasta",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/output.rs",
-      "line": 95,
-      "name": "create_sqlite_db",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/output.rs",
-      "line": 95,
-      "name": "create_sqlite_db_with_quality",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/output.rs",
-      "line": 15,
-      "name": "write_regex_to_db",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/arg.rs",
-      "line": 1,
-      "name": "Cli",
-      "type": "struct"
-    },
-    {
-      "file": "../grepq/src/arg.rs",
-      "line": 1,
-      "name": "Commands",
-      "type": "enum"
-    },
-    {
-      "file": "../grepq/src/arg.rs",
-      "line": 1,
-      "name": "Summarise",
-      "type": "struct"
-    },
-    {
-      "file": "../grepq/src/arg.rs",
-      "line": 1,
-      "name": "Tune",
-      "type": "struct"
-    },
-    {
-      "file": "../grepq/src/quality.rs",
-      "line": 6,
-      "name": "average_quality",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/quality.rs",
-      "line": 1,
-      "name": "gc_content",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/quality.rs",
-      "line": 70,
-      "name": "round_to_4_sig_figs",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/quality.rs",
-      "line": 6,
-      "name": "TetraFrequency",
-      "type": "struct"
-    },
-    {
-      "file": "../grepq/src/quality.rs",
-      "line": 1,
-      "name": "tetranucleotide_frequencies",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/main.rs",
-      "line": 1,
-      "name": "main",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/main.rs",
-      "line": 92,
-      "name": "average_quality",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_quality_scores",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_iupac_conversion",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_illegal_iupac_conversion",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_pattern_parsing",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_gc_content",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_tetranucleotide_frequencies",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_empty_tetranucleotide_frequencies",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_iupac_case_insensitivity_conversion",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_plain_text_pattern_parsing",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_complex_iupac_conversion",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_invalid_variant_json",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tests.rs",
-      "line": 1,
-      "name": "test_valid_json_pattern_parsing",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/tune.rs",
-      "line": 13,
-      "name": "run_tune",
-      "type": "function"
-    },
-    {
-      "file": "../grepq/src/summarise.rs",
-      "line": 16,
-      "name": "run_summarise",
-      "type": "function"
-    }
-  ]
+  }
 }
