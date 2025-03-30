@@ -1,10 +1,17 @@
 [package]
 name = "forest"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Nicholas D. Crosbie"]
 description = "Explore and summarise Rust projects"
 license = "MIT"
+homepage = "https://github.com/Rbfinch/forest"
+documentation = "https://github.com/Rbfinch/forest"
+repository = "https://github.com/Rbfinch/forest"
+readme = "README.md"
+categories = ["CLI"]
+keywords = ["Rust", "analyse", "summarise", "codebase"]
+
 
 [dependencies]
 clap = { version = "4.5.34", features = ["derive"] }
