@@ -1,4 +1,4 @@
-# forest
+<img src="src/forest.svg" width="256" />
 
 _Explore and summarise Rust projects_
 
