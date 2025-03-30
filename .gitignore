@@ -100,4 +100,6 @@ target/
 *.xz
 *.fq
 
+justfile
+
 # Other project specific ignores and allows

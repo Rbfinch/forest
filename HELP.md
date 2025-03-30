@@ -31,9 +31,12 @@ Copyright (c) 2025 Nicholas D. Crosbie
 * `--tree` — Generate a tree-like representation of the project's structure
 * `--markdown-help` — Generate a markdown version of the help text
 
+
+
 <hr/>
 
 <small><i>
     This document was generated automatically by
     <a href="https://crates.io/crates/clap-markdown"><code>clap-markdown</code></a>.
 </i></small>
+
