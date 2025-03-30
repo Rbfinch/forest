@@ -16,7 +16,7 @@ Copyright (c) 2025 Nicholas D. Crosbie
 
 ###### **Arguments:**
 
-* `<PROJECT_DIR>` — The directory containing the Rust project to analyze
+* `<PROJECT_DIR>` — The directory containing the Rust project to analyse
 
 ###### **Options:**
 

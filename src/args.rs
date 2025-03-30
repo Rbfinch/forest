@@ -13,13 +13,13 @@ pub struct Args {
 // Add this new function that returns the Command definition
 pub fn command() -> Command {
     Command::new("forest")
-        .about("Generate a summaries of Rust projects")
+        .about("Explore and summarise Rust projects")
         .version(env!("CARGO_PKG_VERSION"))
         .author(env!("CARGO_PKG_AUTHORS"))
         .after_help("Copyright (c) 2025 Nicholas D. Crosbie")
         .arg(
             Arg::new("project_dir")
-                .help("The directory containing the Rust project to analyze")
+                .help("The directory containing the Rust project to analyse")
                 .required(true)
                 .index(1),
         )

@@ -3,7 +3,7 @@ name = "forest"
 version = "0.1.0"
 edition = "2021"
 authors = ["Nicholas D. Crosbie"]
-description = "A CLI tool to explore Rust projects"
+description = "Explore and summarise Rust projects"
 license = "MIT"
 
 [dependencies]

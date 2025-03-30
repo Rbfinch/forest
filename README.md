@@ -1,47 +1,34 @@
-# forest - Explore a Rust Project
+# forest
 
-Having trouble seeing the forest for the trees?
+_Explore and summarise Rust projects_
 
-This tool analyzes Rust projects to summarize variable mutability and data structure usage.
+[![Crates.io](https://img.shields.io/crates/v/forest.svg)](https://crates.io/crates/forest)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-It provides insights about where variables and data structures are declared, used, and what their types are.
+Having trouble seeing the forest for the trees? **forest** analyses Rust projects to summarise variable mutability and data structure usage. It provides insights about where variables and data structures are declared, used, and what their types are.
 
->[!NOTE]
-**forest**'s JSON output is best viewed using a tool like **jq** or **nushell**, for example:
+Multiple output formats are supported, however the JSON output is the most convenient to work with as it can be easily manipulated with a tool like **jq** or **nushell**, for example:
 
 ```nushell
 open out.json | get mutable_variables | table --expand
 ```
 
-# Command-Line Help for `forest`
+## Installation
 
-This document contains the help content for the `forest` command-line program.
+`cargo install forest`
 
-**Command Overview:**
+## Usage
 
-* [`forest`↴](#forest)
+See see [HELP](https://github.com/Rbfinch/forest/blob/main/HELP.md)
 
-## `forest`
+## Update changes
 
-Generate a summaries of Rust projects
+see [CHANGELOG](https://github.com/Rbfinch/forest/blob/main/CHANGELOG.md)
 
-**Usage:** `forest [OPTIONS] <project_dir>`
+## Contributing
 
-Copyright (c) 2025 Nicholas D. Crosbie
+see [CONTRIBUTING](https://github.com/Rbfinch/forest/blob/main/CONTRIBUTING.md)
 
-###### **Arguments:**
+## License
 
-* `<PROJECT_DIR>` — The directory containing the Rust project to analyze
-
-###### **Options:**
-
-* `--output <FILE>` — Write results to the specified file instead of stdout
-* `--format <FORMAT>` — Output format (json, csv, or text)
-
-  Default value: `text`
-
-  Possible values: `json`, `csv`, `text`
-
-* `-s`, `--sort` — Sort variable names alphabetically
-* `--tree` — Generate a tree-like representation of the project's structure
-* `--markdown-help` — Generate a markdown version of the help text
+MIT

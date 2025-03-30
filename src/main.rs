@@ -1,6 +1,6 @@
 // Copyright (c) 2025 Nicholas D. Crosbie
 // Forest - Explore a Rust Project
-// This tool analyzes Rust projects to summarise variable mutability and data structure usage.
+// This tool analyses Rust projects to summarise variable mutability and data structure usage.
 // It provides insights about where variables and data structures are declared, used, and what their types are.
 //
 // The analysis works by parsing Rust source files using the syn crate, traversing the AST,
@@ -329,8 +329,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         datetime,
     };
 
-    // Analyze the project directory
-    let mut results = analyze_project(&args.project_dir)?;
+    // analyse the project directory
+    let mut results = analyse_project(&args.project_dir)?;
 
     // Sort results if requested
     if args.sort {
@@ -361,13 +361,13 @@ fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-// Function to analyze the project directory
-fn analyze_project(dir: &str) -> Result<AnalysisResults, Box<dyn Error>> {
+// Function to analyse the project directory
+fn analyse_project(dir: &str) -> Result<AnalysisResults, Box<dyn Error>> {
     let mut mutable_vars = Vec::new();
     let mut immutable_vars = Vec::new();
     let mut data_structures = Vec::new();
 
-    // Recursively visit directories and analyze files
+    // Recursively visit directories and analyse files
     visit_dirs(
         Path::new(dir),
         &mut mutable_vars,
@@ -382,7 +382,7 @@ fn analyze_project(dir: &str) -> Result<AnalysisResults, Box<dyn Error>> {
     })
 }
 
-// Function to visit directories and analyze files
+// Function to visit directories and analyse files
 fn visit_dirs(
     dir: &Path,
     mutable_vars: &mut Vec<VarInfo>,
@@ -401,7 +401,7 @@ fn visit_dirs(
                 }
             } else if let Some(extension) = path.extension() {
                 if extension == "rs" {
-                    analyze_file(&path, mutable_vars, immutable_vars, data_structures)?;
+                    analyse_file(&path, mutable_vars, immutable_vars, data_structures)?;
                 }
             }
         }
@@ -409,8 +409,8 @@ fn visit_dirs(
     Ok(())
 }
 
-// Function to analyze a single file with syn parser
-fn analyze_file(
+// Function to analyse a single file with syn parser
+fn analyse_file(
     file_path: &Path, // Rename _file_path to file_path
     mutable_vars: &mut Vec<VarInfo>,
     immutable_vars: &mut Vec<VarInfo>,
@@ -438,7 +438,7 @@ fn analyze_file(
         }
         Err(_) => {
             // Fallback to the manual approach if syn parsing fails
-            analyze_file_manual_implementation(
+            analyse_file_manual_implementation(
                 file_path, // Use file_path here
                 mutable_vars,
                 immutable_vars,
@@ -1515,7 +1515,7 @@ fn infer_type_from_pattern_match(pattern: &str, _expr: &str) -> String {
 }
 
 // Fallback manual parser when syn parsing fails
-fn analyze_file_manual_implementation(
+fn analyse_file_manual_implementation(
     file_path: &Path,
     mutable_vars: &mut Vec<VarInfo>,
     immutable_vars: &mut Vec<VarInfo>,
