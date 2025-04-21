@@ -1,6 +1,6 @@
 [package]
 name = "forest"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2021"
 authors = ["Nicholas D. Crosbie"]
 description = "Explore and summarise Rust projects"
@@ -14,13 +14,18 @@ keywords = ["Rust", "analyse", "summarise", "codebase"]
 
 
 [dependencies]
-clap = { version = "4.5.34", features = ["derive"] }
+clap = { version = "4.5.37", features = ["derive"] }
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.140"
 syn = { version = "2.0.100", features = ["full", "visit", "extra-traits"] }
 quote = "1.0.40"
 visit = "0.1.0"
-proc-macro2 = "1.0.94"
+proc-macro2 = "1.0.95"
 chrono = "0.4.40"
 toml = "0.8.20"
 clap-markdown = "0.1.4"
+# Use older versions of rust-analyzer crates that don't require edition2024
+ra_ap_syntax = "0.0.194"
+ra_ap_hir_def = "0.0.194"
+ra_ap_hir_ty = "0.0.194"
+ra_ap_base_db = "0.0.194"

@@ -3,6 +3,13 @@ TBD
 
 Unreleased changes. Release notes have not yet been written.
 
+0.1.5
+=====
+
+* 2025-04-19
+* Fixed dependency issues with rust-analyzer crates
+* Improved type identification for basic_type using rust-analyzer
+
 0.1.4
 =====
 
